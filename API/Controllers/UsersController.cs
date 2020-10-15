@@ -41,7 +41,7 @@ From Go Server
 
 GET:  /users/count                      --> /users                  (This should probably be refactored to a query param on /users)
 GET:  /user/{id}/persona/skills         --> /user/skills            (Do I need the user id if I'm just using the jwt to validate the current user?)
-PUT: /user/{id}/code/configuration/new --> /user/editorConfig/{unique-name}
+PUT:  /user/{id}/code/configuration/new --> /user/editorConfig/{unique-name}
 GET:  /user/{id}/code/configurations    --> /user/editorConfigs
 
 */
