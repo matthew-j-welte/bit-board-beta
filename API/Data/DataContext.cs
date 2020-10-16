@@ -9,6 +9,8 @@ namespace API.Data
         IdentityUserClaim<int>, UserRole, IdentityUserLogin<int>,
         IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
+        private ModelBuilder _builder;
+
         public DataContext(DbContextOptions options) : base(options)
         {
         }
@@ -18,41 +20,52 @@ namespace API.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            
+            _builder = builder;
 
-            BuildIdentityEntities(builder);
-            BuildUserSkillEntities(builder);
+            BuildIdentityEntities();
+            // BuildUserSkillEntities();
+            // BuildLearningResourceEntities();
 
         }
 
-        private void BuildIdentityEntities(ModelBuilder builder)
+        private void BuildIdentityEntities()
         {
-            builder.Entity<User>()
+            _builder.Entity<User>()
                 .HasMany(ur => ur.UserRoles)
                 .WithOne(u => u.User)
                 .HasForeignKey(ur => ur.UserId)
                 .IsRequired();
 
-            builder.Entity<Role>()
+            _builder.Entity<Role>()
                 .HasMany(ur => ur.UserRoles)
                 .WithOne(u => u.Role)
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
         }
 
-        private void BuildUserSkillEntities(ModelBuilder builder)
+        private void BuildUserSkillEntities()
         {
-            builder.Entity<UserSkill>()
+            _builder.Entity<UserSkill>()
                 .HasKey(x => new { x.UserId, x.SkillId });
 
-            builder.Entity<UserSkill>()
+            _builder.Entity<UserSkill>()
                 .HasOne(x => x.User)
                 .WithMany(x => x.UserSkills)
                 .HasForeignKey(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<UserSkill>()
+            _builder.Entity<UserSkill>()
                 .HasOne(x => x.Skill)
                 .WithOne();
+        }
+
+        private void BuildLearningResourceEntities()
+        {
+            _builder.Entity<LearningResource>()
+                .HasOne(x => x.Author)
+                .WithMany(x => x.PublishedLearningResources)
+                .HasForeignKey(x => x.AuthorUserId);
         }
     }
 }
