@@ -1,4 +1,6 @@
 - Create the remaining entities - error reports
+- Setup SQL connection - sql list or postgres
+- Run EF migrations to ensure entities are created correctly
 - Make a rough estimate of what will be needed for the DTOs (without looking at the frontend)
 - Define our automapper
 - Create the repositories for each... controller? entity? group? not sure what to map repository to
