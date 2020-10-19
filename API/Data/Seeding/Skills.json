@@ -1,0 +1,52 @@
+[
+    {
+      "Name": "Linux",
+      "Category": "OS",
+      "AvatarUrl": "https://picsum.photos/id/82/200/300"
+    },
+    {
+      "Name": "Windows",
+      "Category": "OS",
+      "AvatarUrl": "https://picsum.photos/id/65/200/300"
+    },
+    {
+      "Name": "MongoDb",
+      "Category": "Database",
+      "AvatarUrl": "https://picsum.photos/id/33/200/300"
+    },
+    {
+      "Name": "C#",
+      "Category": "Backend",
+      "AvatarUrl": "https://picsum.photos/id/81/200/300"
+    },
+    {
+      "Name": "Python",
+      "Category": "Backend",
+      "AvatarUrl": "https://picsum.photos/id/46/200/300"
+    },
+    {
+      "Name": "C++",
+      "Category": "Backend",
+      "AvatarUrl": "https://picsum.photos/id/28/200/300"
+    },
+    {
+      "Name": "SQL Server",
+      "Category": "Database",
+      "AvatarUrl": "https://picsum.photos/id/83/200/300"
+    },
+    {
+      "Name": "Javascript",
+      "Category": "Frontend",
+      "AvatarUrl": "https://picsum.photos/id/69/200/300"
+    },
+    {
+      "Name": "React",
+      "Category": "Frontend",
+      "AvatarUrl": "https://picsum.photos/id/3/200/300"
+    },
+    {
+      "Name": "Angular",
+      "Category": "Frontend",
+      "AvatarUrl": "https://picsum.photos/id/15/200/300"
+    }
+  ]

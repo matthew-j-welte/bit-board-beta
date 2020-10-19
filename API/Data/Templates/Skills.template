@@ -1,0 +1,10 @@
+[
+  '{{repeat(10)}}',
+  {
+    Name: 'FILLIN',
+    Category: 'FILLIN',
+    AvatarUrl: function(num) {
+          return 'https://picsum.photos/id/' + num.integer(1,99) + '/200/300';
+    }
+  }
+]

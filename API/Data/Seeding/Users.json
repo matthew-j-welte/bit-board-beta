@@ -1,0 +1,312 @@
+[
+  {
+    "FirstName": "Tate",
+    "LastName": "Frederick",
+    "UserName": "undefinedundefined",
+    "Password": "Password",
+    "Title": "Software Engineer",
+    "YearsExperience": 40,
+    "CareerSummary": "Pariatur qui deserunt aliqua commodo qui labore exercitation enim laboris duis consequat fugiat sunt officia. Et dolore mollit veniam sunt. Minim ut mollit non ut.\r\n",
+    "ImageUrl": "https://randomuser.me/api/portraits/men/34.jpg",
+    "UserSkills": [
+      {
+        "Level": 5,
+        "PercentToNextLevel": 37,
+        "SkillId": 1
+      },
+      {
+        "Level": 19,
+        "PercentToNextLevel": 19,
+        "SkillId": 2
+      },
+      {
+        "Level": 5,
+        "PercentToNextLevel": 35,
+        "SkillId": 3
+      },
+      {
+        "Level": 19,
+        "PercentToNextLevel": 78,
+        "SkillId": 4
+      },
+      {
+        "Level": 14,
+        "PercentToNextLevel": 46,
+        "SkillId": 5
+      },
+      {
+        "Level": 18,
+        "PercentToNextLevel": 39,
+        "SkillId": 6
+      },
+      {
+        "Level": 7,
+        "PercentToNextLevel": 62,
+        "SkillId": 7
+      },
+      {
+        "Level": 18,
+        "PercentToNextLevel": 38,
+        "SkillId": 8
+      },
+      {
+        "Level": 6,
+        "PercentToNextLevel": 45,
+        "SkillId": 9
+      },
+      {
+        "Level": 1,
+        "PercentToNextLevel": 80,
+        "SkillId": 10
+      }
+    ]
+  },
+  {
+    "FirstName": "Bush",
+    "LastName": "Miller",
+    "UserName": "undefinedundefined",
+    "Password": "Password",
+    "Title": "Software Engineer",
+    "YearsExperience": 12,
+    "CareerSummary": "Aliqua ut non eiusmod mollit occaecat culpa voluptate voluptate magna. Consectetur proident minim do ea ipsum et enim eiusmod reprehenderit sit tempor. Sunt qui mollit et in id. Aute consectetur dolor deserunt sit est esse ad consectetur ipsum aute in veniam. Excepteur officia amet veniam sit laborum mollit tempor dolore aliqua ex. Non consequat cupidatat laborum culpa exercitation et eiusmod enim ex.\r\n",
+    "ImageUrl": "https://randomuser.me/api/portraits/men/37.jpg",
+    "UserSkills": [
+      {
+        "Level": 14,
+        "PercentToNextLevel": 29,
+        "SkillId": 1
+      },
+      {
+        "Level": 11,
+        "PercentToNextLevel": 47,
+        "SkillId": 2
+      },
+      {
+        "Level": 3,
+        "PercentToNextLevel": 37,
+        "SkillId": 3
+      },
+      {
+        "Level": 7,
+        "PercentToNextLevel": 25,
+        "SkillId": 4
+      },
+      {
+        "Level": 14,
+        "PercentToNextLevel": 42,
+        "SkillId": 5
+      },
+      {
+        "Level": 19,
+        "PercentToNextLevel": 35,
+        "SkillId": 6
+      },
+      {
+        "Level": 19,
+        "PercentToNextLevel": 91,
+        "SkillId": 7
+      },
+      {
+        "Level": 18,
+        "PercentToNextLevel": 47,
+        "SkillId": 8
+      },
+      {
+        "Level": 20,
+        "PercentToNextLevel": 31,
+        "SkillId": 9
+      },
+      {
+        "Level": 13,
+        "PercentToNextLevel": 92,
+        "SkillId": 10
+      }
+    ]
+  },
+  {
+    "FirstName": "Gordon",
+    "LastName": "Finley",
+    "UserName": "undefinedundefined",
+    "Password": "Password",
+    "Title": "Software Engineer",
+    "YearsExperience": 5,
+    "CareerSummary": "Lorem culpa nisi nostrud aute exercitation et consectetur ad. Anim incididunt eiusmod in quis ipsum ullamco cupidatat nostrud nulla. Ex laboris deserunt ullamco aliqua dolor. Laborum officia culpa ullamco laborum veniam velit sint consectetur elit incididunt labore fugiat voluptate. Sit adipisicing aliqua est eu mollit est laborum. Culpa minim nulla eiusmod ullamco ea incididunt reprehenderit quis non ullamco Lorem qui veniam esse.\r\n",
+    "ImageUrl": "https://randomuser.me/api/portraits/men/77.jpg",
+    "UserSkills": [
+      {
+        "Level": 13,
+        "PercentToNextLevel": 26,
+        "SkillId": 1
+      },
+      {
+        "Level": 12,
+        "PercentToNextLevel": 74,
+        "SkillId": 2
+      },
+      {
+        "Level": 4,
+        "PercentToNextLevel": 48,
+        "SkillId": 3
+      },
+      {
+        "Level": 7,
+        "PercentToNextLevel": 72,
+        "SkillId": 4
+      },
+      {
+        "Level": 11,
+        "PercentToNextLevel": 86,
+        "SkillId": 5
+      },
+      {
+        "Level": 11,
+        "PercentToNextLevel": 14,
+        "SkillId": 6
+      },
+      {
+        "Level": 15,
+        "PercentToNextLevel": 14,
+        "SkillId": 7
+      },
+      {
+        "Level": 4,
+        "PercentToNextLevel": 33,
+        "SkillId": 8
+      },
+      {
+        "Level": 4,
+        "PercentToNextLevel": 94,
+        "SkillId": 9
+      },
+      {
+        "Level": 13,
+        "PercentToNextLevel": 88,
+        "SkillId": 10
+      }
+    ]
+  },
+  {
+    "FirstName": "Duke",
+    "LastName": "Fuentes",
+    "UserName": "undefinedundefined",
+    "Password": "Password",
+    "Title": "Software Engineer",
+    "YearsExperience": 35,
+    "CareerSummary": "Aliquip incididunt voluptate veniam adipisicing in nisi. Commodo velit non do dolore velit nulla. Laborum Lorem non laboris eu dolore adipisicing exercitation irure qui ipsum dolor commodo incididunt. Adipisicing voluptate consequat velit irure.\r\n",
+    "ImageUrl": "https://randomuser.me/api/portraits/men/56.jpg",
+    "UserSkills": [
+      {
+        "Level": 19,
+        "PercentToNextLevel": 83,
+        "SkillId": 1
+      },
+      {
+        "Level": 1,
+        "PercentToNextLevel": 80,
+        "SkillId": 2
+      },
+      {
+        "Level": 3,
+        "PercentToNextLevel": 81,
+        "SkillId": 3
+      },
+      {
+        "Level": 19,
+        "PercentToNextLevel": 88,
+        "SkillId": 4
+      },
+      {
+        "Level": 10,
+        "PercentToNextLevel": 53,
+        "SkillId": 5
+      },
+      {
+        "Level": 12,
+        "PercentToNextLevel": 45,
+        "SkillId": 6
+      },
+      {
+        "Level": 18,
+        "PercentToNextLevel": 42,
+        "SkillId": 7
+      },
+      {
+        "Level": 11,
+        "PercentToNextLevel": 29,
+        "SkillId": 8
+      },
+      {
+        "Level": 10,
+        "PercentToNextLevel": 24,
+        "SkillId": 9
+      },
+      {
+        "Level": 8,
+        "PercentToNextLevel": 30,
+        "SkillId": 10
+      }
+    ]
+  },
+  {
+    "FirstName": "Barlow",
+    "LastName": "Sandoval",
+    "UserName": "undefinedundefined",
+    "Password": "Password",
+    "Title": "Software Engineer",
+    "YearsExperience": 2,
+    "CareerSummary": "Dolor adipisicing nulla adipisicing quis qui pariatur laborum adipisicing pariatur velit dolore adipisicing nisi velit. Deserunt qui eiusmod cillum irure. Deserunt ullamco laboris irure quis laboris sint quis occaecat et laboris id irure Lorem. Laborum sunt ullamco commodo commodo excepteur exercitation labore cupidatat deserunt aliquip. Excepteur est dolore eiusmod cillum anim exercitation minim et ut sunt laboris dolor ad. Nulla mollit sint elit sit dolore nulla eu. Aliquip tempor id ipsum nulla ea culpa qui ad culpa culpa voluptate.\r\n",
+    "ImageUrl": "https://randomuser.me/api/portraits/men/29.jpg",
+    "UserSkills": [
+      {
+        "Level": 19,
+        "PercentToNextLevel": 53,
+        "SkillId": 1
+      },
+      {
+        "Level": 14,
+        "PercentToNextLevel": 75,
+        "SkillId": 2
+      },
+      {
+        "Level": 3,
+        "PercentToNextLevel": 36,
+        "SkillId": 3
+      },
+      {
+        "Level": 15,
+        "PercentToNextLevel": 97,
+        "SkillId": 4
+      },
+      {
+        "Level": 12,
+        "PercentToNextLevel": 48,
+        "SkillId": 5
+      },
+      {
+        "Level": 20,
+        "PercentToNextLevel": 52,
+        "SkillId": 6
+      },
+      {
+        "Level": 18,
+        "PercentToNextLevel": 1,
+        "SkillId": 7
+      },
+      {
+        "Level": 14,
+        "PercentToNextLevel": 13,
+        "SkillId": 8
+      },
+      {
+        "Level": 19,
+        "PercentToNextLevel": 27,
+        "SkillId": 9
+      },
+      {
+        "Level": 11,
+        "PercentToNextLevel": 11,
+        "SkillId": 10
+      }
+    ]
+  }
+]

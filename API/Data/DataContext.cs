@@ -5,9 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class DataContext : IdentityDbContext<User, Role, int,
-        IdentityUserClaim<int>, UserRole, IdentityUserLogin<int>,
-        IdentityRoleClaim<int>, IdentityUserToken<int>>
+    public class DataContext : DbContext
     {
         private ModelBuilder _builder;
 
@@ -15,34 +13,38 @@ namespace API.Data
         {
         }
 
+        public DbSet<User> Users { get; set; }
+        public DbSet<LearningResource> LearningResources { get; set; }
+        public DbSet<Post> Posts { get; set; }
         public DbSet<Skill> Skills { get; set; }
-
+        public DbSet<ErrorReport> ErrorReports { get; set; }
+                
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             
             _builder = builder;
 
-            BuildIdentityEntities();
+            // BuildIdentityEntities();
             // BuildUserSkillEntities();
             // BuildLearningResourceEntities();
 
         }
 
-        private void BuildIdentityEntities()
-        {
-            _builder.Entity<User>()
-                .HasMany(ur => ur.UserRoles)
-                .WithOne(u => u.User)
-                .HasForeignKey(ur => ur.UserId)
-                .IsRequired();
+        // private void BuildIdentityEntities()
+        // {
+        //     _builder.Entity<User>()
+        //         .HasMany(ur => ur.UserRoles)
+        //         .WithOne(u => u.User)
+        //         .HasForeignKey(ur => ur.UserId)
+        //         .IsRequired();
 
-            _builder.Entity<Role>()
-                .HasMany(ur => ur.UserRoles)
-                .WithOne(u => u.Role)
-                .HasForeignKey(ur => ur.RoleId)
-                .IsRequired();
-        }
+        //     _builder.Entity<Role>()
+        //         .HasMany(ur => ur.UserRoles)
+        //         .WithOne(u => u.Role)
+        //         .HasForeignKey(ur => ur.RoleId)
+        //         .IsRequired();
+        // }
 
         private void BuildUserSkillEntities()
         {
@@ -58,14 +60,6 @@ namespace API.Data
             _builder.Entity<UserSkill>()
                 .HasOne(x => x.Skill)
                 .WithOne();
-        }
-
-        private void BuildLearningResourceEntities()
-        {
-            _builder.Entity<LearningResource>()
-                .HasOne(x => x.Author)
-                .WithMany(x => x.PublishedLearningResources)
-                .HasForeignKey(x => x.AuthorUserId);
         }
     }
 }

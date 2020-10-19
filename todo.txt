@@ -21,3 +21,11 @@ in a parent class and just use that to minmize duplicate work.
 
 Or possibly create extension methods for the Repository class / interface (will you have to create one?)
 
+
+
+Oct 16
+-------
+
+- May have to write a custom python script to generate the dummy data
+- It is getting a bit complicated with just using the json generator
+

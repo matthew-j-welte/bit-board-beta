@@ -2,6 +2,8 @@ namespace API.Models.Entities
 {
     public class UserSkill
     {
+        public int UserSkillId { get; set; }
+
         public Skill Skill { get; set; }
         public int SkillId { get; set; }
         
