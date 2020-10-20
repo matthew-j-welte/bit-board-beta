@@ -1,0 +1,32 @@
+[
+  { 
+    "Id": "VkyJ5Mvwt", 
+    "PerRequest": 20, 
+    "Iterations": 1, 
+    "Model": "Users" 
+  },
+  {
+    "Id": "4y0z-NvwK",
+    "PerRequest": 10,
+    "Iterations": 1,
+    "Model": "Skills"
+  },
+  { 
+    "Id": "N1UFlVDvK", 
+    "PerRequest": 100, 
+    "Iterations": 1, 
+    "Model": "Posts" 
+  },
+  {
+    "Id": "EJwylNDDK",
+    "PerRequest": 100,
+    "Iterations": 3,
+    "Model": "Comments"
+  },
+  {
+    "Id": "E1I8NmPDK",
+    "PerRequest": 30,
+    "Iterations": 1,
+    "Model": "LearningResources"
+  }
+]

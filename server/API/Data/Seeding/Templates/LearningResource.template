@@ -1,0 +1,21 @@
+[
+  {
+    'repeat(30)':
+    {
+      LearningResourceId: '{{index() + 1}}',
+      Title: function(num) { return lorem(num.integer(2,4), "words"); },
+      Description: function(num) { return lorem(num.integer(1,2), "paragraphs"); },
+      Viewers: '{{integer(1000,100000)}}',
+      Placeholder: 'https://source.unsplash.com/random/800x600',
+      ImageUrl: 'https://source.unsplash.com/random/800x600',
+      Type: function(num) { return ['Video', 'Book', 'Article'][num.integer(0,2)]; },
+      UserId: '{{integer(1,20)}}',
+      LearningResourceSkills: [{
+      	'repeat(1,3)': {
+          LearningResourceId: function(tags, parent, index) { return parent.LearningResourceId; },
+          SkillId: '{{integer(1,10)}}'
+        }
+      }]
+    }
+  }
+]
