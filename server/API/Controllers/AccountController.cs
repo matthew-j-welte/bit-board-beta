@@ -1,4 +1,5 @@
 // using System.Threading.Tasks;
+using API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -6,16 +7,16 @@ namespace API.Controllers
     public class AccountController : BaseApiController
     {
         [HttpPost("login")]
-        public ActionResult Login()
+        public ActionResult Login(LoginDto loginDto)
         {
-            System.Console.WriteLine("Login Endpoint");
+            System.Console.WriteLine($"Logging in {loginDto.Username}");
             return NoContent();
         }
 
         [HttpPost("register")]
-        public ActionResult Register()
+        public ActionResult Register(RegisterDto registerDto)
         {
-            System.Console.WriteLine("Register Endpoint");
+            System.Console.WriteLine($"Registering in {registerDto.UserName}");
             return NoContent();
         }
     }

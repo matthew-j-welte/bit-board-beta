@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
-using API.Models.Entities;
+using API.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Seeding

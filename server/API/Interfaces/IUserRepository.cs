@@ -1,14 +1,17 @@
-using System;
 using System.Collections.Generic;
-using API.Models.Entities;
+using System.Threading.Tasks;
+using API.Data.Entities;
+using API.Models;
+using API.Models.DTOs;
 
 namespace API.Interfaces
 {
     public interface IUserRepository
     {
-         IEnumerable<User> GetUsers();
-         User GetUserByUsername(string username);
-         void InsertUser(User user);
+         Task<IEnumerable<UserModel>> GetUsersAsync();
+         Task<UserModel> GetUserByUsernameAsync(string username);
+         Task<IEnumerable<CodeEditorConfigurationDto>> GetCodeEditorConfigurationsAsync();
+         void InsertUserAsync(User user);
          void DeletetUser(User user);
          void UpdateUser(User user);
     }

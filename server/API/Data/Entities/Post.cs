@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace API.Models.Entities
+namespace API.Data.Entities
 {
     [Table("Post")]
     public class Post : BaseEntity

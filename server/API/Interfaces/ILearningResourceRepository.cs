@@ -1,14 +1,15 @@
-using System;
 using System.Collections.Generic;
-using API.Models.Entities;
+using System.Threading.Tasks;
+using API.Data.Entities;
+using API.Models;
 
 namespace API.Interfaces
 {
     public interface ILearningResourceRepository
     {
-         IEnumerable<LearningResource> GetLearningResources();
-         LearningResource GetLearningResourceById(int learningResourceId);
-         void InsertLearningResource(LearningResource learningResource);
+         Task<IEnumerable<LearningResourceModel>> GetLearningResourcesAsync();
+         Task<LearningResourceModel> GetLearningResourceByIdAsync(int learningResourceId);
+         void InsertLearningResourceAsync(LearningResource learningResource);
          void DeletetLearningResource(LearningResource learningResource);
          void UpdateLearningResource(LearningResource learningResource);
     }

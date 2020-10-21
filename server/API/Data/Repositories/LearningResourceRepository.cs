@@ -1,42 +1,56 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using API.Data.Entities;
 using API.Interfaces;
-using API.Models.Entities;
+using API.Models;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories
 {
     public class LearningResourceRepository : ILearningResourceRepository
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
-        public LearningResourceRepository(DataContext context)
+        public LearningResourceRepository(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public void DeletetLearningResource(LearningResource learningResource)
         {
-            
+            _context.LearningResources.Remove(learningResource);
         }
 
-        public LearningResource GetLearningResourceById(int learningResourceId)
+        public async Task<LearningResourceModel> GetLearningResourceByIdAsync(int learningResourceId)
         {
-            return _context.LearningResources.Find(learningResourceId);
+            return await _context
+                .LearningResources
+                .Where(x => x.LearningResourceId == learningResourceId)
+                .ProjectTo<LearningResourceModel>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
         }
 
-        public IEnumerable<LearningResource> GetLearningResources()
+        public async Task<IEnumerable<LearningResourceModel>> GetLearningResourcesAsync()
         {
-            return _context.LearningResources.ToList();
+            return await _context
+                .LearningResources
+                .ProjectTo<LearningResourceModel>(_mapper.ConfigurationProvider)
+                .ToListAsync();
         }
 
-        public void InsertLearningResource(LearningResource learningResource)
+        public async void InsertLearningResourceAsync(LearningResource learningResource)
         {
-            
+            await _context.LearningResources.AddAsync(learningResource);
         }
 
         public void UpdateLearningResource(LearningResource learningResource)
         {
-            
+            _context.LearningResources.Update(learningResource);
         }
     }
 }

@@ -22,10 +22,14 @@ namespace API
             {
                 var context = services.GetRequiredService<DataContext>();
                 
-                var dataQuery = new DataQuery();
-                await dataQuery.GenerateDataAsync();
-
                 await context.Database.MigrateAsync();
+
+                if (!(await context.Users.AnyAsync()))
+                {
+                    var dataQuery = new DataQuery();
+                    await dataQuery.GenerateDataAsync();
+                }  
+
                 await Seed.SeedSkills(context);
                 await Seed.SeedUsers(context);
                 await Seed.SeedLearningResources(context);

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace API.Models.Entities
+namespace API.Data.Entities
 {
     [Table("User")]
     public class User : BaseEntity
@@ -19,5 +19,8 @@ namespace API.Models.Entities
         // public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<UserSkill> UserSkills { get; set; }
         public ICollection<LearningResource> LearningResources { get; set; }
+        public ICollection<CodeEditorConfiguration> CodeEditorConfigurations { get; set; }
+        public ICollection<Post> Posts { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }

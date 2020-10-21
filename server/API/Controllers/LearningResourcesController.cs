@@ -1,15 +1,32 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using API.Interfaces;
+using API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     public class LearningResourcesController : BaseApiController
     {
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> GetLearningResources()
+        private readonly IUnitOfWork _unitOfWork;
+
+        public LearningResourcesController(IUnitOfWork unitOfWork)
         {
-            System.Console.WriteLine("Getting all learning resources");
-            return Ok((new List<string> { "GraphQL Video", "MongoDB Video" }));
+            _unitOfWork = unitOfWork;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<LearningResourceModel>>> GetLearningResourcesAsync()
+        {
+            var resources = await _unitOfWork.LearningResourceRepository.GetLearningResourcesAsync();
+            return Ok(resources);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<LearningResourceModel>> GetLearningResourceByIdAsync(int id)
+        {
+            var resource = await _unitOfWork.LearningResourceRepository.GetLearningResourceByIdAsync(id);
+            return Ok(resource);
         }
 
         [HttpPost]

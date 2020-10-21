@@ -1,20 +1,22 @@
 using API.Data.Repositories;
 using API.Interfaces;
+using AutoMapper;
 
 namespace API.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DataContext _context;
-        
-        public UnitOfWork(DataContext context)
+        private readonly IMapper _mapper;
+
+        public UnitOfWork(DataContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public IUserRepository UserRepository => new UserRepository(_context);
-        public ILearningResourceRepository LearningResourceRepository => new LearningResourceRepository(_context);
-
+        public IUserRepository UserRepository => new UserRepository(_context, _mapper);
+        public ILearningResourceRepository LearningResourceRepository => new LearningResourceRepository(_context, _mapper);
         public bool Commit()
         {
             return _context.SaveChanges() > 0;

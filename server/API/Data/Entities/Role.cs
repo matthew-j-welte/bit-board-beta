@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
-namespace API.Models.Entities
+namespace API.Data.Entities
 {
     public class Role : IdentityRole<int>
     {

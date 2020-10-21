@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace API.Models.Entities
+namespace API.Data.Entities
 {
     [Table("Comment")]
     public class Comment : BaseEntity

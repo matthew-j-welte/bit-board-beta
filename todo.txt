@@ -29,3 +29,7 @@ Oct 16
 - May have to write a custom python script to generate the dummy data
 - It is getting a bit complicated with just using the json generator
 
+
+Oct 20
+-------
+Probably would simplify things to toss the seeding configurations into appsettings

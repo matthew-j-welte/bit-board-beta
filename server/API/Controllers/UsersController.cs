@@ -1,36 +1,33 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using API.Models.DTOs;
+using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     public class UsersController : BaseApiController
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public UsersController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         [HttpGet]
-        public ActionResult<IEnumerable<string>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsersAsync()
         {
-            System.Console.WriteLine("Getting all users");
-            return Ok((new List<string> { "Pete", "Jimmy" }));
+            var users = await _unitOfWork.UserRepository.GetUsersAsync();
+            return Ok(users);
         }
 
-        [HttpGet("skills")]
-        public ActionResult<IEnumerable<string>> GetUserSkills()
+        [HttpGet("{username}")]
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUserByUsernameAsync(string username)
         {
-            System.Console.WriteLine("Getting all skills for the user");
-            return Ok((new List<string> { "C++", "SQL", ".NET" }));
-        }
-
-        [HttpGet("editorConfigs")]
-        public ActionResult<IEnumerable<string>> GetEditorConfigs()
-        {
-            System.Console.WriteLine("Getting all editor configs");
-            return Ok((new List<string> { "Dracula", "Cobalt", "Bright-n-Shiny" }));
-        }
-
-        [HttpPut("editorConfig/{name}")]
-        public ActionResult UpdateEditorConfig(string name)
-        {
-            System.Console.WriteLine($"Creating editor config {name}");
-            return NoContent();
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            return Ok(user);
         }
     }
 }
