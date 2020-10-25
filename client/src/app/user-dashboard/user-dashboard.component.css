@@ -1,0 +1,19 @@
+.item-card {
+  transition: 0.2s;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+  margin: 0.5em;
+  background-color: rgb(253, 253, 248);
+}
+
+.card-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 0.6rem;
+  margin-bottom: 80px;
+}
+
+.card:hover {
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
+}

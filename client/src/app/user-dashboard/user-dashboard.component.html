@@ -1,0 +1,91 @@
+<div class="jumbotron" style="background-color: #dae4eb; padding-top: 75px">
+  <div class="container-fluid" style="width: 80%">
+    <h1 class="display-2">{{ user?.firstName }} {{ user?.lastName }}</h1>
+    <hr class="my-4" />
+    <h2 class="display-5">
+      <em>{{ user?.userName }}</em>
+    </h2>
+    <p class="lead">{{ user?.careerSummary }}</p>
+  </div>
+</div>
+
+<!-- List of PostPreviews -->
+<div class="container-fluid" style="width: 80%">
+  <h1>Your Posts</h1>
+  <hr />
+  <div class="card-deck">
+    <div class="card item-card" *ngFor="let post of user?.posts">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-4"><img src={{post.learningResource.imageUrl}} style="width: 100%; border-radius: 3em;"></div>
+          <div class="col-8">
+            <h5 class="card-title">
+              {{ post.learningResource.title | uppercase }}
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              {{ post.learningResource.type }}
+            </h6>
+          </div>
+        </div>
+        <hr />
+        <p class="card-text">
+          {{
+            post.content.length > 300
+              ? post.content.substring(0, 300).trim() + "..."
+              : post.content
+          }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- List of CommentPreviews -->
+  <!-- List of PostPreviews -->
+  <h1>Your Post Comments</h1>
+  <hr />
+  <div class="card-deck">
+    <div class="card item-card" *ngFor="let comment of user?.comments">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-4"><img src={{comment.post.learningResource.imageUrl}} style="width: 100%; border-radius: 3em;"></div>
+          <div class="col-8">
+            <h5 class="card-title">
+              {{ comment.post.learningResource.title | uppercase }}
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              {{ comment.post.learningResource.type }}
+            </h6>
+          </div>
+        </div>
+        <hr />
+        <h6 class="card-subtitle mb-2 text-muted">
+          {{
+            comment.post.content.length > 130
+              ? comment.post.content.substring(0, 130).trim() + "..."
+              : comment.post.content
+          }}
+        </h6>
+        <hr />
+        <p class="card-text">
+          {{
+            comment.content.length > 150
+              ? comment.content.substring(0, 150) + "..."
+              : comment.content
+          }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- List of LearningResourcePreviews -->
+  <h1>Your Published Learning Resources</h1>
+  <span *ngFor="let learningResource of user?.learningResources"
+    >{{ learningResource?.learningResourceId }} |
+  </span>
+
+  <!-- List of UserSkills -->
+  <h1>Your Skill Progressions</h1>
+  <span *ngFor="let userSkill of user?.userSkills"
+    >{{ userSkill?.skill.name }} |
+  </span>
+</div>
