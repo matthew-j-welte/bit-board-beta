@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserSkill } from '../+models/dtos/user_skill_dto';
 import { UserModel } from '../+models/user_model';
 import { UsersService } from '../+services/users.service';
 
@@ -20,5 +21,9 @@ export class UserDashboardComponent implements OnInit {
     this.usersService.getUser().subscribe((res) => {
       this.user = res;
     });
+  }
+
+  getSortedSkills(): UserSkill[] {
+    return this.user.userSkills.sort((x,y) => y.progressPercent - x.progressPercent)
   }
 }

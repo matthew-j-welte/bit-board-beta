@@ -16,4 +16,13 @@
 
 .card:hover {
   box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
+  -webkit-transform: translateY(3px); 
+  -moz-transform: translateY(3px); 
+  -ms-transform: translateY(3px); 
+  -o-transform: translateY(3px); 
+  transform: translateY(3px);
+}
+
+.skillProgressionBox {
+  margin-top: 20px;
 }

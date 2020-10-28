@@ -1,0 +1,52 @@
+<nav
+  class="navbar fixed-top navbar-expand-xl navbar-light p-0"
+  style="background-color: whitesmoke; border-bottom: 2px solid #abb6c7"
+>
+  <div class="navbar-brand abs navbar-logo" href="#">
+    <div class="logo-container d-inline-block align-top">
+      <a routerLink="/" routerLinkActive="active">
+        <img
+          class="nav-icon d-inline-block align-top"
+          src="./assets/full-logo.png"
+          width="300"
+          alt=""
+        />
+      </a>
+    </div>
+  </div>
+  <button
+    class="navbar-toggler mr-3"
+    type="button"
+    (click)="toggleNavbarCollapsing()"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div
+    class="navbar-collapse collapse pl-2"
+    id="collapsingNavbar"
+    [class.collapse]="navbarCollapsed"
+  >
+    <ul class="navbar-nav" style="z-index: 1">
+      <li class="nav-item" *ngFor="let navLink of leftLinks">
+        <a
+          (click)="handleDropdownClick()"
+          class="nav-link"
+          routerLink="{{ navLink.url }}"
+          routerLinkActive="active"
+          >{{ navLink.title }}</a
+        >
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto" style="z-index: 1">
+      <li class="nav-item" *ngFor="let navLink of rightLinks">
+        <a
+          (click)="handleDropdownClick()"
+          class="nav-link"
+          routerLink="{{ navLink.url }}"
+          routerLinkActive="active"
+          >{{ navLink.title }}</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>

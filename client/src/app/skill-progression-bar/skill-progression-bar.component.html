@@ -1,0 +1,13 @@
+<div class="mb-2 progress-box">
+  <h4>{{ skillInfo.skill.name }}</h4>
+  <progressbar
+    class="progress-striped active"
+    style="height: 30px"
+    [value]="value"
+    [striped]="striped"
+    type="info"
+  >
+    <i style="font-size: medium">{{ this.value }}%</i>
+  </progressbar>
+  <h5 class="mt-3"><em style="color: #00457d;">(Level {{ skillInfo.level }})</em></h5>
+</div>

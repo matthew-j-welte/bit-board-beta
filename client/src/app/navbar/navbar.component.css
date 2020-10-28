@@ -1,0 +1,42 @@
+.nav-link {
+  font-size: medium;
+  margin: 6px;
+}
+
+@media (min-width: 1200px) {
+  .navbar-logo {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 1200px) {
+  .nav-icon {
+    margin-top: 5px;
+    margin-left: 10px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .nav-icon {
+    padding: 10px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    margin-top: 15px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .logo-container {
+    border-bottom: 3px solid #abb6c7;
+  }
+}
+
+.logo-container {
+  border-radius: 0px 0px 50px 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: whitesmoke;
+}
