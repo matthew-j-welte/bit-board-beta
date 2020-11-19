@@ -18,12 +18,12 @@ export class UserDashboardComponent implements OnInit {
   }
 
   loadUserData() {
-    this.usersService.getUser().subscribe((res) => {
+    this.usersService.getUser()?.subscribe((res) => {
       this.user = res;
     });
   }
 
   getSortedSkills(): UserSkill[] {
-    return this.user.userSkills.sort((x,y) => y.progressPercent - x.progressPercent)
+    return this.user?.userSkills.sort((x,y) => y.progressPercent - x.progressPercent)
   }
 }

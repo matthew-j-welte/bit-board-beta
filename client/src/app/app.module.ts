@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -12,6 +13,8 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { SkillProgressionBarComponent } from './skill-progression-bar/skill-progression-bar.component';
 import { UserDashboardSidenavComponent } from './user-dashboard-sidenav/user-dashboard-sidenav.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { LoginComponent } from './+forms/login/login.component';
+import { TextInputComponent } from './+forms/text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +24,18 @@ import { NavbarComponent } from './navbar/navbar.component';
     UserDashboardComponent,
     SkillProgressionBarComponent,
     UserDashboardSidenavComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent,
+    TextInputComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ProgressbarModule.forRoot()  
+    ProgressbarModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

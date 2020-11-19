@@ -14,6 +14,10 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   getUser() {
-    return this.http.get<UserModel>(`${this.baseUrl}/users/GuerraSnider`)
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      return this.http.get<UserModel>(`${this.baseUrl}/users/${user.userName}`)
+    }
+    
   }
 }

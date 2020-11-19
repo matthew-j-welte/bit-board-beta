@@ -12,7 +12,6 @@ namespace API.Helpers
         {
             CreateMap<User, UserDto>();
             CreateMap<User, UserModel>();
-            CreateMap<User, RegisterDto>();
             CreateMap<User, LoginDto>();
             CreateMap<LearningResourceSkill, SkillDto>();
             CreateMap<LearningResource, LearningResourceDto>();

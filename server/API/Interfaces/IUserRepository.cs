@@ -8,11 +8,13 @@ namespace API.Interfaces
 {
     public interface IUserRepository
     {
-         Task<IEnumerable<UserModel>> GetUsersAsync();
-         Task<UserModel> GetUserByUsernameAsync(string username);
-         Task<IEnumerable<CodeEditorConfigurationDto>> GetCodeEditorConfigurationsAsync();
-         void InsertUserAsync(User user);
-         void DeletetUser(User user);
-         void UpdateUser(User user);
+        Task<IEnumerable<UserModel>> GetUserModelsAsync();
+        Task<UserModel> GetUserModelByUsernameAsync(string username);
+        Task<IEnumerable<UserDto>> GetUsersAsync();
+        Task<UserDto> GetUserByUsernameAsync(string username);
+        Task<IEnumerable<CodeEditorConfigurationDto>> GetCodeEditorConfigurationsAsync();
+        void InsertUserAsync(User user);
+        void DeletetUser(User user);
+        void UpdateUser(User user);
     }
 }

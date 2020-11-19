@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../+services/account.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,10 +16,10 @@ export class NavbarComponent implements OnInit {
 
   rightLinks = [
     { title: 'User Dashboard', url: '/userDashboard' },
-    { title: 'Log Out', url: '/home' }
+    { title: 'Log Out', url: '/' }
   ]
 
-  constructor() {}
+  constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {}
 
@@ -26,9 +27,16 @@ export class NavbarComponent implements OnInit {
     this.navbarCollapsed = !this.navbarCollapsed;
   }
 
-  handleDropdownClick() {
+  handleNavbarClick(event) {
     if (!this.navbarCollapsed) {
       this.toggleNavbarCollapsing();
     }
+    if (event.target.name === "Log Out") {
+      this.logout()
+    }
+  }
+
+  logout() {
+    this.accountService.logout();
   }
 }

@@ -1,4 +1,6 @@
 // using System.Threading.Tasks;
+using System.Threading.Tasks;
+using API.Interfaces;
 using API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,17 +8,28 @@ namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
-        [HttpPost("login")]
-        public ActionResult Login(LoginDto loginDto)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public AccountController(IUnitOfWork unitOfWork)
         {
-            System.Console.WriteLine($"Logging in {loginDto.Username}");
-            return NoContent();
+            _unitOfWork = unitOfWork;
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult> LoginAsync(LoginDto loginDto)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(loginDto.Username);
+            if (user.Password == loginDto.Password)
+            {
+                return Ok(user);
+            }
+            return BadRequest();
         }
 
         [HttpPost("register")]
-        public ActionResult Register(RegisterDto registerDto)
+        public ActionResult Register(UserDto user)
         {
-            System.Console.WriteLine($"Registering in {registerDto.UserName}");
+            System.Console.WriteLine($"Registering in {user.UserName}");
             return NoContent();
         }
     }

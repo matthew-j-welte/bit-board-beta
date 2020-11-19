@@ -34,7 +34,15 @@ namespace API.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<UserModel> GetUserByUsernameAsync(string username)
+        public async Task<UserDto> GetUserByUsernameAsync(string username)
+        {
+            return await _context.Users
+                .Where(u => u.UserName == username)
+                .ProjectTo<UserDto>(_mapper.ConfigurationProvider)
+                .SingleAsync();
+        }
+
+        public async Task<UserModel> GetUserModelByUsernameAsync(string username)
         {
             return await _context.Users
                 .Where(u => u.UserName == username)
@@ -42,10 +50,17 @@ namespace API.Data.Repositories
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<UserModel>> GetUsersAsync()
+        public async Task<IEnumerable<UserModel>> GetUserModelsAsync()
         {
             return await _context.Users
                 .ProjectTo<UserModel>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<UserDto>> GetUsersAsync()
+        {
+            return await _context.Users
+                .ProjectTo<UserDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
 

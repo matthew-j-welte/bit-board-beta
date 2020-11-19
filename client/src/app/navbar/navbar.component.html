@@ -1,10 +1,10 @@
 <nav
   class="navbar fixed-top navbar-expand-xl navbar-light p-0"
-  style="background-color: whitesmoke; border-bottom: 2px solid #abb6c7"
+  style="background-color: rgb(241, 239, 250); border-bottom: 2px solid #abb6c7"
 >
   <div class="navbar-brand abs navbar-logo" href="#">
     <div class="logo-container d-inline-block align-top">
-      <a routerLink="/" routerLinkActive="active">
+      <a routerLink="/" routerLinkActive="active" (click)="handleNavbarClick($event)">
         <img
           class="nav-icon d-inline-block align-top"
           src="./assets/full-logo.png"
@@ -29,7 +29,7 @@
     <ul class="navbar-nav" style="z-index: 1">
       <li class="nav-item" *ngFor="let navLink of leftLinks">
         <a
-          (click)="handleDropdownClick()"
+          (click)="handleNavbarClick($event)"
           class="nav-link"
           routerLink="{{ navLink.url }}"
           routerLinkActive="active"
@@ -40,7 +40,8 @@
     <ul class="navbar-nav ml-auto" style="z-index: 1">
       <li class="nav-item" *ngFor="let navLink of rightLinks">
         <a
-          (click)="handleDropdownClick()"
+          name="{{navLink.title}}"
+          (click)="handleNavbarClick($event);"
           class="nav-link"
           routerLink="{{ navLink.url }}"
           routerLinkActive="active"

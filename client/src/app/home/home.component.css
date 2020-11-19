@@ -1,3 +1,47 @@
+.parent {
+  overflow: hidden;
+  position: relative;
+}
+
 .home-background {
-    height: 2800px;
+  width: 100%;
+}
+
+.login-block {
+  background-color: transparent;
+  color: black;
+  max-width: 500px;
+  margin-bottom: 350px;
+}
+
+.floating-debris {
+  width: 200px;
+  position: absolute;
+  height: auto;
+  transform: translatey(0px);
+  -webkit-filter: drop-shadow(0px 5px 5px rgb(21, 2, 39));
+  filter: drop-shadow(0px 10px 10px rgb(21, 2, 39));
+  animation: move 10s linear 0s infinite;
+  z-index: auto;
+}
+
+@keyframes move {
+  0% {
+    transform: translatey(0px);
+  }
+  100% {
+    transform: translatey(-3000px);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-20px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
 }
