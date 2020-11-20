@@ -15,6 +15,7 @@ import { UserDashboardSidenavComponent } from './user-dashboard-sidenav/user-das
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './+forms/login/login.component';
 import { TextInputComponent } from './+forms/text-input/text-input.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { TextInputComponent } from './+forms/text-input/text-input.component';
     BrowserAnimationsModule,
     ProgressbarModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TabsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

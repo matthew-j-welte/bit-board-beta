@@ -1,3 +1,16 @@
+#home-panel {
+  text-align: center;
+  margin-top: 300px;
+  margin-bottom: 0px;
+}
+
+#bb-icon {
+  width: 200px;
+  filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.768));
+  transform: translatey(0px);
+  animation: float 6s ease-in-out infinite;
+}
+
 .parent {
   overflow: hidden;
   position: relative;
@@ -5,6 +18,9 @@
 
 .home-background {
   width: 100%;
+  overflow: hidden;
+  background-image: url("../../assets/min-space-bg-3.jpg");
+  background-size: cover;
 }
 
 .login-block {
@@ -19,7 +35,7 @@
   position: absolute;
   height: auto;
   transform: translatey(0px);
-  -webkit-filter: drop-shadow(0px 5px 5px rgb(21, 2, 39));
+  -webkit-filter: drop-shadow(0px 10px 10px rgb(21, 2, 39));
   filter: drop-shadow(0px 10px 10px rgb(21, 2, 39));
   animation: move 10s linear 0s infinite;
   z-index: auto;

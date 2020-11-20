@@ -19,3 +19,8 @@ img {
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
 }
+
+#register {
+  color: white;
+  font-size: 0.9em;
+}

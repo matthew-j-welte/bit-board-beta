@@ -1,29 +1,18 @@
 <div class="parent">
-  <div class="p-0 home-background" style="overflow: hidden; background-image: url('./assets/min-space-bg-3.jpg'); background-size: cover;">
-    <div class="home-background" style="text-align: center; margin-top: 300px; margin-bottom: 0px;">
-      <img
-        class=""
-        src="./assets/bb-icon.png"
-        style="
-          width: 200px;
-          filter: drop-shadow(0px 5px 5px rgba(240, 209, 144, 0.274));
-          transform: translatey(0px);
-          animation: float 6s ease-in-out infinite;
-        "
-      />
+  <div class="p-0 home-background">
+    <div id="home-panel">
+      <img id="bb-icon" src="./assets/bb-icon.png" />
       <div class="container-fluid login-block">
         <img
           *ngFor="let debris of imageDebris"
           class="floating-debris"
           src="{{ debris?.src }}"
-          [style.top.px] = "debris?.y"
-          [style.left.px] = "debris?.x"
-          [style.width.px] = "debris.width || 200"
-  
+          [style.top.px]="debris?.y"
+          [style.left.px]="debris?.x"
+          [style.width.px]="debris.width || 200"
         />
         <app-login></app-login>
       </div>
     </div>
   </div>
-  
 </div>

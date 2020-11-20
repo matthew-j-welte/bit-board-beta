@@ -1,6 +1,15 @@
+nav {
+  background-color: rgb(241, 239, 250);
+  border-bottom: 2px solid #abb6c7;
+}
+
 .nav-link {
   font-size: medium;
   margin: 6px;
+}
+
+.navbar-nav {
+  z-index: 1;
 }
 
 @media (min-width: 1200px) {

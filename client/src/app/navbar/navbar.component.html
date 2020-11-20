@@ -1,10 +1,11 @@
-<nav
-  class="navbar fixed-top navbar-expand-xl navbar-light p-0"
-  style="background-color: rgb(241, 239, 250); border-bottom: 2px solid #abb6c7"
->
+<nav class="navbar fixed-top navbar-expand-xl navbar-light p-0">
   <div class="navbar-brand abs navbar-logo" href="#">
     <div class="logo-container d-inline-block align-top">
-      <a routerLink="/" routerLinkActive="active" (click)="handleNavbarClick($event)">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        (click)="handleNavbarClick($event)"
+      >
         <img
           class="nav-icon d-inline-block align-top"
           src="./assets/full-logo.png"
@@ -26,7 +27,7 @@
     id="collapsingNavbar"
     [class.collapse]="navbarCollapsed"
   >
-    <ul class="navbar-nav" style="z-index: 1">
+    <ul class="navbar-nav">
       <li class="nav-item" *ngFor="let navLink of leftLinks">
         <a
           (click)="handleNavbarClick($event)"
@@ -37,14 +38,14 @@
         >
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto" style="z-index: 1">
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item" *ngFor="let navLink of rightLinks">
         <a
-          name="{{navLink.title}}"
-          (click)="handleNavbarClick($event);"
+          name="{{ navLink.title }}"
+          (click)="handleNavbarClick($event)"
           class="nav-link"
           routerLink="{{ navLink.url }}"
-          routerLinkActive="active"
+          routerLinkActive="{{ navLink.title === 'Log Out' ? '' : 'active' }}"
           >{{ navLink.title }}</a
         >
       </li>

@@ -1,8 +1,5 @@
 <div class="container login-container mt-0 pt-0">
-  <form
-    [formGroup]="registerForm"
-    (ngSubmit)="registerForm.valid && login()"
-  >
+  <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && login()">
     <app-text-input
       [formControl]="registerForm.controls['username']"
       [label]="'Username'"
@@ -30,7 +27,7 @@
         Login
       </button>
       <button
-        style="color: white; font-size: 0.9em"
+        id="register"
         class="btn btn-link mr-2"
         (click)="cancel()"
         type="button"
