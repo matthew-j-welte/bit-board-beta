@@ -11,7 +11,7 @@ export class NavbarComponent implements OnInit {
   leftLinks = [
     { title: 'Learning', url: '/learningResources' },
     { title: 'Code Challenges', url: '/codeChallenges' },
-    { title: 'Code Reviews', url: '/codeReviews' }
+    { title: 'Mentor', url: '/mentor' }
   ]
 
   rightLinks = [

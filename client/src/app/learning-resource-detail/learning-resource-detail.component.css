@@ -1,0 +1,41 @@
+#percent {
+  font-size: 1.3em;
+}
+
+.progress {
+  height: 25px;
+}
+
+.tech-logo {
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+  margin: 0px 10px 0px 10px;
+}
+
+.skill-row {
+  justify-content: space-between;
+}
+
+@media (min-width: 576px) {
+  .container-fluid {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+    .container-fluid {
+      width: 90%;
+    }
+  }
+
+@media (min-width: 992px) {
+  .container-fluid {
+    width: 80%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container-fluid {
+    width: 60%;
+  }
+}

@@ -3,4 +3,5 @@ export interface Skill {
     name: string;
     avatarUrl: string;
     category: string;
+    bgColorHex: string;
 }

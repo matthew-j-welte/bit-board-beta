@@ -14,11 +14,10 @@ namespace API.Helpers
             CreateMap<User, UserModel>();
             CreateMap<User, LoginDto>();
             CreateMap<LearningResourceSkill, SkillDto>();
-            CreateMap<LearningResource, LearningResourceDto>();
-            CreateMap<LearningResource, LearningResourceModel>()
-                .ForMember(
-                    dest => dest.Skills, 
-                    opt => opt.MapFrom(src => src.LearningResourceSkills.Select(y => y.Skill)));                    
+            CreateMap<LearningResource, LearningResourceDto>().ForMember(
+                    dest => dest.Skills,
+                    opt => opt.MapFrom(src => src.LearningResourceSkills.Select(y => y.Skill)));
+            CreateMap<LearningResource, LearningResourceModel>();
             CreateMap<Skill, SkillDto>();
             CreateMap<UserSkill, UserSkillDto>();
             CreateMap<CodeEditorConfiguration, CodeEditorConfigurationDto>();

@@ -1,20 +1,71 @@
 <div id="parent" class="container-fluid">
   <h1>Keep Working</h1>
-  <h5 style="color: rgb(79, 80, 82)">
+  <h6>
     Pick up where you left off last time - the best way to level up from
     learning resources is to finish each one in its entirety
-  </h5>
+  </h6>
   <hr />
 
+  <div class="card-deck">
+    <div
+      class="card item-card"
+      *ngFor="let learningResource of resources?.slice(10, 20)"
+      (mouseenter)="textualSkillsView(learningResource)"
+      (mouseleave)="graphicalSkillsView(learningResource)"
+      routerLink='/learningResource/{{learningResource.learningResourceId}}'
+    >
+      <img
+        class="card-img-top"
+        src="{{ learningResource.imageUrl }}"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <h5 class="card-title">
+          <strong>{{ learningResource.type }} | </strong>
+          {{ learningResource.title | titlecase }}
+        </h5>
+        <h6 class="card-subtitle text-muted mr-0">Matthew Welte</h6>
+        
+      </div>
+      <div
+        class="card-footer pt-2"
+        style="text-align: center; min-height: 50px"
+      >
+        <div
+          *ngIf="learningResource.showLogos; then graphical; else textual"
+          class="p-0"
+        ></div>
+        <ng-template #graphical>
+          <span
+            *ngFor="let skill of learningResource.skills"
+            class="badge badge-pill mt-0 mb-0 ml-2 mr-2 p-0"
+            ><img
+              class="rounded tech-logo"
+              src="./assets/{{ skill.avatarUrl }}"
+              width="55px"
+              height="55px"
+              alt=""
+          /></span>
+        </ng-template>
+        <ng-template #textual>
+          <span
+            *ngFor="let skill of learningResource.skills"
+            style="font-size: 1.3rem"
+            class="mb-0 ml-2 mr-2 mt-5"
+            [style.color]="skill.bgColorHex"
+          >
+            <strong>{{ skill.name }}</strong>
+          </span>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
   <h1>Popular</h1>
-  <h5 style="color: rgb(79, 80, 82)">
-    An assortment of resources that are trending recently
-  </h5>
+  <h6>An assortment of resources that are trending recently</h6>
   <hr />
 
   <h1>Try Something New</h1>
-  <h5 style="color: rgb(79, 80, 82)">
-    Some suggestions to encourage spreading out your range of knowledge
-  </h5>
+  <h6>Some suggestions to encourage spreading out your range of knowledge</h6>
   <hr />
 </div>

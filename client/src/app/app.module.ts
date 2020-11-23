@@ -16,6 +16,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './+forms/login/login.component';
 import { TextInputComponent } from './+forms/text-input/text-input.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { MentorPageComponent } from './mentor-page/mentor-page.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { LearningResourceDetailComponent } from './learning-resource-detail/learning-resource-detail.component'; 
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     UserDashboardSidenavComponent,
     NavbarComponent,
     LoginComponent,
-    TextInputComponent
+    TextInputComponent,
+    MentorPageComponent,
+    LearningResourceDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ProgressbarModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

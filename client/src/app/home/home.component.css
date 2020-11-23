@@ -37,7 +37,7 @@
   transform: translatey(0px);
   -webkit-filter: drop-shadow(0px 10px 10px rgb(21, 2, 39));
   filter: drop-shadow(0px 10px 10px rgb(21, 2, 39));
-  animation: move 10s linear 0s infinite;
+  animation: move 20s linear 0s infinite;
   z-index: auto;
 }
 

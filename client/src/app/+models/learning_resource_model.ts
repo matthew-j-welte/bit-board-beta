@@ -4,5 +4,4 @@ import { Skill } from './dtos/skill_dto';
 
 export interface LearningResourceModel extends LearningResource {
     posts: Post[];
-    skills: Skill[];
 }

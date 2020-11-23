@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using API.Data.Entities;
 using API.Interfaces;
 using API.Models;
+using API.Models.DTOs;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
@@ -25,8 +26,25 @@ namespace API.Data.Repositories
         {
             _context.LearningResources.Remove(learningResource);
         }
+        
+        public async Task<IEnumerable<LearningResourceDto>> GetLearningResourcesAsync()
+        {
+            return await _context
+                .LearningResources
+                .ProjectTo<LearningResourceDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+        }
+        
+        public async Task<LearningResourceDto> GetLearningResourceByIdAsync(int learningResourceId)
+        {
+            return await _context
+                .LearningResources
+                .Where(x => x.LearningResourceId == learningResourceId)
+                .ProjectTo<LearningResourceDto>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
+        }
 
-        public async Task<LearningResourceModel> GetLearningResourceByIdAsync(int learningResourceId)
+        public async Task<LearningResourceModel> GetLearningResourceModelByIdAsync(int learningResourceId)
         {
             return await _context
                 .LearningResources
@@ -35,7 +53,7 @@ namespace API.Data.Repositories
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<LearningResourceModel>> GetLearningResourcesAsync()
+        public async Task<IEnumerable<LearningResourceModel>> GetLearningResourceModelsAsync()
         {
             return await _context
                 .LearningResources

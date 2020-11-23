@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace API.Models.DTOs
 {
     public class LearningResourceDto
@@ -9,5 +11,7 @@ namespace API.Models.DTOs
         public string VideoId { get; set; }
         public string ImageUrl { get; set; }
         public string Type { get; set; }
+
+        public ICollection<SkillDto> Skills { get; set; }
     }
 }

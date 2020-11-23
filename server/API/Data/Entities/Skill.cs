@@ -10,6 +10,7 @@ namespace API.Data.Entities
         public string Name { get; set; }
         public string AvatarUrl { get; set; }
         public string Category { get; set; }
+        public string BgColorHex { get; set; }
 
         public ICollection<LearningResourceSkill> LearningResourceSkills { get; set; }
     }

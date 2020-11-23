@@ -17,7 +17,8 @@ namespace API.Data.Migrations
                     DateModified = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     AvatarUrl = table.Column<string>(nullable: true),
-                    Category = table.Column<string>(nullable: true)
+                    Category = table.Column<string>(nullable: true),
+                    BgColorHex = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
