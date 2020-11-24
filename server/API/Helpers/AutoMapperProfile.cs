@@ -17,7 +17,9 @@ namespace API.Helpers
             CreateMap<LearningResource, LearningResourceDto>().ForMember(
                     dest => dest.Skills,
                     opt => opt.MapFrom(src => src.LearningResourceSkills.Select(y => y.Skill)));
-            CreateMap<LearningResource, LearningResourceModel>();
+            CreateMap<LearningResource, LearningResourceModel>().ForMember(
+                    dest => dest.Skills,
+                    opt => opt.MapFrom(src => src.LearningResourceSkills.Select(y => y.Skill)));
             CreateMap<Skill, SkillDto>();
             CreateMap<UserSkill, UserSkillDto>();
             CreateMap<CodeEditorConfiguration, CodeEditorConfigurationDto>();

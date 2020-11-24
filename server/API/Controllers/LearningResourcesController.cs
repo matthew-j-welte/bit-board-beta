@@ -15,17 +15,31 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpGet]
+        [HttpGet("standard")]
         public async Task<ActionResult<IEnumerable<LearningResourceModel>>> GetLearningResourcesAsync()
         {
             var resources = await _unitOfWork.LearningResourceRepository.GetLearningResourcesAsync();
             return Ok(resources);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("standard/{id}")]
         public async Task<ActionResult<LearningResourceModel>> GetLearningResourceByIdAsync(int id)
         {
             var resource = await _unitOfWork.LearningResourceRepository.GetLearningResourceByIdAsync(id);
+            return Ok(resource);
+        }
+
+        [HttpGet("detailed")]
+        public async Task<ActionResult<IEnumerable<LearningResourceModel>>> GetLearningResourceModelsAsync()
+        {
+            var resources = await _unitOfWork.LearningResourceRepository.GetLearningResourceModelsAsync();
+            return Ok(resources);
+        }
+
+        [HttpGet("detailed/{id}")]
+        public async Task<ActionResult<LearningResourceModel>> GetLearningResourceModelByIdAsync(int id)
+        {
+            var resource = await _unitOfWork.LearningResourceRepository.GetLearningResourceModelByIdAsync(id);
             return Ok(resource);
         }
 
@@ -44,13 +58,3 @@ namespace API.Controllers
         }
     }
 }
-
-/*
-From Go Server
-----------------
-
-GET:  /learn/resources                      --> /learningResources
-POST: --------------------                  --> /learningResources/{learningResourceId}
-PUT:  --------------------                  --> /learningResources/{learningResourceId}
-
-*/

@@ -39,32 +39,79 @@
   </div>
 </div>
 <div class="container-fluid">
-  <img width="100%" src="{{ learningResource.imageUrl }}" style="border-radius: 3%;" />
+  <img
+    width="100%"
+    src="{{ learningResource.imageUrl }}"
+    style="border-radius: 3%"
+  />
   <h1 class="mt-5 mb-0">Description</h1>
   <hr class="mt-1" />
   <p class="text-muted">{{ learningResource.description }}</p>
 
   <h1 class="mt-5 mb-0">Posts</h1>
   <hr class="mt-1" />
-  <div class="row">
-    <span class="mr-3"
-      ><img
-        class="rounded-circle"
-        src="./assets/angular-logo.png"
-        height="70px"
-    /></span>
-    <span class="mt-2">
-      <strong><p class="mb-0" style="font-size: 1.1em; color: rgb(12, 73, 126);"><a href="">Matthew Welte</a></p></strong>
-      <em
-        ><p class="text-muted" style="font-size: 0.9em">
-          Posted 100 days ago
-        </p></em
+  <div *ngFor="let post of learningResource.posts">
+    <div class="row">
+      <span class="mr-2 ml-3"
+        ><img
+          class="rounded-circle mt-1"
+          src="./assets/angular-logo.png"
+          height="50px"
+      /></span>
+      <span class="mt-1">
+        <strong
+          ><p class="mb-0" style="font-size: 1.1em; color: rgb(12, 73, 126)">
+            <a href="">Matthew Welte</a>
+          </p></strong
+        >
+        <em
+          ><p class="text-muted mb-2" style="font-size: 0.9em">
+            Posted 100 days ago
+          </p></em
+        >
+      </span>
+    </div>
+    <div
+      class="mt-1 rounded"
+      style="width: 100%; border: 2px solid rgba(213, 213, 213, 0.753)"
+    >
+      <p class="p-2">
+        {{ post.content }}
+      </p>
+    </div>
+    <div class="mt-2 mb-5">
+      <button
+        type="button"
+        class="btn btn-light mr-3"
+        style="border-radius: 10em"
+        (click)="like(post.postId)"
       >
-    </span>
-  </div>
-  <div style="width: 100%;">
-      <textarea style="width: 100%;">
-          {{learningResource.description}}
-      </textarea>
+        <span style="color: rgb(0, 132, 255)">
+          <i
+            class="fa-heart fa-lg"
+            [class.far]="!likeMap[post.postId]"
+            [class.fas]="likeMap[post.postId]"
+          ></i>
+          {{ likeMap[post.postId] ? "" : "Like" }}
+        </span>
+      </button>
+      <button
+        type="button"
+        class="btn btn-light"
+        style="border-radius: 10em"
+        (click)="report(post.postId)"
+      >
+        <span style="color: rgb(255, 89, 0)">
+          <i
+            [class.fas]="reportMap[post.postId]"
+            [class.fa-flushed]="reportMap[post.postId]"
+            [class.far]="!reportMap[post.postId]"
+            [class.fa-frown]="!reportMap[post.postId]"
+            class="fa-lg"
+          ></i>
+          {{ reportMap[post.postId] ? "" : "Report" }}
+        </span>
+      </button>
+    </div>
   </div>
 </div>
