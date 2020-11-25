@@ -2,11 +2,11 @@
   <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && login()">
     <app-text-input
       [formControl]="registerForm.controls['username']"
-      [label]="'Username'"
+      [placeholder]="'Username'"
     ></app-text-input>
     <app-text-input
       [formControl]="registerForm.controls['password']"
-      [label]="'Password'"
+      [placeholder]="'Password'"
       [type]="'password'"
     >
     </app-text-input>
@@ -18,7 +18,7 @@
       </ul>
     </div>
 
-    <div class="form-group text-center">
+    <div class="form-group">
       <button
         [disabled]="!registerForm.valid"
         class="btn btn-info mr-2"
@@ -29,7 +29,7 @@
       <button
         id="register"
         class="btn btn-link mr-2"
-        (click)="cancel()"
+        (click)="openModalWithClass(template)"
         type="button"
       >
         Register
@@ -37,3 +37,25 @@
     </div>
   </form>
 </div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Create Your Account</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-registration></app-registration>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="modalRef.hide()">
+      Close
+    </button>
+  </div>
+</ng-template>

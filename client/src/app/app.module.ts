@@ -18,7 +18,8 @@ import { TextInputComponent } from './+forms/text-input/text-input.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { MentorPageComponent } from './mentor-page/mentor-page.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { LearningResourceDetailComponent } from './learning-resource-detail/learning-resource-detail.component'; 
+import { LearningResourceDetailComponent } from './learning-resource-detail/learning-resource-detail.component';
+import { RegistrationComponent } from './+forms/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LearningResourceDetailComponent } from './learning-resource-detail/lear
     LoginComponent,
     TextInputComponent,
     MentorPageComponent,
-    LearningResourceDetailComponent
+    LearningResourceDetailComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

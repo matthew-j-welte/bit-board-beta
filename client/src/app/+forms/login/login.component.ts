@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AccountService } from 'src/app/+services/account.service';
 
 @Component({
@@ -13,8 +14,9 @@ export class LoginComponent implements OnInit {
   registerForm: FormGroup;
   maxDate: Date;
   validationErrors: string[] = [];
+  modalRef: BsModalRef;
 
-  constructor(private fb: FormBuilder, private router: Router, private accountService: AccountService) { }
+  constructor(private fb: FormBuilder, private router: Router, private accountService: AccountService, private modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.intitializeForm();
@@ -44,5 +46,12 @@ export class LoginComponent implements OnInit {
 
   cancel() {
     this.cancelRegister.emit(false);
+  }
+
+  openModalWithClass(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(
+      template,
+      Object.assign({}, { class: 'gray modal-lg' })
+    );
   }
 }

@@ -1,0 +1,34 @@
+<div class="container login-container mt-0 pt-0">
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="registerForm.valid && register()"
+  >
+    <div *ngFor="let group of formGroupings">
+      <h4 class="my-3" style="color: rgb(59, 131, 226)">
+        <i [ngClass]="['fas', 'fa-lg', group.icon]"></i
+        ><strong class="ml-3">{{ group.header }}</strong>
+      </h4>
+      <div *ngFor="let row of group.rows" class="row">
+        <div *ngFor="let field of row.fields" class="col-lg">
+          <app-text-input
+            [formControl]="registerForm.controls[field.name]"
+            [type]="field.type"
+            [label]="field.label"
+            [required]="field.required"
+            [placeholder]="field.placeholder"
+            [rows]="field.rows ? field.rows : ''"
+          ></app-text-input>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <button
+        [disabled]="!registerForm.valid"
+        class="btn btn-info mr-2"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

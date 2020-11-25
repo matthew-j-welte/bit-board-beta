@@ -1,21 +1,36 @@
 <div class="form-group">
+  <p class="mb-1 ml-1" style="font-size: 0.9em" *ngIf="label">
+    <strong>{{ label }}</strong
+    ><strong *ngIf="required" style="color: rgb(174, 0, 0); font-size: 1.1em">
+      *</strong
+    >
+  </p>
   <input
     [class.is-invalid]="ngControl.touched && ngControl.invalid"
     type="{{ type }}"
     class="form-control"
     [formControl]="ngControl.control"
-    placeholder="{{ label }}"
+    placeholder="{{ placeholder }}"
+    *ngIf="type !== 'textarea'"
   />
+  <textarea
+    [class.is-invalid]="ngControl.touched && ngControl.invalid"
+    class="form-control"
+    [formControl]="ngControl.control"
+    placeholder="{{ placeholder }}"
+    *ngIf="type === 'textarea'"
+    rows="{{rows}}"
+  ></textarea>
   <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">
     Please enter a {{ label }}
   </div>
   <div *ngIf="ngControl.control.errors?.minlength" class="invalid-feedback">
     {{ label }} must be at least
-    {{ ngControl.control.errors.minlength["requiredLength"] }}
+    {{ ngControl.control.errors.minlength["requiredLength"] }} characters
   </div>
   <div *ngIf="ngControl.control.errors?.maxlength" class="invalid-feedback">
     {{ label }} must be at most
-    {{ ngControl.control.errors.maxlength["requiredLength"] }}
+    {{ ngControl.control.errors.maxlength["requiredLength"] }} characters
   </div>
   <div *ngIf="ngControl.control.errors?.isMatching" class="invalid-feedback">
     Passwords do not match
