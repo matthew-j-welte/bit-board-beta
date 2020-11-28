@@ -34,7 +34,7 @@
 
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
+    <h4 class="modal-title pull-left">Suggest Learning Resource</h4>
     <button
       type="button"
       class="close pull-right"
@@ -45,6 +45,7 @@
     </button>
   </div>
   <div class="modal-body">
+    <app-resource-suggestion></app-resource-suggestion>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" (click)="modalRef.hide()">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { UserSkill } from '../+models/dtos/user_skill_dto';
 import { UserModel } from '../+models/user_model';
 import { UsersService } from '../+services/users.service';
@@ -17,7 +18,7 @@ export class UserDashboardComponent implements OnInit {
     this.loadUserData();
   }
 
-  loadUserData() {
+  async loadUserData() {
     this.usersService.getUser()?.subscribe((res) => {
       this.user = res;
     });

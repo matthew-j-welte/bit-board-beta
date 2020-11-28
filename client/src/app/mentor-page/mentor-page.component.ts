@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Skill } from '../+models/dtos/skill_dto';
 
 @Component({
   selector: 'app-mentor-page',
@@ -8,6 +9,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class MentorPageComponent implements OnInit {
   modalRef: BsModalRef;
+  skills: Skill[];
 
   constructor(private modalService: BsModalService) {}
 

@@ -3,7 +3,7 @@
     [formGroup]="registerForm"
     (ngSubmit)="registerForm.valid && register()"
   >
-    <div *ngFor="let group of formGroupings">
+    <div *ngFor="let group of formConfig.groups">
       <h4 class="my-3" style="color: rgb(59, 131, 226)">
         <i [ngClass]="['fas', 'fa-lg', group.icon]"></i
         ><strong class="ml-3">{{ group.header }}</strong>

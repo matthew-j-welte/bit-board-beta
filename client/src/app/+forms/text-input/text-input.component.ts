@@ -12,6 +12,7 @@ export class TextInputComponent implements ControlValueAccessor {
   @Input() placeholder = '';
   @Input() required = false;
   @Input() rows: number = null;
+  @Input() readonly: boolean = false;
 
   constructor(@Self() public ngControl: NgControl) { 
     this.ngControl.valueAccessor = this;

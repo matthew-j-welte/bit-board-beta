@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -11,7 +11,6 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { SkillProgressionBarComponent } from './skill-progression-bar/skill-progression-bar.component';
-import { UserDashboardSidenavComponent } from './user-dashboard-sidenav/user-dashboard-sidenav.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './+forms/login/login.component';
 import { TextInputComponent } from './+forms/text-input/text-input.component';
@@ -20,6 +19,9 @@ import { MentorPageComponent } from './mentor-page/mentor-page.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LearningResourceDetailComponent } from './learning-resource-detail/learning-resource-detail.component';
 import { RegistrationComponent } from './+forms/registration/registration.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './+interceptors/loading.interceptor';
+import { ResourceSuggestionComponent } from './+forms/resource-suggestion/resource-suggestion.component';
 
 @NgModule({
   declarations: [
@@ -28,13 +30,13 @@ import { RegistrationComponent } from './+forms/registration/registration.compon
     LearningResourcesComponent,
     UserDashboardComponent,
     SkillProgressionBarComponent,
-    UserDashboardSidenavComponent,
     NavbarComponent,
     LoginComponent,
     TextInputComponent,
     MentorPageComponent,
     LearningResourceDetailComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ResourceSuggestionComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,9 +47,12 @@ import { RegistrationComponent } from './+forms/registration/registration.compon
     FormsModule,
     ReactiveFormsModule,
     TabsModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgxSpinnerModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

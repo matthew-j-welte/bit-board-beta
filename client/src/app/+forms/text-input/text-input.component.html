@@ -12,6 +12,7 @@
     [formControl]="ngControl.control"
     placeholder="{{ placeholder }}"
     *ngIf="type !== 'textarea'"
+    [readOnly]='readonly ? true : false'
   />
   <textarea
     [class.is-invalid]="ngControl.touched && ngControl.invalid"
