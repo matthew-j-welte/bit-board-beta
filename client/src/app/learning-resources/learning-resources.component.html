@@ -1,106 +1,28 @@
+<div class="jumbotron pt-3" style="margin: 0px">
+  <div class="container-fluid" style="width: 80%">
+    <h1 id="jumbo-header" class="display-2">Start Learning Today</h1>
+    <hr class="my-4" />
+    <p class="lead">
+      Browse the below selection of learning resources and continue to grow as a
+      developer while leveling up!
+    </p>
+  </div>
+</div>
 <div *ngIf="resources" id="parent" class="container-fluid">
-  <h1>Keep Working</h1>
+  <h1 class="mt-4">Keep Working</h1>
   <h6>
     Pick up where you left off last time - the best way to level up from
     learning resources is to finish each one in its entirety
   </h6>
   <hr />
-  <div class="row" style="justify-content: center">
-    <div
-      class="card col-auto item-card px-0"
-      *ngFor="let learningResource of activeResources"
-      (mouseenter)="textualSkillsView(learningResource)"
-      (mouseleave)="graphicalSkillsView(learningResource)"
-      routerLink="/learningResource/{{ learningResource.learningResourceId }}"
-    >
-      <img
-        class="card-img-top"
-        src="{{ learningResource.imageUrl }}"
-        alt="Card image cap"
-      />
-      <div class="card-body pb-2">
-        <h5 class="card-title">
-          <strong>{{ learningResource.type }} | </strong>
-          {{ learningResource.title | titlecase }}
-        </h5>
-        <h6 class="card-subtitle text-muted mr-0">Matthew Welte</h6>
-        <hr />
-        <p class="card-text mt-2">
-          {{
-            learningResource.description.length > 150
-              ? learningResource.description.substring(0, 150).trim() + "..."
-              : learningResource.description
-          }}
-        </p>
-      </div>
-      <div class="row mb-3" style="justify-content: center">
-        <div
-          *ngIf="learningResource.showLogos; then graphical; else textual"
-          class="p-0"
-        ></div>
-        <ng-template #graphical>
-          <div
-            *ngFor="let skill of learningResource.skills"
-            class="logo-pill ml-2 mr-2 p-0 col-auto rounded-circle"
-            style="
-              height: 70px;
-              width: 70px;
-              justify-content: center;
-              text-align: center;
-            "
-          >
-            <img
-              class="rounded tech-logo"
-              src="./assets/{{ skill.avatarUrl }}"
-              width="48px"
-              height="48px"
-            />
-          </div>
-        </ng-template>
-        <ng-template #textual>
-          <span
-            *ngFor="let skill of learningResource.skills"
-            style="font-size: 1.3rem"
-            class="mb-3 ml-2 mr-2 logo-pill col-auto"
-            [style.color]="skill.bgColorHex"
-          >
-            <strong>{{ skill.name }}</strong>
-          </span>
-        </ng-template>
-      </div>
-    </div>
-  </div>
-  <div style="text-align: center">
-    <div>
-      <span
-        class="mx-2 my-3 rounded-circle"
-        style="font-size: 1.2em; height: 20px; width: 20px"
-        [style.background-color]="
-          resourceIndex + 1 === pageNum
-            ? 'rgb(97, 168, 231)'
-            : 'rgb(238, 238, 238)'
-        "
-        *ngFor="let pageNum of pages"
-        type="button"
-        (click)="setKeepWorkingPage(pageNum)"
-      >
-      </span>
-    </div>
-    <i
-      class="fas fa-angle-left fa-3x mr-3"
-      type="button"
-      (click)="previousKeepWorkingPage()"
-    ></i>
-    <i
-      class="fas fa-angle-right fa-3x ml-3"
-      type="button"
-      (click)="nextKeepWorkingPage()"
-    ></i>
-  </div>
+  <app-learning-resource-card-group [data]="resources">
+  </app-learning-resource-card-group>
 
-  <h1>Popular</h1>
+  <h1 class="mt-5">Popular</h1>
   <h6>An assortment of resources that are trending recently</h6>
   <hr />
+  <app-learning-resource-card-group [data]="allResources">
+  </app-learning-resource-card-group>
 
   <h1>Try Something New</h1>
   <h6>Some suggestions to encourage spreading out your range of knowledge</h6>

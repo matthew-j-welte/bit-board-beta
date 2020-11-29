@@ -28,5 +28,11 @@
     "PerRequest": 30,
     "Iterations": 1,
     "Model": "LearningResources"
+  },
+  {
+    "Id": "EyT9XHhcF",
+    "PerRequest": 100,
+    "Iterations": 1,
+    "Model": "UserResourceProgress"
   }
 ]

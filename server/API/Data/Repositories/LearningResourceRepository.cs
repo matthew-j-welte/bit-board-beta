@@ -35,6 +35,16 @@ namespace API.Data.Repositories
                 .ToListAsync();
         }
         
+        public async Task<IEnumerable<LearningResourceDto>> GetTopViewedLearningResourcesAsync(int amount)
+        {
+            return await _context
+                .LearningResources
+                .OrderByDescending(l => l.Viewers)
+                .Take(amount)
+                .ProjectTo<LearningResourceDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+        }
+
         public async Task<LearningResourceDto> GetLearningResourceByIdAsync(int learningResourceId)
         {
             return await _context

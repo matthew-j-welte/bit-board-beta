@@ -296,6 +296,36 @@ namespace API.Data.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("API.Data.Entities.UserResourceProgress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("LearningResourceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProgressPercent")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LearningResourceId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserResourceProgress");
+                });
+
             modelBuilder.Entity("API.Data.Entities.UserSkill", b =>
                 {
                     b.Property<int>("UserSkillId")
@@ -394,6 +424,21 @@ namespace API.Data.Migrations
 
                     b.HasOne("API.Data.Entities.User", "User")
                         .WithMany("Posts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Data.Entities.UserResourceProgress", b =>
+                {
+                    b.HasOne("API.Data.Entities.LearningResource", "LearningResource")
+                        .WithMany()
+                        .HasForeignKey("LearningResourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Data.Entities.User", "User")
+                        .WithMany("UserResourceProgressions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Interfaces;
 using API.Models;
+using API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -16,14 +17,20 @@ namespace API.Controllers
         }
 
         [HttpGet("standard")]
-        public async Task<ActionResult<IEnumerable<LearningResourceModel>>> GetLearningResourcesAsync()
+        public async Task<ActionResult<IEnumerable<LearningResourceDto>>> GetLearningResourcesAsync([FromHeader] string sortBy, [FromHeader] int count)
         {
-            var resources = await _unitOfWork.LearningResourceRepository.GetLearningResourcesAsync();
+            IEnumerable<LearningResourceDto> resources;
+            if (sortBy.Equals("viewers")) {
+                resources = await _unitOfWork.LearningResourceRepository.GetTopViewedLearningResourcesAsync(count);
+            }
+            else {
+                resources = await _unitOfWork.LearningResourceRepository.GetLearningResourcesAsync();
+            }
             return Ok(resources);
         }
 
         [HttpGet("standard/{id}")]
-        public async Task<ActionResult<LearningResourceModel>> GetLearningResourceByIdAsync(int id)
+        public async Task<ActionResult<LearningResourceDto>> GetLearningResourceByIdAsync(int id)
         {
             var resource = await _unitOfWork.LearningResourceRepository.GetLearningResourceByIdAsync(id);
             return Ok(resource);

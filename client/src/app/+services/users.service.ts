@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../+models/dtos/user_dto';
+import { UserResourceProgress } from '../+models/dtos/user_resource_progress_dto';
 import { UserModel } from '../+models/user_model';
 
 @Injectable({
@@ -18,6 +19,12 @@ export class UsersService {
     if (user) {
       return this.http.get<UserModel>(`${this.baseUrl}/users/${user.userName}`)
     }
-    
+  }
+
+  getResourceProgressions() {
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      return this.http.get<UserResourceProgress[]>(`${this.baseUrl}/users/${user.userId}/resourceProgress`)
+    }
   }
 }

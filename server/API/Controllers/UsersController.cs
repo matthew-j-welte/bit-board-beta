@@ -28,5 +28,12 @@ namespace API.Controllers
             var user = await _unitOfWork.UserRepository.GetUserModelByUsernameAsync(username);
             return Ok(user);
         }
+
+        [HttpGet("{id}/resourceProgress")]
+        public async Task<ActionResult<IEnumerable<UserResourceProgressDto>>> GetResourceProgressionsByUsernameAsync(int id)
+        {
+            var userProgressions = await _unitOfWork.UserRepository.GetLearningResourceProgressionsAsync(id);
+            return Ok(userProgressions);
+        }
     }
 }

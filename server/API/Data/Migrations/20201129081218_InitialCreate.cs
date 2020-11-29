@@ -217,6 +217,35 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserResourceProgress",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false),
+                    LearningResourceId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    ProgressPercent = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserResourceProgress", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserResourceProgress_LearningResource_LearningResourceId",
+                        column: x => x.LearningResourceId,
+                        principalTable: "LearningResource",
+                        principalColumn: "LearningResourceId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserResourceProgress_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Comment",
                 columns: table => new
                 {
@@ -291,6 +320,16 @@ namespace API.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserResourceProgress_LearningResourceId",
+                table: "UserResourceProgress",
+                column: "LearningResourceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserResourceProgress_UserId",
+                table: "UserResourceProgress",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserSkill_SkillId",
                 table: "UserSkill",
                 column: "SkillId");
@@ -314,6 +353,9 @@ namespace API.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "LearningResourceSkill");
+
+            migrationBuilder.DropTable(
+                name: "UserResourceProgress");
 
             migrationBuilder.DropTable(
                 name: "UserSkill");

@@ -13,6 +13,7 @@ namespace API.Interfaces
         Task<IEnumerable<UserDto>> GetUsersAsync();
         Task<UserDto> GetUserByUsernameAsync(string username);
         Task<IEnumerable<CodeEditorConfigurationDto>> GetCodeEditorConfigurationsAsync();
+        Task<IEnumerable<UserResourceProgressDto>> GetLearningResourceProgressionsAsync(int id);
         void InsertUserAsync(User user);
         void DeletetUser(User user);
         void UpdateUser(User user);

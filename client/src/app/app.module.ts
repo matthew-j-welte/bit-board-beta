@@ -22,6 +22,8 @@ import { RegistrationComponent } from './+forms/registration/registration.compon
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './+interceptors/loading.interceptor';
 import { ResourceSuggestionComponent } from './+forms/resource-suggestion/resource-suggestion.component';
+import { LearningResourceCardComponent } from './learning-resource-card/learning-resource-card.component';
+import { LearningResourceCardGroupComponent } from './learning-resource-card-group/learning-resource-card-group.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { ResourceSuggestionComponent } from './+forms/resource-suggestion/resour
     LearningResourceDetailComponent,
     RegistrationComponent,
     ResourceSuggestionComponent,
+    LearningResourceCardComponent,
+    LearningResourceCardGroupComponent,
   ],
   imports: [
     BrowserModule,

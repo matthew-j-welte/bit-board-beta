@@ -17,7 +17,6 @@ namespace API.Data
 
         public IUserRepository UserRepository => new UserRepository(_context, _mapper);
         public ILearningResourceRepository LearningResourceRepository => new LearningResourceRepository(_context, _mapper);
-
         public ISkillsRepository SkillsRepository => new SkillsRepository(_context, _mapper);
 
         public bool Commit()

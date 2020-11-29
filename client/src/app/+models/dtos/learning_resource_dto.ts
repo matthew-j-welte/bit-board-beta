@@ -8,4 +8,5 @@ export interface LearningResource {
     imageUrl: string;
     type: string;
     skills: Skill[];
+    viewers: number;
 }

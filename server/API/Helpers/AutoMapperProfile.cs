@@ -25,6 +25,8 @@ namespace API.Helpers
             CreateMap<CodeEditorConfiguration, CodeEditorConfigurationDto>();
             CreateMap<Post, PostDto>();
             CreateMap<Comment, PostCommentDto>();
+            CreateMap<UserResourceProgress, UserResourceProgressDto>();
+            CreateMap<User, UserResourceProgressDto>();
         }
     }
 }

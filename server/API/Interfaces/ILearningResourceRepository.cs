@@ -11,6 +11,7 @@ namespace API.Interfaces
         Task<IEnumerable<LearningResourceModel>> GetLearningResourceModelsAsync();
         Task<LearningResourceModel> GetLearningResourceModelByIdAsync(int learningResourceId);
         Task<IEnumerable<LearningResourceDto>> GetLearningResourcesAsync();
+        Task<IEnumerable<LearningResourceDto>> GetTopViewedLearningResourcesAsync(int amount);
         Task<LearningResourceDto> GetLearningResourceByIdAsync(int learningResourceId);
         void InsertLearningResourceAsync(LearningResource learningResource);
         void DeletetLearningResource(LearningResource learningResource);

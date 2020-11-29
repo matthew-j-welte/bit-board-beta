@@ -11,6 +11,7 @@ namespace API.Models.DTOs
         public string VideoId { get; set; }
         public string ImageUrl { get; set; }
         public string Type { get; set; }
+        public int Viewers { get; set; }
 
         public ICollection<SkillDto> Skills { get; set; }
     }

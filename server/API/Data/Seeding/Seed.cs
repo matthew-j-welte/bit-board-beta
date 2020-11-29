@@ -42,6 +42,23 @@ namespace API.Data.Seeding
             await context.SaveChangesAsync();
         }
 
+        public static async Task SeedUserProgressions(DataContext context)
+        {
+            if (await context.UserResourceProgressions.AnyAsync()) return;
+
+            var userProgressionData = await System.IO.File.ReadAllTextAsync("Data/Seeding/Generated/UserResourceProgress.json");
+            var userProgressions = JsonSerializer.Deserialize<List<UserResourceProgress>>(userProgressionData);
+            
+            if (userProgressions == null) throw new JsonException("Failed to deserialize");
+
+            foreach (var userProgress in userProgressions)
+            {
+                await context.UserResourceProgressions.AddAsync(userProgress);
+            }
+
+            await context.SaveChangesAsync();
+        }
+
         public static async Task SeedComments(DataContext context)
         {
             if (await context.Comments.AnyAsync()) return;

@@ -32,6 +32,7 @@ namespace API
 
                 await Seed.SeedSkills(context);
                 await Seed.SeedUsers(context);
+                await Seed.SeedUserProgressions(context);
                 await Seed.SeedLearningResources(context);
                 await Seed.SeedPosts(context);
                 await Seed.SeedComments(context);

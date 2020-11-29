@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { LearningResource } from '../+models/dtos/learning_resource_dto';
@@ -15,6 +15,13 @@ export class LearningResourcesService {
   getLearningResources() {
     return this.http.get<LearningResource[]>(
       this.baseUrl + 'learningResources/standard'
+    );
+  }
+
+  getTopViewedLearningResources(count: number) {
+    return this.http.get<LearningResource[]>(
+      this.baseUrl + 'learningResources/standard',
+      { headers: { count: count.toString(), sortBy: 'viewers' } }
     );
   }
 
