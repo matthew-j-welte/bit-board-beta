@@ -7,16 +7,16 @@
       Submitted By: Matthew Welte
     </p>
     <hr />
-    <div class="progress mt-4" style="background-color: rgb(247, 247, 247)">
+    <div *ngIf="userProgression" class="progress mt-4" style="background-color: rgb(247, 247, 247)">
       <div
         class="progress-bar"
         role="progressbar"
-        [style.width.%]="50"
+        [style.width.%]="userProgression?.progressPercent"
         aria-valuenow="50"
         aria-valuemin="0"
         aria-valuemax="100"
       >
-        <i id="percent">50% Complete</i>
+        <i id="percent">{{userProgression?.progressPercent}}%</i>
       </div>
     </div>
     <div class="skill-row">

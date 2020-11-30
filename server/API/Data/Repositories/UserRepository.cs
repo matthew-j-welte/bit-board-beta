@@ -34,6 +34,14 @@ namespace API.Data.Repositories
                 .ToListAsync();
         }
 
+        public async Task<UserResourceProgressDto> GetLearningResourceProgressionAsync(int userId, int learningResourceId)
+        {
+            return await _context.UserResourceProgressions
+                .Where(x => x.UserId == userId && x.LearningResourceId == learningResourceId)
+                .ProjectTo<UserResourceProgressDto>(_mapper.ConfigurationProvider)
+                .SingleAsync();
+        }
+
         public async Task<IEnumerable<UserResourceProgressDto>> GetLearningResourceProgressionsAsync(int id)
         {
             return await _context.UserResourceProgressions
