@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using API.Data.Repositories;
 using API.Interfaces;
 using AutoMapper;
@@ -19,9 +20,9 @@ namespace API.Data
         public ILearningResourceRepository LearningResourceRepository => new LearningResourceRepository(_context, _mapper);
         public ISkillsRepository SkillsRepository => new SkillsRepository(_context, _mapper);
 
-        public bool Commit()
+        public async Task<bool> Commit()
         {
-            return _context.SaveChanges() > 0;
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public void Rollback()

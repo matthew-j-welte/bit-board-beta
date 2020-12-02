@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace API.Interfaces
 {
     public interface IUnitOfWork
@@ -6,7 +8,7 @@ namespace API.Interfaces
         ILearningResourceRepository LearningResourceRepository { get; }
         ISkillsRepository SkillsRepository { get; }
 
-        bool Commit();
+        Task<bool> Commit();
         void Rollback();
     }
 }

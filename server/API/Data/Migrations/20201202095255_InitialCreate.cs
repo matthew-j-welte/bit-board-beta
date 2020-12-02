@@ -37,10 +37,13 @@ namespace API.Data.Migrations
                     Password = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
+                    ImageUrl = table.Column<string>(nullable: true),
                     YearsExperience = table.Column<int>(nullable: false),
-                    CareerSummary = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
-                    ImageUrl = table.Column<string>(nullable: true)
+                    TechnicalSummary = table.Column<string>(nullable: true),
+                    CurrentEmployer = table.Column<string>(nullable: true),
+                    YearsAtEmployer = table.Column<int>(nullable: false),
+                    JobDescription = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

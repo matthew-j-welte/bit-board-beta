@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormConfig, FormFieldBuilder } from 'src/app/+helpers/form-helpers';
+import { Register } from 'src/app/+models/dtos/register_dto';
 import { AccountService } from 'src/app/+services/account.service';
 import { registrationFormConfig } from './registration.config';
 
@@ -47,15 +48,19 @@ export class RegistrationComponent implements OnInit {
   }
 
   register() {
-    console.log(this.registerForm.value);
-    // this.accountService.register(this.registerForm.value).subscribe(
-    //   (_) => {
-    //     this.router.navigateByUrl('/userDashboard');
-    //   },
-    //   (error) => {
-    //     this.validationErrors = error;
-    //   }
-    // );
+    const registration: Register = this.registerForm.value;
+    registration.yearsExperience = +registration.yearsExperience;
+    registration.yearsAtEmployer = +registration.yearsAtEmployer;
+
+    console.log(registration);
+    this.accountService.register(registration).subscribe(
+      (_) => {
+        this.router.navigateByUrl('/userDashboard');
+      },
+      (error) => {
+        this.validationErrors = error;
+      }
+    );
   }
 
   cancel() {

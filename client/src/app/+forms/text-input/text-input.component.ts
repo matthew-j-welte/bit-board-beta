@@ -13,6 +13,7 @@ export class TextInputComponent implements ControlValueAccessor {
   @Input() required = false;
   @Input() rows: number = null;
   @Input() readonly: boolean = false;
+  @Input() showLabel: boolean = true;
 
   constructor(@Self() public ngControl: NgControl) { 
     this.ngControl.valueAccessor = this;

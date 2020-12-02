@@ -4,6 +4,7 @@ import {map} from 'rxjs/operators';
 import { User } from '../+models/dtos/user_dto';
 import { ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Register } from '../+models/dtos/register_dto';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class AccountService {
     )
   }
 
-  register(model: any) {
+  register(model: Register) {
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
       map((user: User) => {
         if (user) {

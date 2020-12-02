@@ -1,8 +1,7 @@
 namespace API.Models.DTOs
 {
-    public class UserDto
+    public class RegistrationDto
     {
-        public int UserId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
@@ -14,13 +13,5 @@ namespace API.Models.DTOs
         public string CurrentEmployer { get; set; }
         public int YearsAtEmployer { get; set; }
         public string JobDescription { get; set; }
-    }
-
-    public class UserSkillDto
-    {
-        public SkillDto Skill { get; set; }
-
-        public int Level { get; set; }
-        public int ProgressPercent { get; set; }
     }
 }

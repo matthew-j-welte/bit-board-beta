@@ -261,10 +261,10 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("CareerSummary")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<string>("CurrentEmployer")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("DateModified")
@@ -276,10 +276,16 @@ namespace API.Data.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("JobDescription")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("LastName")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TechnicalSummary")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -287,6 +293,9 @@ namespace API.Data.Migrations
 
                     b.Property<string>("UserName")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("YearsAtEmployer")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("YearsExperience")
                         .HasColumnType("INTEGER");

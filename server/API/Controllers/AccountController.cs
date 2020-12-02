@@ -27,10 +27,11 @@ namespace API.Controllers
         }
 
         [HttpPost("register")]
-        public ActionResult Register(UserDto user)
+        public async Task<ActionResult> Register(RegistrationDto userRegistration)
         {
-            System.Console.WriteLine($"Registering in {user.UserName}");
-            return NoContent();
+            System.Console.WriteLine(userRegistration.ToString());
+            var user = await _unitOfWork.UserRepository.InsertUserAsync(userRegistration);
+            return Ok(user);
         }
     }
 }

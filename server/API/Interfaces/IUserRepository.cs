@@ -15,7 +15,7 @@ namespace API.Interfaces
         Task<IEnumerable<CodeEditorConfigurationDto>> GetCodeEditorConfigurationsAsync();
         Task<IEnumerable<UserResourceProgressDto>> GetLearningResourceProgressionsAsync(int id);
         Task<UserResourceProgressDto> GetLearningResourceProgressionAsync(int userId, int learningResourceId);
-        void InsertUserAsync(User user);
+        Task<UserDto> InsertUserAsync(RegistrationDto user);
         void DeletetUser(User user);
         void UpdateUser(User user);
     }

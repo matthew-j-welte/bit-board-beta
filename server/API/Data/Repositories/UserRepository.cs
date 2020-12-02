@@ -39,7 +39,7 @@ namespace API.Data.Repositories
             return await _context.UserResourceProgressions
                 .Where(x => x.UserId == userId && x.LearningResourceId == learningResourceId)
                 .ProjectTo<UserResourceProgressDto>(_mapper.ConfigurationProvider)
-                .SingleAsync();
+                .SingleOrDefaultAsync();
         }
 
         public async Task<IEnumerable<UserResourceProgressDto>> GetLearningResourceProgressionsAsync(int id)
@@ -80,9 +80,12 @@ namespace API.Data.Repositories
                 .ToListAsync();
         }
 
-        public async void InsertUserAsync(User user)
+        public async Task<UserDto> InsertUserAsync(RegistrationDto userRegistration)
         {
+            var user = _mapper.Map<RegistrationDto, User>(userRegistration);
             await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+            return await GetUserByUsernameAsync(userRegistration.UserName);
         }
 
         public void UpdateUser(User user)

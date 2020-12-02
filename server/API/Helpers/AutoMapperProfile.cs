@@ -27,6 +27,7 @@ namespace API.Helpers
             CreateMap<Comment, PostCommentDto>();
             CreateMap<UserResourceProgress, UserResourceProgressDto>();
             CreateMap<User, UserResourceProgressDto>();
+            CreateMap<RegistrationDto, User>();
         }
     }
 }

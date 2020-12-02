@@ -55,8 +55,9 @@
       <span class="mr-2 ml-3"
         ><img
           class="rounded-circle mt-1"
-          src="./assets/angular-logo.png"
+          src="{{ userProgression.user.imageUrl ? userProgression.user.imageUrl : './assets/angular-logo.png' }}"
           height="50px"
+          width="50px"
       /></span>
       <span class="mt-1">
         <strong

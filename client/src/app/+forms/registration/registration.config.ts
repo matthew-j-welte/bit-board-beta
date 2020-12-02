@@ -27,7 +27,7 @@ export const registrationFormConfig: FormConfig = {
               label: 'Password',
               placeholder: 'Strong Password!',
               min: 8,
-              max: 36,
+              max: 256,
             },
           ],
         },
@@ -56,7 +56,7 @@ export const registrationFormConfig: FormConfig = {
         {
           fields: [
             {
-              name: 'profileImageUrl',
+              name: 'imageUrl',
               type: 'text',
               startingValue: '',
               required: false,
@@ -84,7 +84,7 @@ export const registrationFormConfig: FormConfig = {
               max: 2,
             },
             {
-              name: 'professionalTitle',
+              name: 'title',
               type: 'text',
               startingValue: '',
               required: false,
