@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { LearningResource } from '../+models/dtos/learning_resource_dto';
+import { User } from '../+models/dtos/user_dto';
 import { LearningResourceModel } from '../+models/learning_resource_model';
 
 @Injectable({
@@ -32,8 +33,9 @@ export class LearningResourcesService {
   }
 
   getLearningResourceModel(id: string) {
+    const user: User = JSON.parse(localStorage.getItem('user'));
     return this.http.get<LearningResourceModel>(
-      this.baseUrl + `learningResources/detailed/${id}`
+      this.baseUrl + `learningResources/detailed/${id}/${user.userId}`
     );
   }
 }

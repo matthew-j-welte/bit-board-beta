@@ -1,6 +1,6 @@
 namespace API.Models.DTOs
 {
-    public class UserResourceProgressDto
+    public class UserResourceStateDto
     {
         public LearningResourceDto LearningResource { get; set; }
         public UserDto User { get; set; }

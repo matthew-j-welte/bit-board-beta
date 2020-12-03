@@ -6,6 +6,7 @@ namespace API.Interfaces
     {
         IUserRepository UserRepository { get; }
         ILearningResourceRepository LearningResourceRepository { get; }
+        ILearningResourceSuggestionRepository LearningResourceSuggestionRepository { get; }
         ISkillsRepository SkillsRepository { get; }
 
         Task<bool> Commit();

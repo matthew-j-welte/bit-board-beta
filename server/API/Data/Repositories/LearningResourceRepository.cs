@@ -54,13 +54,30 @@ namespace API.Data.Repositories
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<LearningResourceModel> GetLearningResourceModelByIdAsync(int learningResourceId)
+        public async Task<LearningResourceModel> GetLearningResourceModelByIdAsync(int learningResourceId, int userId)
         {
-            return await _context
+            var model = await _context
                 .LearningResources
                 .Where(x => x.LearningResourceId == learningResourceId)
                 .ProjectTo<LearningResourceModel>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
+
+            var postActions = await _context
+                .UserPostRelationships
+                .Where(x => x.LearningResourceId == learningResourceId && x.UserId == userId)
+                .ToDictionaryAsync(e => e.PostId, e => e.UserPostAction);
+            
+            foreach (var post in model.Posts)
+            {
+                post.UserPostAction = postActions.GetValueOrDefault(post.PostId);
+            }
+
+            var userResourceState = await _context.UserResourceStates
+                .Where(x => x.UserId == userId && x.LearningResourceId == learningResourceId)
+                .ProjectTo<UserResourceStateDto>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
+            model.UserResourceState = userResourceState;
+            return model;
         }
 
         public async Task<IEnumerable<LearningResourceModel>> GetLearningResourceModelsAsync()

@@ -21,7 +21,8 @@ namespace API.Data.Entities
 
         // public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<UserSkill> UserSkills { get; set; }
-        public ICollection<UserResourceProgress> UserResourceProgressions { get; set; }
+        public ICollection<UserResourceState> UserResourceStates { get; set; }
+        public ICollection<UserPostRelationship> UserPostRelationships { get; set; }
         public ICollection<LearningResource> LearningResources { get; set; }
         public ICollection<CodeEditorConfiguration> CodeEditorConfigurations { get; set; }
         public ICollection<Post> Posts { get; set; }

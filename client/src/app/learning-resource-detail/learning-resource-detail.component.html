@@ -7,16 +7,22 @@
       Submitted By: Matthew Welte
     </p>
     <hr />
-    <div *ngIf="userProgression" class="progress mt-4" style="background-color: rgb(247, 247, 247)">
+    <div
+      *ngIf="learningResource.userResourceState?.progressPercent"
+      class="progress mt-4"
+      style="background-color: rgb(247, 247, 247)"
+    >
       <div
         class="progress-bar"
         role="progressbar"
-        [style.width.%]="userProgression?.progressPercent"
+        [style.width.%]="learningResource.userResourceState?.progressPercent"
         aria-valuenow="50"
         aria-valuemin="0"
         aria-valuemax="100"
       >
-        <i id="percent">{{userProgression?.progressPercent}}%</i>
+        <i id="percent"
+          >{{ learningResource.userResourceState?.progressPercent }}%</i
+        >
       </div>
     </div>
     <div class="skill-row">
@@ -51,68 +57,68 @@
   <h1 class="mt-5 mb-0">Posts</h1>
   <hr class="mt-1" />
   <div *ngFor="let post of learningResource.posts">
-    <div class="row">
-      <span class="mr-2 ml-3"
-        ><img
-          class="rounded-circle mt-1"
-          src="{{ userProgression.user.imageUrl ? userProgression.user.imageUrl : './assets/angular-logo.png' }}"
-          height="50px"
-          width="50px"
-      /></span>
-      <span class="mt-1">
-        <strong
-          ><p class="mb-0" style="font-size: 1.1em; color: rgb(12, 73, 126)">
-            <a href="">Matthew Welte</a>
-          </p></strong
-        >
-        <em
-          ><p class="text-muted mb-2" style="font-size: 0.9em">
-            Posted 100 days ago
-          </p></em
-        >
-      </span>
-    </div>
-    <div
-      class="mt-1 rounded"
-      style="width: 100%; border: 2px solid rgba(213, 213, 213, 0.753)"
-    >
-      <p class="p-2">
-        {{ post.content }}
-      </p>
-    </div>
-    <div class="mt-2 mb-5">
-      <button
-        type="button"
-        class="btn btn-light mr-3"
-        style="border-radius: 10em"
-        (click)="like(post.postId)"
-      >
-        <span style="color: rgb(0, 132, 255)">
-          <i
-            class="fa-heart fa-lg"
-            [class.far]="!likeMap[post.postId]"
-            [class.fas]="likeMap[post.postId]"
-          ></i>
-          {{ likeMap[post.postId] ? "" : "Like" }}
+    <div *ngIf="post.userPostAction !== 2">
+      <div class="row">
+        <span class="mr-2 ml-3"
+          ><img
+            class="rounded-circle mt-1"
+            src="{{
+              learningResource.userResourceState?.user?.imageUrl
+                ? learningResource.userResourceState?.user?.imageUrl
+                : './assets/angular-logo.png'
+            }}"
+            height="50px"
+            width="50px"
+        /></span>
+        <span class="mt-1">
+          <strong
+            ><p class="mb-0" style="font-size: 1.1em; color: rgb(12, 73, 126)">
+              <a href="">Matthew Welte</a>
+            </p></strong
+          >
+          <em
+            ><p class="text-muted mb-2" style="font-size: 0.9em">
+              Posted 100 days ago
+            </p></em
+          >
         </span>
-      </button>
-      <button
-        type="button"
-        class="btn btn-light"
-        style="border-radius: 10em"
-        (click)="report(post.postId)"
+      </div>
+      <div
+        class="mt-1 rounded"
+        style="width: 100%; border: 2px solid rgba(213, 213, 213, 0.753)"
       >
-        <span style="color: rgb(255, 89, 0)">
+        <p class="p-2">
+          {{ post.content }}
+        </p>
+      </div>
+      <div class="mt-2 mb-5 font-italic">
+        <span
+          style="color: rgb(182, 20, 142)"
+          type="button"
+          (click)="like(post)"
+        >
           <i
-            [class.fas]="reportMap[post.postId]"
-            [class.fa-flushed]="reportMap[post.postId]"
-            [class.far]="!reportMap[post.postId]"
-            [class.fa-frown]="!reportMap[post.postId]"
-            class="fa-lg"
+            class="fa-heart fa-md ml-2"
+            [ngClass]="{
+              fas: post.userPostAction === 1,
+              far: post.userPostAction !== 1
+            }"
           ></i>
-          {{ reportMap[post.postId] ? "" : "Report" }}
+          <span class="ml-1" *ngIf="post.userPostAction === 1" style="font-size: 0.9rem;"
+            >{{post.likes}}</span
+          >
+          <span *ngIf="post.userPostAction !== 1"> Like</span>
         </span>
-      </button>
+        <span
+          class="float-right"
+          style="color: rgb(146, 11, 11)"
+          (click)="report(post)"
+          type="button"
+        >
+          <i class="fas fa-times fa-md"></i>
+          {{ post.userPostAction === 2 ? "" : "Report" }}
+        </span>
+      </div>
     </div>
   </div>
 </div>

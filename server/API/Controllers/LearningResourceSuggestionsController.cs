@@ -1,23 +1,25 @@
 using System.Collections.Generic;
+using API.Interfaces;
+using API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     public class LearningResourceSuggestionsController : BaseApiController
     {
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> GetLearningResourceSuggestions()
+        private readonly IUnitOfWork _unitOfWork;
+
+        public LearningResourceSuggestionsController(IUnitOfWork unitOfWork)
         {
-            System.Console.WriteLine("Get all learning resource suggestions");
-            return Ok((new List<string> { "Pete", "Jimmy" }));
+            _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
-        public ActionResult NewLearningResourceSuggestions()
+        public ActionResult NewLearningResourceSuggestion(LearningResourceSuggestionDto resourceSuggestion)
         {
-            System.Console.WriteLine("Creating a new learning resource suggestion");
-            return NoContent();
-        }        
+            _unitOfWork.LearningResourceSuggestionRepository.InsertLearningResourceSuggestionAsync(resourceSuggestion);
+            return Ok();
+        }
     }
 }
 

@@ -8,7 +8,7 @@ export const resourceSuggestionConfig: FormConfig = {
         {
           fields: [
             {
-              name: 'webURL',
+              name: 'sourceUrl',
               type: 'text',
               startingValue: '',
               required: true,
@@ -38,7 +38,7 @@ export const resourceSuggestionConfig: FormConfig = {
         {
           fields: [
             {
-              name: 'skillSelections',
+              name: 'skills',
               type: 'text',
               startingValue: [],
               required: true,

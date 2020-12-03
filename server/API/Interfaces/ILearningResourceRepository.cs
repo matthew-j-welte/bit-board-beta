@@ -9,7 +9,7 @@ namespace API.Interfaces
     public interface ILearningResourceRepository
     {
         Task<IEnumerable<LearningResourceModel>> GetLearningResourceModelsAsync();
-        Task<LearningResourceModel> GetLearningResourceModelByIdAsync(int learningResourceId);
+        Task<LearningResourceModel> GetLearningResourceModelByIdAsync(int learningResourceId, int userId);
         Task<IEnumerable<LearningResourceDto>> GetLearningResourcesAsync();
         Task<IEnumerable<LearningResourceDto>> GetTopViewedLearningResourcesAsync(int amount);
         Task<LearningResourceDto> GetLearningResourceByIdAsync(int learningResourceId);

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../+models/dtos/user_dto';
-import { UserResourceProgress } from '../+models/dtos/user_resource_progress_dto';
+import { UserResourceState } from '../+models/dtos/user_resource_state_dto';
 import { UserModel } from '../+models/user_model';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class UsersService {
   getResourceProgressions() {
     const user: User = JSON.parse(localStorage.getItem('user'));
     if (user) {
-      return this.http.get<UserResourceProgress[]>(
+      return this.http.get<UserResourceState[]>(
         `${this.baseUrl}/users/${user.userId}/resourceProgress`
       );
     }
@@ -33,7 +33,7 @@ export class UsersService {
   getResourceProgression(learningResourceId: number) {
     const user: User = JSON.parse(localStorage.getItem('user'));
     if (user) {
-      return this.http.get<UserResourceProgress>(
+      return this.http.get<UserResourceState>(
         `${this.baseUrl}/users/${user.userId}/resourceProgress/${learningResourceId}`
       );
     }

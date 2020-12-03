@@ -22,5 +22,6 @@ namespace API.Data.Entities
         
         public ICollection<Post> Posts { get; set; }
         public ICollection<LearningResourceSkill> LearningResourceSkills { get; set; }
+        public ICollection<UserPostRelationship> UserPostRelationships { get; set; }
     }
 }

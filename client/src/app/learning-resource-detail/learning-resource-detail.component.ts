@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserResourceProgress } from '../+models/dtos/user_resource_progress_dto';
+import { UserPostAction } from '../+enums/models';
+import { Post } from '../+models/dtos/post_dto';
 import { LearningResourceModel } from '../+models/learning_resource_model';
-import { UsersService } from '../+services/users.service';
 
 @Component({
   selector: 'app-learning-resource-detail',
@@ -10,30 +10,25 @@ import { UsersService } from '../+services/users.service';
   styleUrls: ['./learning-resource-detail.component.css'],
 })
 export class LearningResourceDetailComponent implements OnInit {
-  liked: boolean = false;
-  reported: boolean = false;
-  likeMap: object = {};
-  reportMap: object = {};
   learningResource: LearningResourceModel;
-  userProgression: UserResourceProgress;
 
-  constructor(
-    private route: ActivatedRoute,
-    private userService: UsersService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       this.learningResource = data.learningResource;
-      this.userService
-        .getResourceProgression(this.learningResource.learningResourceId)
-        ?.subscribe((res) => {
-          this.userProgression = res;
-        });
     });
   }
 
-  like = (id) => (this.likeMap[id] = this.likeMap[id] === true ? false : true);
-  report = (id) =>
-    (this.reportMap[id] = this.reportMap[id] === true ? false : true);
+  like = (post: Post) =>
+    (post.userPostAction =
+      post.userPostAction === UserPostAction.Liked
+        ? UserPostAction.None
+        : UserPostAction.Liked);
+  
+  report = (post) =>
+    (post.userPostAction =
+      post.userPostAction === UserPostAction.Reported
+        ? UserPostAction.None
+        : UserPostAction.Reported);
 }

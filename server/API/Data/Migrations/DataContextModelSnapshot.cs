@@ -190,6 +190,55 @@ namespace API.Data.Migrations
                     b.ToTable("LearningResourceSkill");
                 });
 
+            modelBuilder.Entity("API.Data.Entities.LearningResourceSuggestion", b =>
+                {
+                    b.Property<int>("LearningResourceSuggestionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Rationale")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SourceUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("LearningResourceSuggestionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("LearningResourceSuggestion");
+                });
+
+            modelBuilder.Entity("API.Data.Entities.LearningResourceSuggestionSkill", b =>
+                {
+                    b.Property<int>("LearningResourceSuggestionSkillId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LearningResourceSuggestionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SkillId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("LearningResourceSuggestionSkillId");
+
+                    b.HasIndex("LearningResourceSuggestionId");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("LearningResourceSuggestionSkill");
+                });
+
             modelBuilder.Entity("API.Data.Entities.Post", b =>
                 {
                     b.Property<int>("PostId")
@@ -305,7 +354,42 @@ namespace API.Data.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("API.Data.Entities.UserResourceProgress", b =>
+            modelBuilder.Entity("API.Data.Entities.UserPostRelationship", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateModified")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("LearningResourceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserPostAction")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LearningResourceId");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserPostRelationship");
+                });
+
+            modelBuilder.Entity("API.Data.Entities.UserResourceState", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -332,7 +416,7 @@ namespace API.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserResourceProgress");
+                    b.ToTable("UserResourceState");
                 });
 
             modelBuilder.Entity("API.Data.Entities.UserSkill", b =>
@@ -423,6 +507,30 @@ namespace API.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("API.Data.Entities.LearningResourceSuggestion", b =>
+                {
+                    b.HasOne("API.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Data.Entities.LearningResourceSuggestionSkill", b =>
+                {
+                    b.HasOne("API.Data.Entities.LearningResourceSuggestion", "LearningResourceSuggestion")
+                        .WithMany("LearningResourceSuggestionSkills")
+                        .HasForeignKey("LearningResourceSuggestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Data.Entities.Skill", "Skill")
+                        .WithMany()
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("API.Data.Entities.Post", b =>
                 {
                     b.HasOne("API.Data.Entities.LearningResource", "LearningResource")
@@ -438,7 +546,28 @@ namespace API.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("API.Data.Entities.UserResourceProgress", b =>
+            modelBuilder.Entity("API.Data.Entities.UserPostRelationship", b =>
+                {
+                    b.HasOne("API.Data.Entities.LearningResource", "LearningResource")
+                        .WithMany("UserPostRelationships")
+                        .HasForeignKey("LearningResourceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Data.Entities.Post", "Post")
+                        .WithMany("UserPostRelationships")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Data.Entities.User", "User")
+                        .WithMany("UserPostRelationships")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Data.Entities.UserResourceState", b =>
                 {
                     b.HasOne("API.Data.Entities.LearningResource", "LearningResource")
                         .WithMany()
@@ -447,7 +576,7 @@ namespace API.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("API.Data.Entities.User", "User")
-                        .WithMany("UserResourceProgressions")
+                        .WithMany("UserResourceStates")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

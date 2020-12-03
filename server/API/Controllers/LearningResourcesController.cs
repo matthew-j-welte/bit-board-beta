@@ -43,10 +43,10 @@ namespace API.Controllers
             return Ok(resources);
         }
 
-        [HttpGet("detailed/{id}")]
-        public async Task<ActionResult<LearningResourceModel>> GetLearningResourceModelByIdAsync(int id)
+        [HttpGet("detailed/{resourceId}/{userId}")]
+        public async Task<ActionResult<LearningResourceModel>> GetLearningResourceModelByIdAsync(int resourceId, int userId)
         {
-            var resource = await _unitOfWork.LearningResourceRepository.GetLearningResourceModelByIdAsync(id);
+            var resource = await _unitOfWork.LearningResourceRepository.GetLearningResourceModelByIdAsync(resourceId, userId);
             return Ok(resource);
         }
 

@@ -18,6 +18,7 @@ namespace API.Data
 
         public IUserRepository UserRepository => new UserRepository(_context, _mapper);
         public ILearningResourceRepository LearningResourceRepository => new LearningResourceRepository(_context, _mapper);
+        public ILearningResourceSuggestionRepository LearningResourceSuggestionRepository => new LearningResourceSuggestionRepository(_context, _mapper);
         public ISkillsRepository SkillsRepository => new SkillsRepository(_context, _mapper);
 
         public async Task<bool> Commit()

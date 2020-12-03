@@ -133,6 +133,29 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LearningResourceSuggestion",
+                columns: table => new
+                {
+                    LearningResourceSuggestionId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false),
+                    SourceUrl = table.Column<string>(nullable: true),
+                    Rationale = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LearningResourceSuggestion", x => x.LearningResourceSuggestionId);
+                    table.ForeignKey(
+                        name: "FK_LearningResourceSuggestion_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserSkill",
                 columns: table => new
                 {
@@ -220,31 +243,57 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserResourceProgress",
+                name: "UserResourceState",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     DateModified = table.Column<DateTime>(nullable: false),
+                    ProgressPercent = table.Column<int>(nullable: false),
                     LearningResourceId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    ProgressPercent = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserResourceProgress", x => x.Id);
+                    table.PrimaryKey("PK_UserResourceState", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserResourceProgress_LearningResource_LearningResourceId",
+                        name: "FK_UserResourceState_LearningResource_LearningResourceId",
                         column: x => x.LearningResourceId,
                         principalTable: "LearningResource",
                         principalColumn: "LearningResourceId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserResourceProgress_User_UserId",
+                        name: "FK_UserResourceState_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LearningResourceSuggestionSkill",
+                columns: table => new
+                {
+                    LearningResourceSuggestionSkillId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    LearningResourceSuggestionId = table.Column<int>(nullable: false),
+                    SkillId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LearningResourceSuggestionSkill", x => x.LearningResourceSuggestionSkillId);
+                    table.ForeignKey(
+                        name: "FK_LearningResourceSuggestionSkill_LearningResourceSuggestion_LearningResourceSuggestionId",
+                        column: x => x.LearningResourceSuggestionId,
+                        principalTable: "LearningResourceSuggestion",
+                        principalColumn: "LearningResourceSuggestionId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LearningResourceSuggestionSkill_Skill_SkillId",
+                        column: x => x.SkillId,
+                        principalTable: "Skill",
+                        principalColumn: "SkillId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -271,6 +320,42 @@ namespace API.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comment_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserPostRelationship",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false),
+                    UserPostAction = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    PostId = table.Column<int>(nullable: false),
+                    LearningResourceId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserPostRelationship", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserPostRelationship_LearningResource_LearningResourceId",
+                        column: x => x.LearningResourceId,
+                        principalTable: "LearningResource",
+                        principalColumn: "LearningResourceId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserPostRelationship_Post_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Post",
+                        principalColumn: "PostId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserPostRelationship_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "UserId",
@@ -313,6 +398,21 @@ namespace API.Data.Migrations
                 column: "SkillId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LearningResourceSuggestion_UserId",
+                table: "LearningResourceSuggestion",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LearningResourceSuggestionSkill_LearningResourceSuggestionId",
+                table: "LearningResourceSuggestionSkill",
+                column: "LearningResourceSuggestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LearningResourceSuggestionSkill_SkillId",
+                table: "LearningResourceSuggestionSkill",
+                column: "SkillId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Post_LearningResourceId",
                 table: "Post",
                 column: "LearningResourceId");
@@ -323,13 +423,28 @@ namespace API.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserResourceProgress_LearningResourceId",
-                table: "UserResourceProgress",
+                name: "IX_UserPostRelationship_LearningResourceId",
+                table: "UserPostRelationship",
                 column: "LearningResourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserResourceProgress_UserId",
-                table: "UserResourceProgress",
+                name: "IX_UserPostRelationship_PostId",
+                table: "UserPostRelationship",
+                column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserPostRelationship_UserId",
+                table: "UserPostRelationship",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserResourceState_LearningResourceId",
+                table: "UserResourceState",
+                column: "LearningResourceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserResourceState_UserId",
+                table: "UserResourceState",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -358,10 +473,19 @@ namespace API.Data.Migrations
                 name: "LearningResourceSkill");
 
             migrationBuilder.DropTable(
-                name: "UserResourceProgress");
+                name: "LearningResourceSuggestionSkill");
+
+            migrationBuilder.DropTable(
+                name: "UserPostRelationship");
+
+            migrationBuilder.DropTable(
+                name: "UserResourceState");
 
             migrationBuilder.DropTable(
                 name: "UserSkill");
+
+            migrationBuilder.DropTable(
+                name: "LearningResourceSuggestion");
 
             migrationBuilder.DropTable(
                 name: "Post");

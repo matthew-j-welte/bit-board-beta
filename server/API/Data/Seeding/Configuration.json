@@ -33,6 +33,6 @@
     "Id": "EyT9XHhcF",
     "PerRequest": 100,
     "Iterations": 1,
-    "Model": "UserResourceProgress"
+    "Model": "UserResourceStates"
   }
 ]

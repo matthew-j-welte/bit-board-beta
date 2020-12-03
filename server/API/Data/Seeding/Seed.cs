@@ -12,6 +12,7 @@ namespace API.Data.Seeding
         {
             if (await context.Skills.AnyAsync()) return;
 
+            // TODO: Update this to pull from the config file
             var skillsData = await System.IO.File.ReadAllTextAsync("Data/Seeding/Generated/Skills.json");
             var skills = JsonSerializer.Deserialize<List<Skill>>(skillsData);
             
@@ -44,16 +45,16 @@ namespace API.Data.Seeding
 
         public static async Task SeedUserProgressions(DataContext context)
         {
-            if (await context.UserResourceProgressions.AnyAsync()) return;
+            if (await context.UserResourceStates.AnyAsync()) return;
 
-            var userProgressionData = await System.IO.File.ReadAllTextAsync("Data/Seeding/Generated/UserResourceProgress.json");
-            var userProgressions = JsonSerializer.Deserialize<List<UserResourceProgress>>(userProgressionData);
+            var userProgressionData = await System.IO.File.ReadAllTextAsync("Data/Seeding/Generated/UserResourceStates.json");
+            var userProgressions = JsonSerializer.Deserialize<List<UserResourceState>>(userProgressionData);
             
             if (userProgressions == null) throw new JsonException("Failed to deserialize");
 
             foreach (var userProgress in userProgressions)
             {
-                await context.UserResourceProgressions.AddAsync(userProgress);
+                await context.UserResourceStates.AddAsync(userProgress);
             }
 
             await context.SaveChangesAsync();

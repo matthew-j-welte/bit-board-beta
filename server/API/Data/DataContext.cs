@@ -18,7 +18,9 @@ namespace API.Data
         public DbSet<ErrorReport> ErrorReports { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<CodeEditorConfiguration> CodeEditorConfigurations { get; set; }
-        public DbSet<UserResourceProgress> UserResourceProgressions { get; set; }
+        public DbSet<UserResourceState> UserResourceStates { get; set; }
+        public DbSet<LearningResourceSuggestion> LearningResourceSuggestions { get; set; }
+        public DbSet<UserPostRelationship> UserPostRelationships { get; set; }
                 
         protected override void OnModelCreating(ModelBuilder builder)
         {

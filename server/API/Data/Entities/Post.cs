@@ -19,5 +19,6 @@ namespace API.Data.Entities
         public LearningResource LearningResource { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<UserPostRelationship> UserPostRelationships { get; set; }
     }
 }
