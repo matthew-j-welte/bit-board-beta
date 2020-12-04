@@ -1,6 +1,6 @@
 namespace API.Enums
 {
-    public enum UserPostAction
+    public enum UserPostActionEnum
     {
         None,
         Liked,

@@ -46,6 +46,7 @@ namespace API.Controllers
         [HttpGet("detailed/{resourceId}/{userId}")]
         public async Task<ActionResult<LearningResourceModel>> GetLearningResourceModelByIdAsync(int resourceId, int userId)
         {
+            // TODO: Have the userId come from the decoded token
             var resource = await _unitOfWork.LearningResourceRepository.GetLearningResourceModelByIdAsync(resourceId, userId);
             return Ok(resource);
         }
@@ -62,6 +63,16 @@ namespace API.Controllers
         {
             System.Console.WriteLine($"Updating learning resource: {learningResourceId}");
             return NoContent();
+        }
+
+        [HttpPut("user/{userId}/post")]
+        public async Task<ActionResult> UpdateResourcePost(int userId, PostDto post)
+        {
+            System.Console.WriteLine($"Users {userId} resource {post.LearningResourceId}: for post {post.PostId} being updated");
+            System.Console.WriteLine($"Previous action state: {post.PreviousUserPostAction} --- New action state: {post.UserPostAction}");
+            var updatedPost = await _unitOfWork.LearningResourceRepository.UpdateResourcePost(post, userId);
+            System.Console.WriteLine(updatedPost.Likes);
+            return Ok(updatedPost);
         }
     }
 }

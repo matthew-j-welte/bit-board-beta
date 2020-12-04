@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserPostAction } from '../+enums/models';
 import { Post } from '../+models/dtos/post_dto';
 import { LearningResourceModel } from '../+models/learning_resource_model';
+import { LearningResourcesService } from '../+services/learning-resources.service';
 
 @Component({
   selector: 'app-learning-resource-detail',
@@ -12,7 +13,10 @@ import { LearningResourceModel } from '../+models/learning_resource_model';
 export class LearningResourceDetailComponent implements OnInit {
   learningResource: LearningResourceModel;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private learningResourceService: LearningResourcesService
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
@@ -20,15 +24,28 @@ export class LearningResourceDetailComponent implements OnInit {
     });
   }
 
-  like = (post: Post) =>
-    (post.userPostAction =
+  like(post: Post) {
+    post.previousUserPostAction = post.userPostAction;
+    post.userPostAction =
       post.userPostAction === UserPostAction.Liked
         ? UserPostAction.None
-        : UserPostAction.Liked);
-  
-  report = (post) =>
-    (post.userPostAction =
+        : UserPostAction.Liked;
+    this.updatePost(post);
+  }
+
+  report(post: Post) {
+    post.previousUserPostAction = post.userPostAction;
+    post.userPostAction =
       post.userPostAction === UserPostAction.Reported
         ? UserPostAction.None
-        : UserPostAction.Reported);
+        : UserPostAction.Reported;
+    this.updatePost(post);
+  }
+
+  private async updatePost(post: Post) {
+    this.learningResourceService.updateResourcePost(post)?.subscribe((res) => {
+      this.learningResource.posts.find(x => x.postId === post.postId).likes = res.likes;
+      this.learningResource.posts.find(x => x.postId === post.postId).reports = res.reports;
+    });
+  }
 }

@@ -11,6 +11,7 @@ namespace API.Models.DTOs
 
         public int LearningResourceId { get; set; }
         public LearningResourceDto LearningResource { get; set; }
-        public UserPostAction UserPostAction { get; set; }
+        public UserPostActionEnum UserPostAction { get; set; }
+        public UserPostActionEnum PreviousUserPostAction { get; set; }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data.Entities;
+using API.Enums;
 using API.Interfaces;
 using API.Models;
 using API.Models.DTOs;
@@ -26,7 +27,7 @@ namespace API.Data.Repositories
         {
             _context.LearningResources.Remove(learningResource);
         }
-        
+
         public async Task<IEnumerable<LearningResourceDto>> GetLearningResourcesAsync()
         {
             return await _context
@@ -34,7 +35,7 @@ namespace API.Data.Repositories
                 .ProjectTo<LearningResourceDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
-        
+
         public async Task<IEnumerable<LearningResourceDto>> GetTopViewedLearningResourcesAsync(int amount)
         {
             return await _context
@@ -66,7 +67,7 @@ namespace API.Data.Repositories
                 .UserPostRelationships
                 .Where(x => x.LearningResourceId == learningResourceId && x.UserId == userId)
                 .ToDictionaryAsync(e => e.PostId, e => e.UserPostAction);
-            
+
             foreach (var post in model.Posts)
             {
                 post.UserPostAction = postActions.GetValueOrDefault(post.PostId);
@@ -96,6 +97,50 @@ namespace API.Data.Repositories
         public void UpdateLearningResource(LearningResource learningResource)
         {
             _context.LearningResources.Update(learningResource);
+        }
+
+        public async Task<PostDto> UpdateResourcePost(PostDto post, int userId)
+        {
+            int likeDiff;
+            int reportDiff;
+
+            if (post.PreviousUserPostAction == UserPostActionEnum.None)
+            {
+                likeDiff = post.UserPostAction == UserPostActionEnum.Liked ? 1 : 0;
+                reportDiff = post.UserPostAction == UserPostActionEnum.Reported ? 1 : 0;
+            }
+            else if (post.PreviousUserPostAction == UserPostActionEnum.Liked)
+            {
+                likeDiff = -1;
+                reportDiff = post.UserPostAction == UserPostActionEnum.Reported ? 1 : 0;
+            }
+            else
+            {
+                throw new System.InvalidOperationException(
+                    "Should not be able to reverse post report - something went wrong."
+                );
+            }
+
+            // Update UserPostRelationship 
+            // Update likes/reports on Post table
+            var userPostRelationship = await _context
+            .UserPostRelationships
+            .Where(x => x.UserId == userId && x.LearningResourceId == post.LearningResourceId && x.PostId == post.PostId)
+            .SingleOrDefaultAsync();
+            
+            userPostRelationship.UserPostAction = post.UserPostAction;
+
+            // _context.UserPostRelationships
+            // .Where(x => x.UserId == userId && x.LearningResourceId == post.LearningResourceId && x.PostId == post.PostId)
+            // .Update(y => new UserPostRelationship { UserPostAction=post.UserPostAction });
+
+            var postEntity = await _context.Posts.Where(x=> x.PostId == post.PostId).SingleOrDefaultAsync();
+            postEntity.Likes += likeDiff;
+            postEntity.Reports += reportDiff;
+            await _context.SaveChangesAsync();
+            // .Where(x => x.PostId == post.PostId)
+            // .Update(y => new Post { Likes=y.Likes + likeDiff, Reports=y.Reports + reportDiff });
+            return _mapper.Map<Post, PostDto>(postEntity);
         }
     }
 }

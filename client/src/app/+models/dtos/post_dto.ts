@@ -7,6 +7,7 @@ export interface Post {
   learningResourceId: number;
   learningResource: LearningResource;
   userPostAction: UserPostAction;
+  previousUserPostAction?: UserPostAction;
   likes: number;
   reports: number;
 }

@@ -1,4 +1,4 @@
-<div class="jumbotron pb-2">
+<div class="jumbotron pb-2" *ngIf="learningResource">
   <div id="header" class="container-fluid mt-5">
     <h1 style="font-size: 60px" class="mb-0">
       {{ learningResource.title | titlecase }}
@@ -44,7 +44,7 @@
     </div>
   </div>
 </div>
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="learningResource">
   <img
     width="100%"
     src="{{ learningResource.imageUrl }}"
@@ -104,10 +104,9 @@
               far: post.userPostAction !== 1
             }"
           ></i>
-          <span class="ml-1" *ngIf="post.userPostAction === 1" style="font-size: 0.9rem;"
-            >{{post.likes}}</span
-          >
-          <span *ngIf="post.userPostAction !== 1"> Like</span>
+          <span class="ml-1" style="font-size: 0.9rem">{{
+            post.likes === 0 ? "" : post.likes
+          }}</span>
         </span>
         <span
           class="float-right"

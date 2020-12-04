@@ -7,7 +7,7 @@ namespace API.Data.Entities
     public class UserPostRelationship : BaseEntity
     {
         public int Id { get; set; }
-        public UserPostAction UserPostAction { get; set; }
+        public UserPostActionEnum UserPostAction { get; set; }
 
         // Relationships
         public User User { get; set; }
