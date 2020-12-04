@@ -36,9 +36,6 @@ namespace API
                 await Seed.SeedUserProgressions(context);
                 await Seed.SeedPosts(context);
                 await Seed.SeedComments(context);
-                
-                
-                
             }
             catch (Exception ex)
             {

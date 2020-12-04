@@ -87,9 +87,38 @@
         class="mt-1 rounded"
         style="width: 100%; border: 2px solid rgba(213, 213, 213, 0.753)"
       >
-        <p class="p-2">
-          {{ post.content }}
-        </p>
+        <textarea
+          #readonlyPost
+          id="post-{{ post.postId }}"
+          class="p-3 form-control pb-4"
+          [style.height.px]="
+            post['expanded'] && post['expanded'] === true ? getPostContentHeight(readonlyPost) : 200
+          "
+          [style.overflow]="post['expanded'] ? 'hidden' : ''"
+          style="
+            white-space: pre-wrap;
+            width: 100%;
+            background-color: rgb(251, 251, 251);
+            border: none;
+            resize: none;
+          "
+          readonly
+          >{{ post.content }}</textarea
+        >
+        <div
+          type="button"
+          style="
+            text-align: center;
+            width: 100%;
+            background-color: rgb(240, 243, 247);
+          "
+          (click)="resizePostContent(post)"
+        >
+          <i
+            class="fas fa-md"
+            [class]="post['expanded'] ? 'fa-sort-up' : 'fa-sort-down'"
+          ></i>
+        </div>
       </div>
       <div class="mt-2 mb-5 font-italic">
         <span
@@ -119,5 +148,10 @@
         </span>
       </div>
     </div>
+  </div>
+  <div>
+    <hr />
+    <h5>New Post</h5>
+    <textarea name="" id="" rows="10" style="white-space: nowrap"> </textarea>
   </div>
 </div>
