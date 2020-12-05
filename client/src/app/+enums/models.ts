@@ -1,5 +1,4 @@
-export enum UserPostAction
-{
+export enum UserPostAction {
     None,
     Liked,
     Reported,

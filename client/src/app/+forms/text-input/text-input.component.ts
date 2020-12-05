@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Self } from '@angular/core';
+import { Component, Input, Self } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
@@ -12,10 +12,10 @@ export class TextInputComponent implements ControlValueAccessor {
   @Input() placeholder = '';
   @Input() required = false;
   @Input() rows: number = null;
-  @Input() readonly: boolean = false;
-  @Input() showLabel: boolean = true;
+  @Input() readonly = false;
+  @Input() showLabel = true;
 
-  constructor(@Self() public ngControl: NgControl) { 
+  constructor(@Self() public ngControl: NgControl) {
     this.ngControl.valueAccessor = this;
   }
 
@@ -27,5 +27,5 @@ export class TextInputComponent implements ControlValueAccessor {
 
   registerOnTouched(fn: any): void {
   }
-  
+
 }

@@ -33,13 +33,13 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private accountService: AccountService,
     private modalService: BsModalService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.intitializeForm();
   }
 
-  intitializeForm() {
+  intitializeForm(): void {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
       password: [
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
     };
   }
 
-  login() {
+  login(): void {
     this.accountService.login(this.registerForm.value).subscribe(
       (_) => {
         this.router.navigateByUrl('/userDashboard');
@@ -68,11 +68,11 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  cancel() {
+  cancel(): void {
     this.cancelRegister.emit(false);
   }
 
-  openModalWithClass(template: TemplateRef<any>) {
+  openModalWithClass(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(
       template,
       Object.assign({}, { class: 'gray modal-lg' })

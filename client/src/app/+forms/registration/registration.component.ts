@@ -26,13 +26,13 @@ export class RegistrationComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private accountService: AccountService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.buildForm();
   }
 
-  buildForm() {
+  buildForm(): void {
     this.formConfig = registrationFormConfig;
     this.registerForm = this.fb.group(
       FormFieldBuilder.buildCtlConfig(this.formConfig)
@@ -47,7 +47,7 @@ export class RegistrationComponent implements OnInit {
     };
   }
 
-  register() {
+  register(): void {
     const registration: Register = this.registerForm.value;
     registration.yearsExperience = +registration.yearsExperience;
     registration.yearsAtEmployer = +registration.yearsAtEmployer;
@@ -63,7 +63,7 @@ export class RegistrationComponent implements OnInit {
     );
   }
 
-  cancel() {
+  cancel(): void {
     this.cancelRegister.emit(false);
   }
 }

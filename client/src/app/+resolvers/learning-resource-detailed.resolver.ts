@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LearningResource } from '../+models/dtos/learning_resource_dto';
 import { LearningResourceModel } from '../+models/learning_resource_model';
 import { LearningResourcesService } from '../+services/learning-resources.service';
 
@@ -10,10 +9,9 @@ import { LearningResourcesService } from '../+services/learning-resources.servic
 })
 export class LearningResourceDetailedResolver implements Resolve<LearningResourceModel> {
 
-    constructor(private learningResourceService: LearningResourcesService) {}
+    constructor(private learningResourceService: LearningResourcesService) { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<LearningResourceModel> {
         return this.learningResourceService.getLearningResourceModel(route.paramMap.get('id'));
     }
-
 }

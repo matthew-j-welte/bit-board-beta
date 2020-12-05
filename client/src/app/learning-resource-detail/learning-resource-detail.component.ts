@@ -1,7 +1,5 @@
 import {
-  AfterViewInit,
   Component,
-  ElementRef,
   OnInit,
   ViewChildren,
 } from '@angular/core';
@@ -28,7 +26,7 @@ export class LearningResourceDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private learningResourceService: LearningResourcesService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
@@ -44,11 +42,11 @@ export class LearningResourceDetailComponent implements OnInit {
     this.learningResource.posts.push(post);
   }
 
-  getPostContentHeight(el) {
+  getPostContentHeight(el): number {
     return el.scrollHeight;
   }
 
-  resizePostContent(post: PostContent) {
+  resizePostContent(post: PostContent): void {
     post.expanded = !post.expanded;
   }
 

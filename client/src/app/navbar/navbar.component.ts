@@ -12,31 +12,31 @@ export class NavbarComponent implements OnInit {
     { title: 'Learning', url: '/learningResources' },
     { title: 'Code Challenges', url: '/codeChallenges' },
     { title: 'Mentor', url: '/mentor' }
-  ]
+  ];
 
   rightLinks = [
     { title: 'User Dashboard', url: '/userDashboard' },
     { title: 'Log Out', url: '/' }
-  ]
+  ];
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  toggleNavbarCollapsing() {
+  toggleNavbarCollapsing(): void {
     this.navbarCollapsed = !this.navbarCollapsed;
   }
 
-  handleNavbarClick(event) {
+  handleNavbarClick(event): void {
     if (!this.navbarCollapsed) {
       this.toggleNavbarCollapsing();
     }
-    if (event.target.name === "Log Out") {
-      this.logout()
+    if (event.target.name === 'Log Out') {
+      this.logout();
     }
   }
 
-  logout() {
+  logout(): void {
     this.accountService.logout();
   }
 }

@@ -29,22 +29,22 @@ export class ResourceSuggestionComponent implements OnInit {
     private fb: FormBuilder,
     private skillsService: SkillsService,
     private resourceSuggestionService: LearningResourceSuggestionService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.buildForm();
     this.getSkills();
   }
 
-  buildForm() {
+  buildForm(): void {
     this.formConfig = resourceSuggestionConfig;
     this.resourceSuggestionForm = this.fb.group(
       FormFieldBuilder.buildCtlConfig(this.formConfig)
     );
   }
 
-  submitSuggestion() {
-    const skillString: string = this.resourceSuggestionForm.controls['skills']
+  submitSuggestion(): void {
+    const skillString: string = this.resourceSuggestionForm.controls.skills
       .value;
     const skillNames = skillString.trim().split(' ');
     const skills = this.skills.filter((skill) =>
@@ -52,9 +52,8 @@ export class ResourceSuggestionComponent implements OnInit {
     );
     const resourceSuggestion: LearningResourceSuggestion = {
       ...this.resourceSuggestionForm.value,
-      skills: skills,
+      skills
     };
-    console.log(resourceSuggestion);
     this.resourceSuggestionService
       .postLearningResourceSuggestion(resourceSuggestion)
       .subscribe(
@@ -67,7 +66,7 @@ export class ResourceSuggestionComponent implements OnInit {
       );
   }
 
-  async getSkills() {
+  async getSkills(): Promise<void> {
     this.skillsService.getSkills()?.subscribe((res) => {
       this.skills = res.map((skill) => {
         return { ...skill, selected: false, hovered: false };
@@ -75,10 +74,10 @@ export class ResourceSuggestionComponent implements OnInit {
     });
   }
 
-  toggleSkill(skill: SkillSelection) {
+  toggleSkill(skill: SkillSelection): void {
     skill.selected = !skill.selected;
-    const value: string = this.resourceSuggestionForm.controls['skills'].value;
-    const skillSelectionField = this.resourceSuggestionForm.controls['skills'];
+    const value: string = this.resourceSuggestionForm.controls.skills.value;
+    const skillSelectionField = this.resourceSuggestionForm.controls.skills;
 
     if (skill.selected) {
       skillSelectionField.setValue(value + ' ' + skill.name);
@@ -87,7 +86,7 @@ export class ResourceSuggestionComponent implements OnInit {
     }
   }
 
-  hoverSkill(skill: SkillSelection, hover: boolean) {
+  hoverSkill(skill: SkillSelection, hover: boolean): void {
     skill.hovered = hover;
   }
 }

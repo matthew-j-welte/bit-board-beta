@@ -1,7 +1,7 @@
 import { Validators } from '@angular/forms';
 
 export class FormFieldBuilder {
-  public static buildCtlConfig(form: FormConfig) {
+  public static buildCtlConfig(form: FormConfig): object {
     const conf = {};
 
     form.groups.forEach((group) => {
@@ -15,10 +15,10 @@ export class FormFieldBuilder {
     return conf;
   }
 
-  private static buildFieldCtlConfig(field: FormFieldConfig) {
+  private static buildFieldCtlConfig(field: FormFieldConfig): any[] {
     const fieldConfig = [field.startingValue];
     const validators = [];
-    
+
     if (field.required) {
       validators.push(Validators.required);
     }

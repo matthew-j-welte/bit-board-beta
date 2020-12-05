@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormConfig, FormFieldBuilder } from 'src/app/+helpers/form-helpers';
 import { Post } from 'src/app/+models/dtos/post_dto';
 import { LearningResourcesService } from 'src/app/+services/learning-resources.service';
@@ -21,20 +21,20 @@ export class NewPostComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private learningResourceService: LearningResourcesService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.buildForm();
   }
 
-  buildForm() {
+  buildForm(): void {
     this.formConfig = newPostForm;
     this.newPostForm = this.fb.group(
       FormFieldBuilder.buildCtlConfig(this.formConfig)
     );
   }
 
-  submitNewPost() {
+  submitNewPost(): void {
     const newPost: Post = {
       content: this.newPostForm.value.content,
       learningResourceId: this.learningResourceId
@@ -42,7 +42,7 @@ export class NewPostComponent implements OnInit {
     this.learningResourceService.newResourcePost(newPost)?.subscribe((res) => {
       const addedPost: Post = res;
       this.addPost(addedPost);
-      this.newPostForm.setValue({content: ''});
+      this.newPostForm.setValue({ content: '' });
       this.newPostForm.markAsUntouched();
     });
   }

@@ -20,14 +20,14 @@ export class LearningResourcesComponent implements OnInit {
   constructor(
     private learningResourcesService: LearningResourcesService,
     private userService: UsersService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getLearningResources();
     this.getAllResources();
   }
 
-  async getLearningResources() {
+  async getLearningResources(): Promise<void> {
     this.userService.getResourceProgressions()?.subscribe((res) => {
       this.resources = res.map((resource) => {
         return {
@@ -42,7 +42,7 @@ export class LearningResourcesComponent implements OnInit {
     });
   }
 
-  async getAllResources() {
+  async getAllResources(): Promise<void> {
     this.learningResourcesService
       .getTopViewedLearningResources(9)
       ?.subscribe((res) => {
@@ -52,7 +52,6 @@ export class LearningResourcesComponent implements OnInit {
             showLogos: true,
           };
         });
-        console.log(this.allResources);
       });
   }
 }

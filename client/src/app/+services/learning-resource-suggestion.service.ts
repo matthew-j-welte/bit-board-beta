@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LearningResourceSuggestion } from '../+models/dtos/learning_resource_suggestion_dto';
 import { User } from '../+models/dtos/user_dto';
@@ -10,9 +11,9 @@ import { User } from '../+models/dtos/user_dto';
 export class LearningResourceSuggestionService {
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  postLearningResourceSuggestion(suggestion: LearningResourceSuggestion) {
+  postLearningResourceSuggestion(suggestion: LearningResourceSuggestion): Observable<object> {
     const user: User = JSON.parse(localStorage.getItem('user'));
     const usersSuggestion: LearningResourceSuggestion = {
       ...suggestion,

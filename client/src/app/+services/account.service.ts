@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { User } from '../+models/dtos/user_dto';
-import { ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Register } from '../+models/dtos/register_dto';
 
@@ -16,7 +16,7 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
-  login(model: any) {
+  login(model: any): Observable<void> {
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
       map((response: User) => {
         const user = response;
@@ -24,30 +24,30 @@ export class AccountService {
           this.setCurrentUser(user);
         }
       })
-    )
+    );
   }
 
-  register(model: Register) {
+  register(model: Register): Observable<void> {
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
       map((user: User) => {
         if (user) {
-         this.setCurrentUser(user);
+          this.setCurrentUser(user);
         }
       })
-    )
+    );
   }
 
-  setCurrentUser(user: User) {
+  setCurrentUser(user: User): void {
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
   }
 
-  getDecodedToken(token) {
+  getDecodedToken(token): void {
     return JSON.parse(atob(token.split('.')[1]));
   }
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { User } from '../+models/dtos/user_dto';
 import { UserResourceState } from '../+models/dtos/user_resource_state_dto';
 import { UserModel } from '../+models/user_model';
@@ -12,16 +13,16 @@ export class UsersService {
   members = [];
   memberCache = new Map();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getUser() {
+  getUser(): Observable<UserModel> {
     const user: User = JSON.parse(localStorage.getItem('user'));
     if (user) {
       return this.http.get<UserModel>(`${this.baseUrl}/users/${user.userName}`);
     }
   }
 
-  getResourceProgressions() {
+  getResourceProgressions(): Observable<UserResourceState[]> {
     const user: User = JSON.parse(localStorage.getItem('user'));
     if (user) {
       return this.http.get<UserResourceState[]>(
@@ -30,7 +31,7 @@ export class UsersService {
     }
   }
 
-  getResourceProgression(learningResourceId: number) {
+  getResourceProgression(learningResourceId: number): Observable<UserResourceState> {
     const user: User = JSON.parse(localStorage.getItem('user'));
     if (user) {
       return this.http.get<UserResourceState>(

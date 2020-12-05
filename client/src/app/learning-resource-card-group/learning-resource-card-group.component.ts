@@ -1,9 +1,7 @@
 import {
   Component,
   Input,
-  OnChanges,
   OnInit,
-  SimpleChanges,
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LearningResource } from '../+models/dtos/learning_resource_dto';
@@ -19,26 +17,26 @@ interface LearningResourceCard extends LearningResource {
   styleUrls: ['./learning-resource-card-group.component.css'],
 })
 export class LearningResourceCardGroupComponent implements OnInit {
-  private _data = new BehaviorSubject<LearningResourceCard[]>([]);
+  private inputData = new BehaviorSubject<LearningResourceCard[]>([]);
   resources: LearningResourceCard[];
 
   @Input() set data(value) {
-    this._data.next(value);
+    this.inputData.next(value);
   }
 
-  get data() {
-    return this._data.getValue();
+  get data(): LearningResourceCard[] {
+    return this.inputData.getValue();
   }
 
   activeResources: LearningResourceCard[];
-  resourceIndex: number = 0;
+  resourceIndex = 0;
   resourcePageCount = 3;
   pages: number[] = [];
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
-    this._data.subscribe((x) => {
+    this.inputData.subscribe((x) => {
       this.resources = this.data;
       this.setActiveResources();
       for (
@@ -51,22 +49,22 @@ export class LearningResourceCardGroupComponent implements OnInit {
     });
   }
 
-  setActiveResources() {
+  setActiveResources(): void {
     this.activeResources = this.resources?.slice(
       this.resourceIndex * this.resourcePageCount,
       this.resourceIndex * this.resourcePageCount + 3
     );
   }
 
-  graphicalSkillsView(resource: LearningResourceCard) {
+  graphicalSkillsView(resource: LearningResourceCard): void {
     resource.showLogos = true;
   }
 
-  textualSkillsView(resource: LearningResourceCard) {
+  textualSkillsView(resource: LearningResourceCard): void {
     resource.showLogos = false;
   }
 
-  nextKeepWorkingPage() {
+  nextKeepWorkingPage(): void {
     if (
       this.resourceIndex <
       this.resources.length / this.resourcePageCount - 1
@@ -78,7 +76,7 @@ export class LearningResourceCardGroupComponent implements OnInit {
     this.setActiveResources();
   }
 
-  previousKeepWorkingPage() {
+  previousKeepWorkingPage(): void {
     if (this.resourceIndex > 0) {
       this.resourceIndex -= 1;
     } else {
@@ -87,7 +85,7 @@ export class LearningResourceCardGroupComponent implements OnInit {
     this.setActiveResources();
   }
 
-  setKeepWorkingPage(page: number) {
+  setKeepWorkingPage(page: number): void {
     this.resourceIndex = page - 1;
     this.setActiveResources();
   }
