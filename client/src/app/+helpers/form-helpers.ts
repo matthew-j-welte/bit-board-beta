@@ -45,6 +45,7 @@ export interface FormFieldConfig {
   max?: number;
   rows?: number;
   readonly?: boolean;
+  showLabel?: boolean;
 }
 
 export interface FormRowConfig {

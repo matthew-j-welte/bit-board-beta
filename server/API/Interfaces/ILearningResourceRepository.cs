@@ -14,6 +14,7 @@ namespace API.Interfaces
         Task<IEnumerable<LearningResourceDto>> GetTopViewedLearningResourcesAsync(int amount);
         Task<LearningResourceDto> GetLearningResourceByIdAsync(int learningResourceId);
         Task<PostDto> UpdateResourcePost(PostDto post, int userId);
+        Task<PostDto> NewResourcePost(PostDto post);
         void InsertLearningResourceAsync(LearningResource learningResource);
         void DeletetLearningResource(LearningResource learningResource);
         void UpdateLearningResource(LearningResource learningResource);

@@ -46,4 +46,12 @@ export class LearningResourcesService {
       this.baseUrl + `learningResources/user/${user.userId}/post`, post
     );
   }
+
+  newResourcePost(post: Post) {
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    post.userId = user.userId;
+    return this.http.post<Post>(
+      this.baseUrl + `learningResources/posts`, post
+    );
+  }
 }

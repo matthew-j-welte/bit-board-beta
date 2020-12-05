@@ -32,6 +32,7 @@ namespace API.Helpers
             CreateMap<UserSkill, UserSkillDto>();
             CreateMap<CodeEditorConfiguration, CodeEditorConfigurationDto>();
             CreateMap<Post, PostDto>();
+            CreateMap<PostDto, Post>();
             CreateMap<Comment, PostCommentDto>();
             CreateMap<UserResourceState, UserResourceStateDto>();
             CreateMap<User, UserResourceStateDto>();

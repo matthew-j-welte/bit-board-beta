@@ -121,25 +121,28 @@ namespace API.Data.Repositories
                 );
             }
 
-            // Update UserPostRelationship 
-            // Update likes/reports on Post table
             var userPostRelationship = await _context
             .UserPostRelationships
             .Where(x => x.UserId == userId && x.LearningResourceId == post.LearningResourceId && x.PostId == post.PostId)
             .SingleOrDefaultAsync();
             
+            // TODO: Handle case where there is no userPostRelationship
             userPostRelationship.UserPostAction = post.UserPostAction;
-
-            // _context.UserPostRelationships
-            // .Where(x => x.UserId == userId && x.LearningResourceId == post.LearningResourceId && x.PostId == post.PostId)
-            // .Update(y => new UserPostRelationship { UserPostAction=post.UserPostAction });
 
             var postEntity = await _context.Posts.Where(x=> x.PostId == post.PostId).SingleOrDefaultAsync();
             postEntity.Likes += likeDiff;
             postEntity.Reports += reportDiff;
             await _context.SaveChangesAsync();
-            // .Where(x => x.PostId == post.PostId)
-            // .Update(y => new Post { Likes=y.Likes + likeDiff, Reports=y.Reports + reportDiff });
+
+            return _mapper.Map<Post, PostDto>(postEntity);
+        }
+
+        public async Task<PostDto> NewResourcePost(PostDto post)
+        {
+            var postEntity = _mapper.Map<PostDto, Post>(post);
+            await _context.Posts.AddAsync(postEntity);
+            await _context.SaveChangesAsync();
+
             return _mapper.Map<Post, PostDto>(postEntity);
         }
     }

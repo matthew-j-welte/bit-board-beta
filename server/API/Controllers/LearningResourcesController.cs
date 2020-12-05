@@ -68,11 +68,15 @@ namespace API.Controllers
         [HttpPut("user/{userId}/post")]
         public async Task<ActionResult> UpdateResourcePost(int userId, PostDto post)
         {
-            System.Console.WriteLine($"Users {userId} resource {post.LearningResourceId}: for post {post.PostId} being updated");
-            System.Console.WriteLine($"Previous action state: {post.PreviousUserPostAction} --- New action state: {post.UserPostAction}");
             var updatedPost = await _unitOfWork.LearningResourceRepository.UpdateResourcePost(post, userId);
-            System.Console.WriteLine(updatedPost.Likes);
             return Ok(updatedPost);
+        }
+
+        [HttpPost("posts")]
+        public async Task<ActionResult> NewResourcePost(PostDto post)
+        {
+            var addedPost = await _unitOfWork.LearningResourceRepository.NewResourcePost(post);
+            return Ok(addedPost);
         }
     }
 }

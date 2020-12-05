@@ -23,6 +23,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './+interceptors/loading.interceptor';
 import { ResourceSuggestionComponent } from './+forms/resource-suggestion/resource-suggestion.component';
 import { LearningResourceCardGroupComponent } from './learning-resource-card-group/learning-resource-card-group.component';
+import { NewPostComponent } from './+forms/new-post/new-post.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { LearningResourceCardGroupComponent } from './learning-resource-card-gro
     RegistrationComponent,
     ResourceSuggestionComponent,
     LearningResourceCardGroupComponent,
+    NewPostComponent,
   ],
   imports: [
     BrowserModule,

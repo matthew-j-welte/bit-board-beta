@@ -92,15 +92,15 @@
           id="post-{{ post.postId }}"
           class="p-3 form-control pb-4"
           [style.height.px]="
-            post['expanded'] && post['expanded'] === true ? getPostContentHeight(readonlyPost) : 200
+            post['expanded'] && post['expanded'] === true
+              ? getPostContentHeight(readonlyPost)
+              : 200
           "
           [style.overflow]="post['expanded'] ? 'hidden' : ''"
           style="
-            white-space: pre-wrap;
-            width: 100%;
-            background-color: rgb(251, 251, 251);
             border: none;
             resize: none;
+            background-color: rgb(250, 250, 250);
           "
           readonly
           >{{ post.content }}</textarea
@@ -151,7 +151,9 @@
   </div>
   <div>
     <hr />
-    <h5>New Post</h5>
-    <textarea name="" id="" rows="10" style="white-space: nowrap"> </textarea>
+    <app-new-post
+      [learningResourceId]="learningResource.learningResourceId"
+      [addPost]='addPost'
+    ></app-new-post>
   </div>
 </div>

@@ -40,6 +40,10 @@ export class LearningResourceDetailComponent implements OnInit {
     });
   }
 
+  addPost = (post: Post) => {
+    this.learningResource.posts.push(post);
+  }
+
   getPostContentHeight(el) {
     return el.scrollHeight;
   }

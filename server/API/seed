@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "Removing previous db file"
+rm -rf bitboard-beta.db Data/Migrations/; 
+
+echo "Creating initial ef migration"
+dotnet ef migrations add InitialCreate -o Data/Migrations;
+
+echo "Success!"
