@@ -18,17 +18,17 @@ namespace API.Data.Repositories
             _mapper = mapper;
         }
 
-        public async void DeletetLearningSuggestionResourceAsync(LearningResourceSuggestionDto learningResource)
+        public void DeletetLearningSuggestionResourceAsync(LearningResourceSuggestionDto learningResource)
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task<LearningResourceSuggestionDto> GetLearningResourceSuggestionByIdAsync(int learningResourceId)
+        public Task<LearningResourceSuggestionDto> GetLearningResourceSuggestionByIdAsync(int learningResourceId)
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task<IEnumerable<LearningResourceSuggestionDto>> GetLearningResourceSuggestionsAsync()
+        public Task<IEnumerable<LearningResourceSuggestionDto>> GetLearningResourceSuggestionsAsync()
         {
             throw new System.NotImplementedException();
         }
