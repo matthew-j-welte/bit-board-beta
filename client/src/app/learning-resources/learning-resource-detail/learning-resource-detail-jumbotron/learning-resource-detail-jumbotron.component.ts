@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LearningResource } from 'src/app/+models/dtos/learning_resource_dto';
 import { LearningResourceModel } from 'src/app/+models/learning_resource_model';
 
 @Component({

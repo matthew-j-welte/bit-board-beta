@@ -16,16 +16,16 @@ import { TextInputComponent } from './+forms/text-input/text-input.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { MentorPageComponent } from './mentor-page/mentor-page.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { LearningResourceDetailComponent } from './learning-resource-detail/learning-resource-detail.component';
+import { LearningResourceDetailComponent } from './learning-resources/learning-resource-detail/learning-resource-detail.component';
 import { RegistrationComponent } from './+forms/registration/registration.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './+interceptors/loading.interceptor';
 import { ResourceSuggestionComponent } from './+forms/resource-suggestion/resource-suggestion.component';
-import { LearningResourceCardGroupComponent } from './learning-resource-card-group/learning-resource-card-group.component';
+import { LearningResourceCardGroupComponent } from './learning-resources/learning-resource-card-group/learning-resource-card-group.component';
 import { NewPostComponent } from './+forms/new-post/new-post.component';
-import { LearningResourceCardComponent } from './learning-resource-card-group/learning-resource-card/learning-resource-card.component';
-import { LearningResourceDetailJumbotronComponent } from './learning-resource-detail/learning-resource-detail-jumbotron/learning-resource-detail-jumbotron.component';
-import { LearningResourceDetailPostsComponent } from './learning-resource-detail/learning-resource-detail-posts/learning-resource-detail-posts.component';
+import { LearningResourceCardComponent } from './learning-resources/learning-resource-card-group/learning-resource-card/learning-resource-card.component';
+import { LearningResourceDetailJumbotronComponent } from './learning-resources/learning-resource-detail/learning-resource-detail-jumbotron/learning-resource-detail-jumbotron.component';
+import { LearningResourceDetailPostsComponent } from './learning-resources/learning-resource-detail/learning-resource-detail-posts/learning-resource-detail-posts.component';
 
 @NgModule({
   declarations: [

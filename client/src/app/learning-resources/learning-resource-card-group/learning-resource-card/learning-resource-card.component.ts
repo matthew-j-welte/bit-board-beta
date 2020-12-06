@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LearningResource } from 'src/app/+models/dtos/learning_resource_dto';
-import { LearningResourceCard } from '../../+models/component-interfaces/interfaces';
+import { LearningResourceCard } from '../../../+models/component-interfaces/interfaces';
 
 @Component({
   selector: 'app-learning-resource-card',

@@ -1,3 +1,5 @@
+# Components and Databinding
+
 ## _Data Binding Basics_
 
 Can assign an alias to Input() to make the input make more sense from an external point of view, for ex:
@@ -98,17 +100,75 @@ onAddUser() {
 ```
 
 ## _ng-content_
-*Use if trying to pass html into a custom made component (like children in react)*
+
+_Use if trying to pass html into a custom made component (like children in react)_
 
 For ex,
+
 ```html
-    <app-element>
-        <p>Some content</p>
-    </app-element>
+<app-element>
+  <p>Some content</p>
+</app-element>
 ```
 
 ```html
-    <div>
-        <ng-content></ng-content>
-    </div>
+<div>
+  <ng-content></ng-content>
+</div>
 ```
+
+## _Lifecycle Hooks_
+
+- **ngOnChanges** - Called whenever any @Input() property changes on that component
+- **ngOnInit** - Called once the component is initialized
+- **ngDoCheck** - Called whenever angular checks for changes (even if no changes were made) - for example a button click or obsevable resolution.
+- **ngAfterContentInit** - Called after ng-content has been projected into the view.
+- **ngAfterContentChecked** - Called every time the project content has been checked
+- **ngAfterViewInit** - Called after the component's view and child views have been initialized.
+
+## _@ContentChild_
+
+_If you need to access the `<ng-content>` that is passed in to your component then from your typescript you can
+do the following:_
+
+```ts
+@ContentChild('contentParagraph') paragraph: ElementRef;
+```
+
+This can then be accessed during `ngAfterContentInit()` lifecycle hook
+
+# Directives
+*To make your own angular directive: `ng g directive`*
+
+An example of a custom **attribute** directive for changing background color on highlight:
+```ts
+@Directive({
+  selector: '[appBetterHighlight]'
+})
+export class BetterHighlightDirective implements OnInit {
+  @Input() defaultColor: string = 'transparent';
+  @Input('appBetterHighlight') highlightColor: string = 'blue';
+  @HostBinding('style.backgroundColor') backgroundColor: string;
+
+  constructor(private elRef: ElementRef, private renderer: Renderer2) { }
+
+  ngOnInit() {
+    this.backgroundColor = this.defaultColor;
+  }
+
+  @HostListener('mouseenter') mouseover(eventData: Event) {
+    this.backgroundColor = this.highlightColor;
+  }
+
+  @HostListener('mouseleave') mouseleave(eventData: Event) {
+    this.backgroundColor = this.defaultColor;
+  }
+
+}
+```
+
+```html
+<p [appBetterHighlight]="'red'" [defaultColor]="'yellow'">Style me with a better directive!</p>
+```
+>**Idea:** Create a directive that accepts a number of css classes to apply when that component is highlighted
+to avoid having to create a ton of ::hover properties in our style sheets.

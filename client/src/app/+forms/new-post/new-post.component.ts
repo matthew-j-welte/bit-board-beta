@@ -12,8 +12,9 @@ import { newPostForm } from './new-post.config';
 })
 export class NewPostComponent implements OnInit {
   @Input() learningResourceId: number;
-  @Input() addPost: (post: Post) => void;
   @Output() cancelRegister = new EventEmitter();
+  @Output() addPost = new EventEmitter<Post>();
+
   newPostForm: FormGroup;
   validationErrors: string[] = [];
   formConfig: FormConfig;
@@ -41,7 +42,7 @@ export class NewPostComponent implements OnInit {
     };
     this.learningResourceService.newResourcePost(newPost)?.subscribe((res) => {
       const addedPost: Post = res;
-      this.addPost(addedPost);
+      this.addPost.emit(addedPost);
       this.newPostForm.setValue({ content: '' });
       this.newPostForm.markAsUntouched();
     });

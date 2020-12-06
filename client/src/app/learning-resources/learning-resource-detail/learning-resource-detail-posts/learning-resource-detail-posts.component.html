@@ -95,6 +95,6 @@
 <div id="new-post-container">
   <app-new-post
     [learningResourceId]="learningResource.learningResourceId"
-    [addPost]="addPost"
+    (addPost)="addPost($event)"
   ></app-new-post>
 </div>

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LearningResourceDetailedResolver } from './+resolvers/learning-resource-detailed.resolver';
 import { HomeComponent } from './home/home.component';
-import { LearningResourceDetailComponent } from './learning-resource-detail/learning-resource-detail.component';
+import { LearningResourceDetailComponent } from './learning-resources/learning-resource-detail/learning-resource-detail.component';
 import { LearningResourcesComponent } from './learning-resources/learning-resources.component';
 import { MentorPageComponent } from './mentor-page/mentor-page.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { LearningResourceCard } from '../+models/component-interfaces/interfaces';
+import { LearningResourceCard } from '../../+models/component-interfaces/interfaces';
 
 @Component({
   selector: 'app-learning-resource-card-group',
@@ -45,14 +45,6 @@ export class LearningResourceCardGroupComponent implements OnInit {
       this.resourceIndex * this.resourcePageCount,
       this.resourceIndex * this.resourcePageCount + 3
     );
-  }
-
-  graphicalSkillsView(resource: LearningResourceCard): void {
-    resource.showLogos = true;
-  }
-
-  textualSkillsView(resource: LearningResourceCard): void {
-    resource.showLogos = false;
   }
 
   nextKeepWorkingPage(): void {

@@ -58,7 +58,7 @@ export class LearningResourceDetailPostsComponent implements OnInit {
     });
   }
 
-  addPost = (post: Post) => {
+  addPost(post: Post): void {
     this.learningResource.posts.push(post);
   }
 }

@@ -1,9 +1,6 @@
 import { Component, OnInit, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserPostAction } from '../+enums/models';
-import { Post } from '../+models/dtos/post_dto';
-import { LearningResourceModel } from '../+models/learning_resource_model';
-import { LearningResourcesService } from '../+services/learning-resources.service';
+import { LearningResourceModel } from '../../+models/learning_resource_model';
 
 @Component({
   selector: 'app-learning-resource-detail',
@@ -14,10 +11,7 @@ export class LearningResourceDetailComponent implements OnInit {
   learningResource: LearningResourceModel;
   maxVisiblePosts = 5;
 
-  constructor(
-    private route: ActivatedRoute,
-    private learningResourceService: LearningResourcesService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
