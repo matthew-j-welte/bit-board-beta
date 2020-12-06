@@ -1,11 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { LearningResource } from '../+models/dtos/learning_resource_dto';
-
-interface LearningResourceCard extends LearningResource {
-  showLogos: boolean;
-  progressPercent?: number;
-}
+import { LearningResourceCard } from '../+models/component-interfaces/interfaces';
 
 @Component({
   selector: 'app-learning-resource-card-group',

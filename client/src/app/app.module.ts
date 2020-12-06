@@ -23,6 +23,9 @@ import { LoadingInterceptor } from './+interceptors/loading.interceptor';
 import { ResourceSuggestionComponent } from './+forms/resource-suggestion/resource-suggestion.component';
 import { LearningResourceCardGroupComponent } from './learning-resource-card-group/learning-resource-card-group.component';
 import { NewPostComponent } from './+forms/new-post/new-post.component';
+import { LearningResourceCardComponent } from './learning-resource-card-group/learning-resource-card/learning-resource-card.component';
+import { LearningResourceDetailJumbotronComponent } from './learning-resource-detail/learning-resource-detail-jumbotron/learning-resource-detail-jumbotron.component';
+import { LearningResourceDetailPostsComponent } from './learning-resource-detail/learning-resource-detail-posts/learning-resource-detail-posts.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,9 @@ import { NewPostComponent } from './+forms/new-post/new-post.component';
     ResourceSuggestionComponent,
     LearningResourceCardGroupComponent,
     NewPostComponent,
+    LearningResourceCardComponent,
+    LearningResourceDetailJumbotronComponent,
+    LearningResourceDetailPostsComponent,
   ],
   imports: [
     BrowserModule,

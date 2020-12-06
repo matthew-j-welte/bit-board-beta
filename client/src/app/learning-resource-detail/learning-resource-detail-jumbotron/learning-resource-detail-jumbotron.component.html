@@ -1,0 +1,46 @@
+<div class="jumbotron pb-2" *ngIf="learningResource">
+  <div class="container-fluid mt-5">
+    <h1 style="font-size: 60px" class="mb-0">
+      {{ learningResource.title | titlecase }}
+    </h1>
+    <p class="text-muted mt-0" style="font-size: 1.1em">
+      Submitted By: Matthew Welte
+    </p>
+    <hr />
+    <div
+      *ngIf="learningResource.userResourceState?.progressPercent"
+      class="progress mt-4"
+      style="background-color: rgb(247, 247, 247)"
+    >
+      <div
+        class="progress-bar"
+        role="progressbar"
+        [style.width.%]="learningResource.userResourceState?.progressPercent"
+        aria-valuenow="50"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <i id="percent"
+          >{{ learningResource.userResourceState?.progressPercent }}%</i
+        >
+      </div>
+    </div>
+    <div class="skill-row">
+      <div
+        *ngFor="let skill of learningResource.skills"
+        class="badge badge-pill mb-0"
+      >
+        <div class="mt-3">
+          <img
+            class="rounded tech-logo"
+            src="./assets/{{ skill.avatarUrl }}"
+            width="55px"
+            height="55px"
+            alt=""
+          />
+          <p class="mt-2" style="font-size: 1.3em">+25</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
