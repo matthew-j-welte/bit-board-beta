@@ -1,11 +1,8 @@
 <div class="container login-container mt-0 pt-0">
-  <form
-    [formGroup]="resourceSuggestionForm"
-    (ngSubmit)="resourceSuggestionForm.valid && submitSuggestion()"
-  >
-    <div *ngFor="let group of formConfig.groups">
-      <h4 *ngIf="group.header" class="my-3" style="color: rgb(59, 131, 226)">
-        <i *ngIf="group.icon" [ngClass]="['fas', 'fa-lg', group.icon]"></i
+    <form [formGroup]="resourceSuggestionForm" (ngSubmit)="resourceSuggestionForm.valid && submitSuggestion()">
+        <div *ngFor="let group of formConfig.groups">
+            <h4 *ngIf="group.header" class="my-3 form-header">
+                <i *ngIf="group.icon" [ngClass]="['fas', 'fa-lg', group.icon]"></i
         ><strong class="ml-3">{{ group.header }}</strong>
       </h4>
       <div *ngFor="let row of group.rows" class="row">
@@ -36,14 +33,12 @@
         >
           <img
             *ngIf="!skill.hovered"
-            class="rounded"
+            class="rounded skill-bubble"
             src="./assets/{{ skill.avatarUrl }}"
-            style="height: 70px; width: 70px"
           />
           <div
             *ngIf="skill.hovered"
-            class="rounded-cirlce skill-name"
-            style="height: 70px; width: 70px"
+            class="rounded-cirlce skill-name skill-bubble"
           >
             <p class="mb-0" [style.color]="skill.bgColorHex">
               <strong>{{ skill.name }}</strong>

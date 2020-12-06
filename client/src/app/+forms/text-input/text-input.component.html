@@ -1,7 +1,7 @@
 <div class="form-group">
-  <p class="mb-1 ml-1" style="font-size: 0.9em" *ngIf="label && showLabel">
-    <strong>{{ label }}</strong
-    ><strong *ngIf="required" style="color: rgb(174, 0, 0); font-size: 1.1em">
+    <p class="mb-1 ml-1" id="form-label" *ngIf="label && showLabel">
+        <strong>{{ label }}</strong
+    ><strong *ngIf="required" id="required-star-icon">
       *</strong
     >
   </p>

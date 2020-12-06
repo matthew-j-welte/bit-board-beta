@@ -1,89 +1,42 @@
-<div class="row" style="justify-content: center">
-  <div
-    class="card col-auto item-card px-0"
-    *ngFor="let learningResource of activeResources"
-    (mouseenter)="textualSkillsView(learningResource)"
-    (mouseleave)="graphicalSkillsView(learningResource)"
-    routerLink="/learningResource/{{ learningResource?.learningResourceId }}"
-  >
-    <img
-      class="card-img-top"
-      src="{{ learningResource?.imageUrl }}"
-      alt="Card image cap"
-    />
-    <div class="card-body pb-2">
-      <h5 class="card-title">
-        <strong>{{ learningResource?.type }} | </strong>
-        {{ learningResource.title | titlecase }}
-      </h5>
-      <h6 class="card-subtitle text-muted mr-0">
-        <em>Viewers: </em>{{ learningResource.viewers }}
-      </h6>
-      <hr />
-      <p class="card-text mt-2">
-        {{
-          learningResource?.description.length > 150
-            ? learningResource?.description.substring(0, 150).trim() + "..."
-            : learningResource?.description
-        }}
-      </p>
-    </div>
-    <div class="row mb-3" style="justify-content: center">
-      <div
-        *ngIf="learningResource?.showLogos; then graphical; else textual"
-        class="p-0"
-      ></div>
-      <ng-template #graphical>
-        <div
-          *ngFor="let skill of learningResource?.skills"
-          class="logo-pill ml-2 mr-2 p-0 col-auto rounded-circle"
-          style="
+<div id="resource-container" class="row">
+    <div class="card col-auto item-card px-0" *ngFor="let learningResource of activeResources" (mouseenter)="textualSkillsView(learningResource)" (mouseleave)="graphicalSkillsView(learningResource)" routerLink="/learningResource/{{ learningResource?.learningResourceId }}">
+        <img class="card-img-top" src="{{ learningResource?.imageUrl }}" alt="Card image cap" />
+        <div class="card-body pb-2">
+            <h5 class="card-title">
+                <strong>{{ learningResource?.type }} | </strong> {{ learningResource.title | titlecase }}
+            </h5>
+            <h6 class="card-subtitle text-muted mr-0">
+                <em>Viewers: </em>{{ learningResource.viewers }}
+            </h6>
+            <hr />
+            <p class="card-text mt-2">
+                {{ learningResource?.description.length > 150 ? learningResource?.description.substring(0, 150).trim() + "..." : learningResource?.description }}
+            </p>
+        </div>
+        <div class="row mb-3" style="justify-content: center">
+            <div *ngIf="learningResource?.showLogos; then graphical; else textual" class="p-0"></div>
+            <ng-template #graphical>
+                <div *ngFor="let skill of learningResource?.skills" class="logo-pill ml-2 mr-2 p-0 col-auto rounded-circle" style="
             height: 70px;
             width: 70px;
             justify-content: center;
             text-align: center;
-          "
-        >
-          <img
-            class="rounded tech-logo"
-            src="./assets/{{ skill.avatarUrl }}"
-            width="48px"
-            height="48px"
-          />
-        </div>
-      </ng-template>
-      <ng-template #textual>
-        <div
-          *ngFor="let skill of learningResource?.skills"
-          class="col-auto mt-3 mx-0 px-2 py-0"
-          style="text-align: center"
-        >
-          <span
-            style="font-size: 0.9rem"
-            class="px-2 py-1 logo-pill"
-            [style.color]="skill.bgColorHex"
-          >
+          ">
+                    <img class="rounded tech-logo" src="./assets/{{ skill.avatarUrl }}" width="48px" height="48px" />
+                </div>
+            </ng-template>
+            <ng-template #textual>
+                <div *ngFor="let skill of learningResource?.skills" class="col-auto mt-3 mx-0 px-2 py-0" style="text-align: center">
+                    <span style="font-size: 0.9rem" class="px-2 py-1 logo-pill" [style.color]="skill.bgColorHex">
             <strong>{{ skill.name }}</strong>
           </span>
-          <p class="mb-0 mt-1"><strong>+25</strong></p>
+                    <p class="mb-0 mt-1"><strong>+25</strong></p>
+                </div>
+            </ng-template>
         </div>
-      </ng-template>
-    </div>
-    <div
-      *ngIf="learningResource?.progressPercent"
-      class="progress mt-2 mb-3 mx-3"
-      style="background-color: rgb(247, 247, 247); border-radius: 20px"
-    >
-      <div
-        class="progress-bar"
-        role="progressbar"
-        [style.width.%]="learningResource.progressPercent"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        style="background-color: rgb(197, 238, 185); color: black"
-      >
-        <i id="percent"
-          ><strong>{{ learningResource?.progressPercent }}%</strong></i
+        <div *ngIf="learningResource?.progressPercent" class="progress mt-2 mb-3 mx-3" style="background-color: rgb(247, 247, 247); border-radius: 20px">
+            <div class="progress-bar" role="progressbar" [style.width.%]="learningResource.progressPercent" aria-valuemin="0" aria-valuemax="100" style="background-color: rgb(197, 238, 185); color: black">
+                <i id="percent"><strong>{{ learningResource?.progressPercent }}%</strong></i
         >
       </div>
     </div>
@@ -108,9 +61,5 @@
     type="button"
     (click)="previousKeepWorkingPage()"
   ></i>
-  <i
-    class="fas fa-angle-right fa-3x ml-3"
-    type="button"
-    (click)="nextKeepWorkingPage()"
-  ></i>
-</div>
+                <i class="fas fa-angle-right fa-3x ml-3" type="button" (click)="nextKeepWorkingPage()"></i>
+            </div>

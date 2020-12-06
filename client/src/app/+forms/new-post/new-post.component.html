@@ -4,7 +4,7 @@
       (ngSubmit)="newPostForm.valid && submitNewPost()"
     >
       <div *ngFor="let group of formConfig.groups">
-        <h5 class="my-3" style="color: rgb(59, 131, 226)">
+        <h5 id="new-post-header" class="my-3">
           <i [ngClass]="['fas', 'fa-lg', group.icon]"></i
           ><strong class="ml-3">{{ group.header }}</strong>
         </h5>

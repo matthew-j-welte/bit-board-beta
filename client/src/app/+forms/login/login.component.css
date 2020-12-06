@@ -1,23 +1,11 @@
 .login-container {
-  /* background-color: rgb(241, 239, 250);  */
   padding: 40px;
   border-radius: 20px;
-  /* box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3); */
 }
 
 img {
   width: 30%;
   height: auto;
-}
-
-.avatar {
-  width: 150px;
-  height: 150px;
-  box-sizing: border-box;
-  border-radius: 50%;
-  overflow: hidden;
-  -webkit-filter: drop-shadow(5px 5px 5px #222);
-  filter: drop-shadow(5px 5px 5px #222);
 }
 
 #register {
