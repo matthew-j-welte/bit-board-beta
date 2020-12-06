@@ -11,7 +11,7 @@ import { UsersService } from '../+services/users.service';
 export class UserDashboardComponent implements OnInit {
   user: UserModel;
 
-  constructor(private usersService: UsersService) { }
+  constructor(private usersService: UsersService) {}
 
   ngOnInit(): void {
     this.loadUserData();
@@ -24,6 +24,8 @@ export class UserDashboardComponent implements OnInit {
   }
 
   getSortedSkills(): UserSkill[] {
-    return this.user?.userSkills.sort((x, y) => y.progressPercent - x.progressPercent);
+    return this.user?.userSkills.sort(
+      (x, y) => y.progressPercent - x.progressPercent
+    );
   }
 }

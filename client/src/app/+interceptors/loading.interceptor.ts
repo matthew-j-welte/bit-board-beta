@@ -11,7 +11,7 @@ import { finalize } from 'rxjs/operators';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
-  constructor(private busyService: BusyService) { }
+  constructor(private busyService: BusyService) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -21,7 +21,7 @@ export class LoadingInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       finalize(() => {
         this.busyService.idle();
-      }),
+      })
     );
   }
 }

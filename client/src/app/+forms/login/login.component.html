@@ -4,14 +4,14 @@
       [formControl]="registerForm.controls['username']"
       [placeholder]="'Username'"
       [label]="'Username'"
-      [showLabel]='false'
+      [showLabel]="false"
     ></app-text-input>
     <app-text-input
       [formControl]="registerForm.controls['password']"
       [placeholder]="'Password'"
       [type]="'password'"
       [label]="'Password'"
-      [showLabel]='false'
+      [showLabel]="false"
     >
     </app-text-input>
     <div class="row" *ngIf="validationErrors.length > 0">

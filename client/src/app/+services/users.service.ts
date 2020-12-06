@@ -13,7 +13,7 @@ export class UsersService {
   members = [];
   memberCache = new Map();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getUser(): Observable<UserModel> {
     const user: User = JSON.parse(localStorage.getItem('user'));
@@ -31,7 +31,9 @@ export class UsersService {
     }
   }
 
-  getResourceProgression(learningResourceId: number): Observable<UserResourceState> {
+  getResourceProgression(
+    learningResourceId: number
+  ): Observable<UserResourceState> {
     const user: User = JSON.parse(localStorage.getItem('user'));
     if (user) {
       return this.http.get<UserResourceState>(

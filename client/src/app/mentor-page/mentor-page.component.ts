@@ -11,9 +11,9 @@ export class MentorPageComponent implements OnInit {
   modalRef: BsModalRef;
   skills: Skill[];
 
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   openModalWithClass(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(

@@ -1,8 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LearningResource } from '../+models/dtos/learning_resource_dto';
 
@@ -33,7 +29,7 @@ export class LearningResourceCardGroupComponent implements OnInit {
   resourcePageCount = 3;
   pages: number[] = [];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.inputData.subscribe((x) => {

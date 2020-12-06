@@ -21,7 +21,7 @@ export class NewPostComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private learningResourceService: LearningResourcesService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -37,7 +37,7 @@ export class NewPostComponent implements OnInit {
   submitNewPost(): void {
     const newPost: Post = {
       content: this.newPostForm.value.content,
-      learningResourceId: this.learningResourceId
+      learningResourceId: this.learningResourceId,
     };
     this.learningResourceService.newResourcePost(newPost)?.subscribe((res) => {
       const addedPost: Post = res;

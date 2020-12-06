@@ -7,14 +7,14 @@ import { environment } from 'src/environments/environment';
 import { Register } from '../+models/dtos/register_dto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AccountService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   login(model: any): Observable<void> {
     return this.http.post(this.baseUrl + 'account/login', model).pipe(

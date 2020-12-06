@@ -8,9 +8,8 @@ describe('SkillProgressionBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SkillProgressionBarComponent ]
-    })
-    .compileComponents();
+      declarations: [SkillProgressionBarComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

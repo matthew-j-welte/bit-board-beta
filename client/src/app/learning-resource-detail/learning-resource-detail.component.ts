@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChildren,
-} from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserPostAction } from '../+enums/models';
 import { Post } from '../+models/dtos/post_dto';
@@ -27,7 +23,7 @@ export class LearningResourceDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private learningResourceService: LearningResourcesService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {

@@ -29,7 +29,7 @@ export class ResourceSuggestionComponent implements OnInit {
     private fb: FormBuilder,
     private skillsService: SkillsService,
     private resourceSuggestionService: LearningResourceSuggestionService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -52,7 +52,7 @@ export class ResourceSuggestionComponent implements OnInit {
     );
     const resourceSuggestion: LearningResourceSuggestion = {
       ...this.resourceSuggestionForm.value,
-      skills
+      skills,
     };
     this.resourceSuggestionService
       .postLearningResourceSuggestion(resourceSuggestion)

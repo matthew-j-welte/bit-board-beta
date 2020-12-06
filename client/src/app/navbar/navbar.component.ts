@@ -11,17 +11,17 @@ export class NavbarComponent implements OnInit {
   leftLinks = [
     { title: 'Learning', url: '/learningResources' },
     { title: 'Code Challenges', url: '/codeChallenges' },
-    { title: 'Mentor', url: '/mentor' }
+    { title: 'Mentor', url: '/mentor' },
   ];
 
   rightLinks = [
     { title: 'User Dashboard', url: '/userDashboard' },
-    { title: 'Log Out', url: '/' }
+    { title: 'Log Out', url: '/' },
   ];
 
-  constructor(private accountService: AccountService) { }
+  constructor(private accountService: AccountService) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   toggleNavbarCollapsing(): void {
     this.navbarCollapsed = !this.navbarCollapsed;

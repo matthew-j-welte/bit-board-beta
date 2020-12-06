@@ -11,9 +11,11 @@ import { User } from '../+models/dtos/user_dto';
 export class LearningResourceSuggestionService {
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  postLearningResourceSuggestion(suggestion: LearningResourceSuggestion): Observable<object> {
+  postLearningResourceSuggestion(
+    suggestion: LearningResourceSuggestion
+  ): Observable<object> {
     const user: User = JSON.parse(localStorage.getItem('user'));
     const usersSuggestion: LearningResourceSuggestion = {
       ...suggestion,

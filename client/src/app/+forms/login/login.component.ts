@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private accountService: AccountService,
     private modalService: BsModalService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.intitializeForm();

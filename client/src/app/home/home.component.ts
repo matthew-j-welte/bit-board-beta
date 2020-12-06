@@ -23,10 +23,9 @@ export class HomeComponent implements OnInit {
       { x: 1400, y: 2300, src: './assets/rocket.png', width: 400 },
       { x: 350, y: 1700, src: './assets/mongodb-logo.png' },
       { x: 1300, y: 1800, src: './assets/windows-logo.png' },
-      { x: 525, y: 2600, src: './assets/linux-logo.png' }
+      { x: 525, y: 2600, src: './assets/linux-logo.png' },
     ];
-
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

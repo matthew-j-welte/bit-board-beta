@@ -20,7 +20,7 @@ export class LearningResourcesComponent implements OnInit {
   constructor(
     private learningResourcesService: LearningResourcesService,
     private userService: UsersService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getLearningResources();

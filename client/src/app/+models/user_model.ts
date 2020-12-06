@@ -6,9 +6,9 @@ import { User } from './dtos/user_dto';
 import { UserSkill } from './dtos/user_skill_dto';
 
 export interface UserModel extends User {
-    userSkills: UserSkill[];
-    learningResources: LearningResource[];
-    codeEditorConfigurations: CodeEditorConfiguration[];
-    posts: Post[];
-    comments: PostComment[];
+  userSkills: UserSkill[];
+  learningResources: LearningResource[];
+  codeEditorConfigurations: CodeEditorConfiguration[];
+  posts: Post[];
+  comments: PostComment[];
 }

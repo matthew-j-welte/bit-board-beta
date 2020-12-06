@@ -8,9 +8,8 @@ describe('LearningResourceCardGroupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LearningResourceCardGroupComponent ]
-    })
-    .compileComponents();
+      declarations: [LearningResourceCardGroupComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -10,7 +10,7 @@ import { Skill } from '../+models/dtos/skill_dto';
 export class SkillsService {
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getSkills(): Observable<Skill[]> {
     return this.http.get<Skill[]>(this.baseUrl + 'skills');

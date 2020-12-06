@@ -44,7 +44,7 @@ export const resourceSuggestionConfig: FormConfig = {
               required: true,
               label: 'Associated Skills',
               placeholder: 'Select skills below',
-              readonly: true
+              readonly: true,
             },
           ],
         },

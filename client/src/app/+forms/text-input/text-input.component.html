@@ -1,9 +1,7 @@
 <div class="form-group">
-    <p class="mb-1 ml-1" id="form-label" *ngIf="label && showLabel">
-        <strong>{{ label }}</strong
-    ><strong *ngIf="required" id="required-star-icon">
-      *</strong
-    >
+  <p class="mb-1 ml-1" id="form-label" *ngIf="label && showLabel">
+    <strong>{{ label }}</strong
+    ><strong *ngIf="required" id="required-star-icon"> *</strong>
   </p>
   <input
     [class.is-invalid]="ngControl.touched && ngControl.invalid"
@@ -12,7 +10,7 @@
     [formControl]="ngControl.control"
     placeholder="{{ placeholder }}"
     *ngIf="type !== 'textarea'"
-    [readOnly]='readonly ? true : false'
+    [readOnly]="readonly ? true : false"
   />
   <textarea
     [class.is-invalid]="ngControl.touched && ngControl.invalid"
@@ -20,7 +18,7 @@
     [formControl]="ngControl.control"
     placeholder="{{ placeholder }}"
     *ngIf="type === 'textarea'"
-    rows="{{rows}}"
+    rows="{{ rows }}"
   ></textarea>
   <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">
     Please enter a {{ label }}

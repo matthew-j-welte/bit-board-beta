@@ -1,31 +1,31 @@
 .unselected-skill {
-    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
-    background-color: rgb(238, 238, 238);
-    border: solid 3px rgb(238, 238, 238);
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
+  background-color: rgb(238, 238, 238);
+  border: solid 3px rgb(238, 238, 238);
 }
 
 .unselected-skill:hover {
-    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
-    background-color: rgb(242, 242, 242);
-    border: solid 3px rgb(242, 242, 242);
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
+  background-color: rgb(242, 242, 242);
+  border: solid 3px rgb(242, 242, 242);
 }
 
 .selected-skill {
-    background-color: rgb(224, 252, 220);
-    border: solid 3px greenyellow;
+  background-color: rgb(224, 252, 220);
+  border: solid 3px greenyellow;
 }
 
 .skill-name {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form-header {
-    color: rgb(59, 131, 226);
+  color: rgb(59, 131, 226);
 }
 
 .skill-bubble {
-    height: 70px;
-    width: 70px
+  height: 70px;
+  width: 70px;
 }

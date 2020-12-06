@@ -13,7 +13,7 @@ import { LearningResourceModel } from '../+models/learning_resource_model';
 export class LearningResourcesService {
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getLearningResources(): Observable<LearningResource[]> {
     return this.http.get<LearningResource[]>(
@@ -44,15 +44,14 @@ export class LearningResourcesService {
   updateResourcePost(post: Post): Observable<Post> {
     const user: User = JSON.parse(localStorage.getItem('user'));
     return this.http.put<Post>(
-      this.baseUrl + `learningResources/user/${user.userId}/post`, post
+      this.baseUrl + `learningResources/user/${user.userId}/post`,
+      post
     );
   }
 
   newResourcePost(post: Post): Observable<Post> {
     const user: User = JSON.parse(localStorage.getItem('user'));
     post.userId = user.userId;
-    return this.http.post<Post>(
-      this.baseUrl + `learningResources/posts`, post
-    );
+    return this.http.post<Post>(this.baseUrl + `learningResources/posts`, post);
   }
 }
