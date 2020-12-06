@@ -1,6 +1,7 @@
 nav {
   background-color: rgb(241, 239, 250);
   border-bottom: 2px solid #abb6c7;
+  z-index: 1
 }
 
 .nav-link {
@@ -48,4 +49,5 @@ nav {
   padding-left: 20px;
   padding-right: 20px;
   background-color: rgb(241, 239, 250);
+  z-index: 1;
 }

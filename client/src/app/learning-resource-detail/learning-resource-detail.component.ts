@@ -22,6 +22,7 @@ export class LearningResourceDetailComponent implements OnInit {
   @ViewChildren('readonlyPosts') posts;
 
   learningResource: LearningResourceModel;
+  maxVisiblePosts = 5;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,6 +49,10 @@ export class LearningResourceDetailComponent implements OnInit {
 
   resizePostContent(post: PostContent): void {
     post.expanded = !post.expanded;
+  }
+
+  public incrementPosts(): void {
+    this.maxVisiblePosts += 5;
   }
 
   public like(post: Post): void {

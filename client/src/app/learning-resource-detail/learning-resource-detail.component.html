@@ -56,8 +56,8 @@
 
   <h1 class="mt-5 mb-0">Posts</h1>
   <hr class="mt-1" />
-  <div *ngFor="let post of learningResource.posts">
-    <div *ngIf="post.userPostAction !== 2">
+  <div *ngFor="let post of learningResource.posts.slice(0, maxVisiblePosts)">
+    <div *ngIf="post.userPostAction !== 2" class="mt-4">
       <div class="row">
         <span class="mr-2 ml-3"
           ><img
@@ -120,7 +120,7 @@
           ></i>
         </div>
       </div>
-      <div class="mt-2 mb-5 font-italic">
+      <div class="mt-2 mb-2 font-italic">
         <span
           style="color: rgb(182, 20, 142)"
           type="button"
@@ -150,10 +150,21 @@
     </div>
   </div>
   <div>
+    <button
+      *ngIf="maxVisiblePosts < learningResource.posts.length"
+      class="btn btn-info mt-2"
+      style="width: 100%"
+      (click)="incrementPosts()"
+    >
+      <i class="fa fa-sort-down mr-2"></i> See More Posts
+      <i class="fa fa-sort-down ml-2"></i>
+    </button>
+  </div>
+  <div style="margin-top: 100px">
     <hr />
     <app-new-post
       [learningResourceId]="learningResource.learningResourceId"
-      [addPost]='addPost'
+      [addPost]="addPost"
     ></app-new-post>
   </div>
 </div>
