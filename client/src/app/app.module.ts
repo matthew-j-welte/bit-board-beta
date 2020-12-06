@@ -10,7 +10,6 @@ import { LearningResourcesComponent } from './learning-resources/learning-resour
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
-import { SkillProgressionBarComponent } from './skill-progression-bar/skill-progression-bar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './+forms/login/login.component';
 import { TextInputComponent } from './+forms/text-input/text-input.component';
@@ -31,7 +30,6 @@ import { NewPostComponent } from './+forms/new-post/new-post.component';
     HomeComponent,
     LearningResourcesComponent,
     UserDashboardComponent,
-    SkillProgressionBarComponent,
     NavbarComponent,
     LoginComponent,
     TextInputComponent,

@@ -15,8 +15,6 @@ interface PostContent extends Post {
   styleUrls: ['./learning-resource-detail.component.css'],
 })
 export class LearningResourceDetailComponent implements OnInit {
-  @ViewChildren('readonlyPosts') posts;
-
   learningResource: LearningResourceModel;
   maxVisiblePosts = 5;
 

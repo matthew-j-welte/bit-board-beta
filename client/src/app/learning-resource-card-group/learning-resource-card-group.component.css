@@ -1,3 +1,7 @@
+.card-container {
+  justify-content: center;
+}
+
 #parent {
   margin-top: 50px;
   width: 70%;
@@ -36,6 +40,10 @@
   background-color: rgb(243, 243, 243);
   border-radius: 20px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+  height: 70px;
+  width: 70px;
+  justify-content: center;
+  text-align: center;
 }
 
 .tab-image {
@@ -43,6 +51,26 @@
   background-color: aliceblue;
   width: 400px;
   height: 400px;
+}
+
+.progress {
+  background-color: rgb(247, 247, 247);
+  border-radius: 20px;
+}
+
+.progress-bar {
+  background-color: rgb(197, 238, 185);
+  color: black;
+}
+
+.card-navigation-dot {
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+}
+
+.skill-point-number {
+  font-size: 0.9rem;
 }
 
 h1 {

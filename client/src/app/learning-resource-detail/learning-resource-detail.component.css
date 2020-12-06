@@ -19,7 +19,26 @@
 textarea {
   white-space: pre-wrap;
   width: 100%;
-  background-color: rgb(255, 255, 255);
+  border: none;
+  resize: none;
+}
+
+.post-expand-button {
+  text-align: center;
+  width: 100%;
+  background-color: rgb(240, 243, 247);
+}
+
+.like-button {
+  color: rgb(182, 20, 142);
+}
+
+.report-button {
+  color: rgb(146, 11, 11);
+}
+
+#new-post-container {
+  margin-top: 100px;
 }
 
 textarea::-webkit-scrollbar {

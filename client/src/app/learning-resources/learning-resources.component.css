@@ -7,6 +7,10 @@
   margin-top: 125px;
 }
 
+#jumbo-container {
+  width: 80%
+}
+
 .display-2 {
   color: rgb(12, 160, 160);
 }

@@ -120,19 +120,6 @@
           </div>
         </div>
       </div>
-
-      <!-- List of UserSkills -->
-      <h2>Your Skill Progressions</h2>
-      <hr />
-      <div class="row">
-        <div class="col-sm-4" *ngFor="let skillProgress of getSortedSkills()">
-          <div class="mb-2">
-            <app-skill-progression-bar
-              [skillInfo]="skillProgress"
-            ></app-skill-progression-bar>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
