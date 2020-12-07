@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormConfig, FormFieldBuilder } from 'src/app/+helpers/form-helpers';
 import { LearningResourceSuggestion } from 'src/app/+models/dtos/learning_resource_suggestion_dto';
@@ -18,8 +18,6 @@ interface SkillSelection extends Skill {
   styleUrls: ['./resource-suggestion.component.css'],
 })
 export class ResourceSuggestionComponent implements OnInit {
-  @Output() cancelRegister = new EventEmitter();
-
   resourceSuggestionForm: FormGroup;
   validationErrors: string[] = [];
   formConfig: FormConfig;

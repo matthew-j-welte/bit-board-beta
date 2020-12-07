@@ -1,4 +1,3 @@
-import { ButtonCheckboxDirective } from 'ng-bootstrap';
 import { LearningResource } from './learning_resource_dto';
 import { User } from './user_dto';
 

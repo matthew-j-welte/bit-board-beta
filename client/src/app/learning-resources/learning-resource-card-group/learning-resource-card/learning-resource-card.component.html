@@ -2,7 +2,7 @@
   class="card col-auto item-card px-0"
   (mouseenter)="textualSkillsView()"
   (mouseleave)="graphicalSkillsView()"
-  routerLink="/learningResource/{{ learningResource?.learningResourceId }}"
+  routerLink="{{ learningResource?.learningResourceId }}"
 >
   <img
     class="card-img-top"
@@ -19,11 +19,7 @@
     </h6>
     <hr />
     <p class="card-text mt-2">
-      {{
-        learningResource?.description.length > 150
-          ? learningResource?.description.substring(0, 150).trim() + "..."
-          : learningResource?.description
-      }}
+      {{ learningResource?.description | textSummary:150 }}
     </p>
   </div>
   <div class="row mb-3 mx-2 card-container">

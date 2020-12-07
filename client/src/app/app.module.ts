@@ -26,6 +26,9 @@ import { NewPostComponent } from './+forms/new-post/new-post.component';
 import { LearningResourceCardComponent } from './learning-resources/learning-resource-card-group/learning-resource-card/learning-resource-card.component';
 import { LearningResourceDetailJumbotronComponent } from './learning-resources/learning-resource-detail/learning-resource-detail-jumbotron/learning-resource-detail-jumbotron.component';
 import { LearningResourceDetailPostsComponent } from './learning-resources/learning-resource-detail/learning-resource-detail-posts/learning-resource-detail-posts.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AccessDeniedComponent } from './access-denied/access-denied.component';
+import { TextSummaryPipe } from './+pipes/text-summary.pipe';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,9 @@ import { LearningResourceDetailPostsComponent } from './learning-resources/learn
     LearningResourceCardComponent,
     LearningResourceDetailJumbotronComponent,
     LearningResourceDetailPostsComponent,
+    PageNotFoundComponent,
+    AccessDeniedComponent,
+    TextSummaryPipe,
   ],
   imports: [
     BrowserModule,

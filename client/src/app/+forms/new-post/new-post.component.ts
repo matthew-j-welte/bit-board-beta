@@ -12,7 +12,6 @@ import { newPostForm } from './new-post.config';
 })
 export class NewPostComponent implements OnInit {
   @Input() learningResourceId: number;
-  @Output() cancelRegister = new EventEmitter();
   @Output() addPost = new EventEmitter<Post>();
 
   newPostForm: FormGroup;

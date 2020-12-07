@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -17,7 +17,6 @@ import { registrationFormConfig } from './registration.config';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
-  @Output() cancelRegister = new EventEmitter();
   registerForm: FormGroup;
   validationErrors: string[] = [];
   formConfig: FormConfig;
@@ -52,18 +51,13 @@ export class RegistrationComponent implements OnInit {
     registration.yearsExperience = +registration.yearsExperience;
     registration.yearsAtEmployer = +registration.yearsAtEmployer;
 
-    console.log(registration);
     this.accountService.register(registration).subscribe(
       (_) => {
-        this.router.navigateByUrl('/userDashboard');
+        this.router.navigate(['userDashboard']);
       },
       (error) => {
         this.validationErrors = error;
       }
     );
-  }
-
-  cancel(): void {
-    this.cancelRegister.emit(false);
   }
 }

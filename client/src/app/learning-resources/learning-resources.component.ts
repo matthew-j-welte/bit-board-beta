@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { LearningResource } from '../+models/dtos/learning_resource_dto';
+import { UserResourceState } from '../+models/dtos/user_resource_state_dto';
 import { LearningResourcesService } from '../+services/learning-resources.service';
 import { UsersService } from '../+services/users.service';
 
@@ -27,31 +30,39 @@ export class LearningResourcesComponent implements OnInit {
     this.getAllResources();
   }
 
-  async getLearningResources(): Promise<void> {
-    this.userService.getResourceProgressions()?.subscribe((res) => {
-      this.resources = res.map((resource) => {
-        return {
+  getLearningResources(): void {
+    const resources$ = this.userService.getResourceProgressions()?.pipe(
+      map((response) =>
+        response.map((resource) => ({
           ...resource.learningResource,
           showLogos: true,
           progressPercent: resource.progressPercent,
-        };
-      });
+        }))
+      )
+    );
+
+    resources$.subscribe((resourceCards) => {
+      this.resources = resourceCards;
       this.resources.sort((x, y) =>
         x.progressPercent < y.progressPercent ? 1 : -1
       );
     });
   }
 
-  async getAllResources(): Promise<void> {
-    this.learningResourcesService
+  getAllResources(): void {
+    const resources$ = this.learningResourcesService
       .getTopViewedLearningResources(9)
-      ?.subscribe((res) => {
-        this.allResources = res.map((resource) => {
-          return {
+      ?.pipe(
+        map((response) =>
+          response.map((resource) => ({
             ...resource,
             showLogos: true,
-          };
-        });
-      });
+          }))
+        )
+      );
+
+    resources$.subscribe((resourceCards) => {
+      this.allResources = resourceCards;
+    });
   }
 }

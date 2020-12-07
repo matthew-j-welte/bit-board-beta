@@ -17,10 +17,18 @@ export class LoadingInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    this.busyService.busy();
+    const markBusy = request.headers.get('ngx-spinner') === 'true';
+    if (markBusy) {
+      // No need to send this to our server
+      request.headers.delete('ngx-spinner');
+      this.busyService.busy();
+    }
+
     return next.handle(request).pipe(
       finalize(() => {
-        this.busyService.idle();
+        if (markBusy) {
+          this.busyService.idle();
+        }
       })
     );
   }

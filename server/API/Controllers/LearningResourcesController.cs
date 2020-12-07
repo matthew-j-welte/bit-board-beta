@@ -17,7 +17,7 @@ namespace API.Controllers
         }
 
         [HttpGet("standard")]
-        public async Task<ActionResult<IEnumerable<LearningResourceDto>>> GetLearningResourcesAsync([FromHeader] string sortBy, [FromHeader] int count)
+        public async Task<ActionResult<IEnumerable<LearningResourceDto>>> GetLearningResourcesAsync([FromQuery] string sortBy, [FromQuery] int count)
         {
             IEnumerable<LearningResourceDto> resources;
             if (sortBy.Equals("viewers")) {

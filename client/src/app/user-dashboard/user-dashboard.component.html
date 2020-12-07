@@ -36,11 +36,7 @@
             </div>
             <hr />
             <p class="card-text">
-              {{
-                post.content.length > 300
-                  ? post.content.substring(0, 300).trim() + "..."
-                  : post.content
-              }}
+              {{ post.content | textSummary: 300 }}
             </p>
           </div>
         </div>
@@ -70,19 +66,11 @@
             </div>
             <hr />
             <h6 class="card-subtitle mb-2 text-muted">
-              {{
-                comment.post.content.length > 130
-                  ? comment.post.content.substring(0, 130).trim() + "..."
-                  : comment.post.content
-              }}
+              {{ comment.post.content | textSummary: 130 }}
             </h6>
             <hr />
             <p class="card-text">
-              {{
-                comment.content.length > 150
-                  ? comment.content.substring(0, 150) + "..."
-                  : comment.content
-              }}
+              {{ comment.content | textSummary: 150 }}
             </p>
           </div>
         </div>
@@ -110,12 +98,7 @@
               {{ learningResource.type }}
             </h6>
             <p class="card-text">
-              {{
-                learningResource.description.length > 300
-                  ? learningResource.description.substring(0, 300).trim() +
-                    "..."
-                  : learningResource.description
-              }}
+              {{ learningResource.description | textSummary: 300 }}
             </p>
           </div>
         </div>

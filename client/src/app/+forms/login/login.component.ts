@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  TemplateRef,
-} from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -22,7 +16,6 @@ import { AccountService } from 'src/app/+services/account.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  @Output() cancelRegister = new EventEmitter();
   registerForm: FormGroup;
   maxDate: Date;
   validationErrors: string[] = [];
@@ -60,16 +53,12 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.accountService.login(this.registerForm.value).subscribe(
       (_) => {
-        this.router.navigateByUrl('/userDashboard');
+        this.router.navigate(['userDashboard']);
       },
       (error) => {
         this.validationErrors = error;
       }
     );
-  }
-
-  cancel(): void {
-    this.cancelRegister.emit(false);
   }
 
   openModalWithClass(template: TemplateRef<any>): void {
