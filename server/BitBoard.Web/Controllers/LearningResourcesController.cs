@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Interfaces;
+using API.Interfaces.Repositories;
 using API.Models;
 using API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
@@ -17,37 +18,37 @@ namespace API.Controllers
         }
 
         [HttpGet("standard")]
-        public async Task<ActionResult<IEnumerable<LearningResourceDto>>> GetLearningResourcesAsync([FromQuery] string sortBy, [FromQuery] int count)
+        public async Task<ActionResult<IEnumerable<LearningResourceDto>>> GetAllAsync([FromQuery] string sortBy, [FromQuery] int count)
         {
             IEnumerable<LearningResourceDto> resources;
             if (sortBy.Equals("viewers")) {
-                resources = await _unitOfWork.LearningResourceRepository.GetTopViewedLearningResourcesAsync(count);
+                resources = await _unitOfWork.LearningResourceRepository.GetTopViewedAsync(count);
             }
             else {
-                resources = await _unitOfWork.LearningResourceRepository.GetLearningResourcesAsync();
+                resources = await _unitOfWork.LearningResourceRepository.GetAllAsync();
             }
             return Ok(resources);
         }
 
         [HttpGet("standard/{id}")]
-        public async Task<ActionResult<LearningResourceDto>> GetLearningResourceByIdAsync(int id)
+        public async Task<ActionResult<LearningResourceDto>> GetAsync(int id)
         {
-            var resource = await _unitOfWork.LearningResourceRepository.GetLearningResourceByIdAsync(id);
+            var resource = await _unitOfWork.LearningResourceRepository.GetAsync(id);
             return Ok(resource);
         }
 
         [HttpGet("detailed")]
-        public async Task<ActionResult<IEnumerable<LearningResourceModel>>> GetLearningResourceModelsAsync()
+        public async Task<ActionResult<IEnumerable<LearningResourceModel>>> GetAllModelsAsync()
         {
-            var resources = await _unitOfWork.LearningResourceRepository.GetLearningResourceModelsAsync();
+            var resources = await _unitOfWork.LearningResourceRepository.GetAllModelsAsync();
             return Ok(resources);
         }
 
         [HttpGet("detailed/{resourceId}/{userId}")]
-        public async Task<ActionResult<LearningResourceModel>> GetLearningResourceModelByIdAsync(int resourceId, int userId)
+        public async Task<ActionResult<LearningResourceModel>> GetModelAsync(int resourceId, int userId)
         {
             // TODO: Have the userId come from the decoded token
-            var resource = await _unitOfWork.LearningResourceRepository.GetLearningResourceModelByIdAsync(resourceId, userId);
+            var resource = await _unitOfWork.LearningResourceRepository.GetModelAsync(resourceId, userId);
             return Ok(resource);
         }
 
@@ -66,16 +67,16 @@ namespace API.Controllers
         }
 
         [HttpPut("user/{userId}/post")]
-        public async Task<ActionResult> UpdateResourcePost(int userId, PostDto post)
+        public async Task<ActionResult> UpdatePostAsync(int userId, PostDto post)
         {
-            var updatedPost = await _unitOfWork.LearningResourceRepository.UpdateResourcePost(post, userId);
+            var updatedPost = await _unitOfWork.LearningResourceRepository.UpdatePostAsync(post, userId);
             return Ok(updatedPost);
         }
 
         [HttpPost("posts")]
-        public async Task<ActionResult> NewResourcePost(PostDto post)
+        public async Task<ActionResult> AddPostAsync(PostDto post)
         {
-            var addedPost = await _unitOfWork.LearningResourceRepository.NewResourcePost(post);
+            var addedPost = await _unitOfWork.LearningResourceRepository.AddPostAsync(post);
             return Ok(addedPost);
         }
     }

@@ -1,5 +1,6 @@
 // using System.Threading.Tasks;
 using System.Threading.Tasks;
+using API.Interfaces.Repositories;
 using API.Interfaces;
 using API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult> LoginAsync(LoginDto loginDto)
         {
-            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(loginDto.Username);
+            var user = await _unitOfWork.UserRepository.GetAsync(loginDto.Username);
             if (user.Password == loginDto.Password)
             {
                 return Ok(user);
@@ -27,10 +28,10 @@ namespace API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult> Register(RegistrationDto userRegistration)
+        public async Task<ActionResult> Register(UserDto userRegistration)
         {
             System.Console.WriteLine(userRegistration.ToString());
-            var user = await _unitOfWork.UserRepository.InsertUserAsync(userRegistration);
+            var user = await _unitOfWork.UserRepository.AddAsync(userRegistration);
             return Ok(user);
         }
     }

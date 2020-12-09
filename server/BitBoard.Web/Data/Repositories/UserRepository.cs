@@ -3,11 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data.Entities;
 using API.Models.DTOs;
-using API.Interfaces;
+using API.Interfaces.Repositories;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using API.Models;
+using BitBoard.Web.Interfaces.Base;
 
 namespace API.Data.Repositories
 {
@@ -22,7 +23,7 @@ namespace API.Data.Repositories
             _mapper = mapper;
         }
 
-        public void DeletetUser(User user)
+        public void DeleteAsync(User user)
         {
             _context.Users.Remove(user);
         }
@@ -34,7 +35,7 @@ namespace API.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<UserResourceStateDto> GetLearningResourceProgressionAsync(int userId, int learningResourceId)
+        public async Task<UserResourceStateDto> GetProgressionAsync(int userId, int learningResourceId)
         {
             return await _context.UserResourceStates
                 .Where(x => x.UserId == userId && x.LearningResourceId == learningResourceId)
@@ -42,7 +43,7 @@ namespace API.Data.Repositories
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<UserResourceStateDto>> GetLearningResourceProgressionsAsync(int id)
+        public async Task<IEnumerable<UserResourceStateDto>> GetProgressionsAsync(int id)
         {
             return await _context.UserResourceStates
                 .Where(x => x.UserId == id)
@@ -50,7 +51,7 @@ namespace API.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<UserDto> GetUserByUsernameAsync(string username)
+        public async Task<UserDto> GetAsync(string username)
         {
             return await _context.Users
                 .Where(u => u.UserName == username)
@@ -58,7 +59,7 @@ namespace API.Data.Repositories
                 .SingleAsync();
         }
 
-        public async Task<UserModel> GetUserModelByUsernameAsync(string username)
+        public async Task<UserModel> GetUserModelAsync(string username)
         {
             return await _context.Users
                 .Where(u => u.UserName == username)
@@ -66,31 +67,43 @@ namespace API.Data.Repositories
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<UserModel>> GetUserModelsAsync()
+        public async Task<IEnumerable<UserModel>> GetAllModelsAsync()
         {
             return await _context.Users
                 .ProjectTo<UserModel>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<UserDto>> GetUsersAsync()
+        public async Task<IEnumerable<UserDto>> GetAllAsync()
         {
             return await _context.Users
                 .ProjectTo<UserDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
 
-        public async Task<UserDto> InsertUserAsync(RegistrationDto userRegistration)
+        public async Task<UserDto> AddAsync(UserDto userRegistration)
         {
-            var user = _mapper.Map<RegistrationDto, User>(userRegistration);
+            var user = _mapper.Map<UserDto, User>(userRegistration);
             await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
-            return await GetUserByUsernameAsync(userRegistration.UserName);
+            return _mapper.Map<User, UserDto>(user);
         }
 
-        public void UpdateUser(User user)
+        public void Remove(UserDto entity)
         {
-            _context.Users.Update(user);
+            throw new System.NotImplementedException();
+        }
+
+        public UserDto Update(UserDto user)
+        {
+            var userEntity = _mapper.Map<UserDto, User>(user);
+            _context.Users.Update(userEntity);
+            return _mapper.Map<User, UserDto>(userEntity);
+        }
+
+        public async Task<UserDto> GetAsync(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            return _mapper.Map<User, UserDto>(user);
         }
     }
 }

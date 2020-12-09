@@ -36,7 +36,7 @@ namespace API.Helpers
             CreateMap<Comment, PostCommentDto>();
             CreateMap<UserResourceState, UserResourceStateDto>();
             CreateMap<User, UserResourceStateDto>();
-            CreateMap<RegistrationDto, User>();
+            CreateMap<UserDto, User>();
         }
     }
 }

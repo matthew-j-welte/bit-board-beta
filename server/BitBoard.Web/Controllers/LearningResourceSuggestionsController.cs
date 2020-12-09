@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using API.Interfaces;
+using API.Interfaces.Repositories;
 using API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,7 @@ namespace API.Controllers
         [HttpPost]
         public ActionResult NewLearningResourceSuggestion(LearningResourceSuggestionDto resourceSuggestion)
         {
-            _unitOfWork.LearningResourceSuggestionRepository.InsertLearningResourceSuggestionAsync(resourceSuggestion);
+            _unitOfWork.LearningResourceSuggestionRepository.AddAsync(resourceSuggestion);
             return Ok();
         }
     }

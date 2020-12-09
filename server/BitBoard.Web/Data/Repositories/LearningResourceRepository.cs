@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data.Entities;
 using API.Enums;
-using API.Interfaces;
+using API.Interfaces.Repositories;
 using API.Models;
 using API.Models.DTOs;
 using AutoMapper;
@@ -23,12 +23,7 @@ namespace API.Data.Repositories
             _mapper = mapper;
         }
 
-        public void DeletetLearningResource(LearningResource learningResource)
-        {
-            _context.LearningResources.Remove(learningResource);
-        }
-
-        public async Task<IEnumerable<LearningResourceDto>> GetLearningResourcesAsync()
+        public async Task<IEnumerable<LearningResourceDto>> GetAllAsync()
         {
             return await _context
                 .LearningResources
@@ -36,7 +31,7 @@ namespace API.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<LearningResourceDto>> GetTopViewedLearningResourcesAsync(int amount)
+        public async Task<IEnumerable<LearningResourceDto>> GetTopViewedAsync(int amount)
         {
             return await _context
                 .LearningResources
@@ -46,7 +41,7 @@ namespace API.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<LearningResourceDto> GetLearningResourceByIdAsync(int learningResourceId)
+        public async Task<LearningResourceDto> GetAsync(int learningResourceId)
         {
             return await _context
                 .LearningResources
@@ -55,7 +50,7 @@ namespace API.Data.Repositories
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<LearningResourceModel> GetLearningResourceModelByIdAsync(int learningResourceId, int userId)
+        public async Task<LearningResourceModel> GetModelAsync(int learningResourceId, int userId)
         {
             var model = await _context
                 .LearningResources
@@ -81,7 +76,7 @@ namespace API.Data.Repositories
             return model;
         }
 
-        public async Task<IEnumerable<LearningResourceModel>> GetLearningResourceModelsAsync()
+        public async Task<IEnumerable<LearningResourceModel>> GetAllModelsAsync()
         {
             return await _context
                 .LearningResources
@@ -89,17 +84,7 @@ namespace API.Data.Repositories
                 .ToListAsync();
         }
 
-        public async void InsertLearningResourceAsync(LearningResource learningResource)
-        {
-            await _context.LearningResources.AddAsync(learningResource);
-        }
-
-        public void UpdateLearningResource(LearningResource learningResource)
-        {
-            _context.LearningResources.Update(learningResource);
-        }
-
-        public async Task<PostDto> UpdateResourcePost(PostDto post, int userId)
+        public async Task<PostDto> UpdatePostAsync(PostDto post, int userId)
         {
             int likeDiff;
             int reportDiff;
@@ -125,11 +110,11 @@ namespace API.Data.Repositories
             .UserPostRelationships
             .Where(x => x.UserId == userId && x.LearningResourceId == post.LearningResourceId && x.PostId == post.PostId)
             .SingleOrDefaultAsync();
-            
+
             // TODO: Handle case where there is no userPostRelationship
             userPostRelationship.UserPostAction = post.UserPostAction;
 
-            var postEntity = await _context.Posts.Where(x=> x.PostId == post.PostId).SingleOrDefaultAsync();
+            var postEntity = await _context.Posts.Where(x => x.PostId == post.PostId).SingleOrDefaultAsync();
             postEntity.Likes += likeDiff;
             postEntity.Reports += reportDiff;
             await _context.SaveChangesAsync();
@@ -137,13 +122,33 @@ namespace API.Data.Repositories
             return _mapper.Map<Post, PostDto>(postEntity);
         }
 
-        public async Task<PostDto> NewResourcePost(PostDto post)
+        public async Task<PostDto> AddPostAsync(PostDto post)
         {
             var postEntity = _mapper.Map<PostDto, Post>(post);
             await _context.Posts.AddAsync(postEntity);
             await _context.SaveChangesAsync();
 
             return _mapper.Map<Post, PostDto>(postEntity);
+        }
+
+        public async Task<LearningResourceDto> AddAsync(LearningResourceDto resource)
+        {
+            var resourceEntity = _mapper.Map<LearningResourceDto, LearningResource>(resource);
+            await _context.AddAsync(resourceEntity);
+            return _mapper.Map<LearningResource, LearningResourceDto>(resourceEntity);
+        }
+
+        public void Remove(LearningResourceDto resource)
+        {
+            var resourceEntity = _mapper.Map<LearningResourceDto, LearningResource>(resource);
+            _context.LearningResources.Remove(resourceEntity);
+        }
+
+        public LearningResourceDto Update(LearningResourceDto resource)
+        {
+            var resourceEntity = _mapper.Map<LearningResourceDto, LearningResource>(resource);
+            _context.LearningResources.Update(resourceEntity);
+            return _mapper.Map<LearningResource, LearningResourceDto>(resourceEntity);
         }
     }
 }

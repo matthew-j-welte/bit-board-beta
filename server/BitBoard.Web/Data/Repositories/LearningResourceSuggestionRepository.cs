@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Data.Entities;
-using API.Interfaces;
+using API.Interfaces.Repositories;
 using API.Models.DTOs;
 using AutoMapper;
 
@@ -18,30 +18,30 @@ namespace API.Data.Repositories
             _mapper = mapper;
         }
 
-        public void DeletetLearningSuggestionResourceAsync(LearningResourceSuggestionDto learningResource)
+        public void Remove(LearningResourceSuggestionDto resource)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<LearningResourceSuggestionDto> GetLearningResourceSuggestionByIdAsync(int learningResourceId)
+        public Task<LearningResourceSuggestionDto> GetAsync(int learningResourceId)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<LearningResourceSuggestionDto>> GetLearningResourceSuggestionsAsync()
+        public Task<IEnumerable<LearningResourceSuggestionDto>> GetAllAsync()
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task InsertLearningResourceSuggestionAsync(LearningResourceSuggestionDto learningResource)
+        public async Task<LearningResourceSuggestionDto> AddAsync(LearningResourceSuggestionDto learningResource)
         {
             var resourceSuggestion = _mapper.Map<LearningResourceSuggestionDto, LearningResourceSuggestion>(learningResource);
             await _context.LearningResourceSuggestions.AddAsync(resourceSuggestion);
-            await _context.SaveChangesAsync();
+            return _mapper.Map<LearningResourceSuggestion, LearningResourceSuggestionDto>(resourceSuggestion);
             
         }
 
-        public void UpdateLearningResourceSuggestionAsync(LearningResourceSuggestionDto learningResource)
+        public LearningResourceSuggestionDto Update(LearningResourceSuggestionDto learningResource)
         {
             throw new System.NotImplementedException();
         }

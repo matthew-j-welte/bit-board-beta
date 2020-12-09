@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using API.Interfaces;
+using API.Interfaces.Repositories;
 using API.Models.DTOs;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -19,11 +19,31 @@ namespace API.Data.Repositories
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<SkillDto>> GetSkillsAsync()
+        public Task<SkillDto> AddAsync(SkillDto entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task<IEnumerable<SkillDto>> GetAllAsync()
         {
             return await _context.Skills
                 .ProjectTo<SkillDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
+        }
+
+        public Task<SkillDto> GetAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Remove(SkillDto entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public SkillDto Update(SkillDto entity)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

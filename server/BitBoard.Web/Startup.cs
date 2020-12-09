@@ -25,7 +25,7 @@ namespace API
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
-            services.AddDbContext<DataContext>(options => 
+            services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
             });

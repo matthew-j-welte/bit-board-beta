@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Models.DTOs;
 using API.Interfaces;
+using API.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -16,9 +17,9 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SkillDto>>> GetSkillsAsync()
+        public async Task<ActionResult<IEnumerable<SkillDto>>> GetAllAsync()
         {
-            var skills = await _unitOfWork.SkillsRepository.GetSkillsAsync();
+            var skills = await _unitOfWork.SkillsRepository.GetAllAsync();
             return Ok(skills);
         }
     }

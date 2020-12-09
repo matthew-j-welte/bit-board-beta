@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using API.Data.Repositories;
 using API.Interfaces;
+using API.Interfaces.Repositories;
 using AutoMapper;
 
 namespace API.Data
