@@ -1,6 +1,6 @@
 export enum UserPostAction {
-    None,
-    Liked,
-    Reported,
-    Authored
+  None,
+  Liked,
+  Reported,
+  Authored,
 }
