@@ -138,17 +138,16 @@ namespace API.Data.Repositories
             return _mapper.Map<LearningResource, LearningResourceDto>(resourceEntity);
         }
 
-        public void Remove(LearningResourceDto resource)
+        public Task RemoveAsync(LearningResourceDto resource)
         {
-            var resourceEntity = _mapper.Map<LearningResourceDto, LearningResource>(resource);
-            _context.LearningResources.Remove(resourceEntity);
+            throw new System.NotImplementedException();
         }
 
-        public LearningResourceDto Update(LearningResourceDto resource)
+        public async Task UpdateAsync(LearningResourceDto resource)
         {
             var resourceEntity = _mapper.Map<LearningResourceDto, LearningResource>(resource);
             _context.LearningResources.Update(resourceEntity);
-            return _mapper.Map<LearningResource, LearningResourceDto>(resourceEntity);
+            await _context.SaveChangesAsync();
         }
     }
 }

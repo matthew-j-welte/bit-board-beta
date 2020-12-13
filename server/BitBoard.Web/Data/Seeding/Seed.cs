@@ -12,7 +12,7 @@ namespace API.Data.Seeding
         {
             if (await context.Skills.AnyAsync()) return;
 
-            // TODO: Update this to pull from the config file
+            // TODO: UpdateAsync this to pull from the config file
             var skillsData = await System.IO.File.ReadAllTextAsync("Data/Seeding/Generated/Skills.json");
             var skills = JsonSerializer.Deserialize<List<Skill>>(skillsData);
             

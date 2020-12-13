@@ -36,12 +36,12 @@ namespace API.Data.Repositories
             throw new System.NotImplementedException();
         }
 
-        public void Remove(SkillDto entity)
+        public Task RemoveAsync(SkillDto entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public SkillDto Update(SkillDto entity)
+        public async Task UpdateAsync(SkillDto entity)
         {
             throw new System.NotImplementedException();
         }

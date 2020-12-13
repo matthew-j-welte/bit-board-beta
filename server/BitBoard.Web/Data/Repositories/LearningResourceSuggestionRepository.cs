@@ -18,7 +18,7 @@ namespace API.Data.Repositories
             _mapper = mapper;
         }
 
-        public void Remove(LearningResourceSuggestionDto resource)
+        public Task RemoveAsync(LearningResourceSuggestionDto resource)
         {
             throw new System.NotImplementedException();
         }
@@ -41,7 +41,7 @@ namespace API.Data.Repositories
             
         }
 
-        public LearningResourceSuggestionDto Update(LearningResourceSuggestionDto learningResource)
+        public async Task UpdateAsync(LearningResourceSuggestionDto learningResource)
         {
             throw new System.NotImplementedException();
         }
