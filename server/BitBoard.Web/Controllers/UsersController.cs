@@ -33,14 +33,14 @@ namespace API.Controllers
         [HttpGet("{id}/resourceProgress")]
         public async Task<ActionResult<IEnumerable<UserResourceStateDto>>> GetResourceProgressionsByUserIdAsync(int id)
         {
-            var userProgressions = await _unitOfWork.UserRepository.GetProgressionsAsync(id);
+            var userProgressions = await _unitOfWork.UserRepository.GetAllResourceStatesAsync(id);
             return Ok(userProgressions);
         }
 
         [HttpGet("{userId}/resourceProgress/{learningResourceId}")]
         public async Task<ActionResult<IEnumerable<UserResourceStateDto>>> GetResourceProgressionAsync(int userId, int learningResourceId)
         {
-            var userProgressions = await _unitOfWork.UserRepository.GetProgressionAsync(userId, learningResourceId);
+            var userProgressions = await _unitOfWork.UserRepository.GetResourceStateAsync(userId, learningResourceId);
             return Ok(userProgressions);
         }
     }

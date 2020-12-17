@@ -37,6 +37,8 @@ namespace API.Data.Repositories
         {
             var resourceSuggestion = _mapper.Map<LearningResourceSuggestionDto, LearningResourceSuggestion>(learningResource);
             await _context.LearningResourceSuggestions.AddAsync(resourceSuggestion);
+            await _context.LearningResourceSuggestionSkills.AddRangeAsync(resourceSuggestion.LearningResourceSuggestionSkills);
+            await _context.SaveChangesAsync();
             return _mapper.Map<LearningResourceSuggestion, LearningResourceSuggestionDto>(resourceSuggestion);
             
         }

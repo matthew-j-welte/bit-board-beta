@@ -21,28 +21,16 @@ namespace API.Data
         public DbSet<CodeEditorConfiguration> CodeEditorConfigurations { get; set; }
         public DbSet<UserResourceState> UserResourceStates { get; set; }
         public DbSet<LearningResourceSuggestion> LearningResourceSuggestions { get; set; }
+        public DbSet<LearningResourceSuggestionSkill> LearningResourceSuggestionSkills { get; set; }
         public DbSet<UserPostRelationship> UserPostRelationships { get; set; }
+
+        public DbSet<LearningResourceSkill> LearningResourceSkills { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             _builder = builder;
-        }
-
-        public void DetachAllEntities()
-        {
-            var changedEntriesCopy = this.ChangeTracker.Entries()
-                .Where(e => e.State == EntityState.Added ||
-                            e.State == EntityState.Modified ||
-                            e.State == EntityState.Deleted)
-                .ToList();
-
-            foreach (var entry in changedEntriesCopy)
-            {
-                System.Console.WriteLine(entry);
-                entry.State = EntityState.Detached;
-            }
         }
     }
 }

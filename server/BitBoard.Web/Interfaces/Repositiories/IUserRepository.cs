@@ -12,7 +12,7 @@ namespace API.Interfaces.Repositories
         Task<IEnumerable<UserModel>> GetAllModelsAsync();
         Task<UserModel> GetUserModelAsync(string username);
         Task<UserDto> GetAsync(string username);
-        Task<IEnumerable<UserResourceStateDto>> GetProgressionsAsync(int id);
-        Task<UserResourceStateDto> GetProgressionAsync(int userId, int learningResourceId);
+        Task<IEnumerable<UserResourceStateDto>> GetAllResourceStatesAsync(int id);
+        Task<UserResourceStateDto> GetResourceStateAsync(int userId, int learningResourceId);
     }
 }

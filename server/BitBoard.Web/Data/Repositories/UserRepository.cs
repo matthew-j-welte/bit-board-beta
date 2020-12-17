@@ -81,7 +81,6 @@ namespace API.Data.Repositories
             {
                 throw new InvalidOperationException("Cannot remove this record because it does not exist");
             }
-
         }
 
         public async Task UpdateAsync(UserDto user)
@@ -104,7 +103,7 @@ namespace API.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<UserResourceStateDto> GetProgressionAsync(int userId, int learningResourceId)
+        public async Task<UserResourceStateDto> GetResourceStateAsync(int userId, int learningResourceId)
         {
             return await _context.UserResourceStates
                 .Where(x => x.UserId == userId && x.LearningResourceId == learningResourceId)
@@ -112,10 +111,10 @@ namespace API.Data.Repositories
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<UserResourceStateDto>> GetProgressionsAsync(int id)
+        public async Task<IEnumerable<UserResourceStateDto>> GetAllResourceStatesAsync(int userId)
         {
             return await _context.UserResourceStates
-                .Where(x => x.UserId == id)
+                .Where(x => x.UserId == userId)
                 .ProjectTo<UserResourceStateDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }

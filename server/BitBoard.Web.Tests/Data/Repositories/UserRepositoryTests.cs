@@ -1,98 +1,15 @@
 using System.Threading.Tasks;
 using Xunit;
-using AutoMapper;
-using API.Helpers;
 using Microsoft.EntityFrameworkCore;
-using API.Data;
-using Microsoft.Data.Sqlite;
-using API.Data.Repositories;
 using API.Models.DTOs;
 using API.Data.Entities;
 using System;
-using API.Data.Seeding;
 using System.Linq;
-using System.IO;
 
 namespace BitBoard.Web.Tests.Data.Repositories
 {
-    public static class DataContextFactory
+    public class UserRepositoryTests : BaseTestRepository
     {
-        public static DataContext GetDataContext()
-        {
-            var connection = new SqliteConnection("Data source=unit-testing.db");
-            connection.Open();
-            var dbContextOptions = new DbContextOptionsBuilder<DataContext>()
-            .UseSqlite(connection)
-            .EnableSensitiveDataLogging()
-            .EnableDetailedErrors()
-            .Options;
-
-            return new DataContext(dbContextOptions);
-        }
-
-        public static UserRepository GetUserRepository(DataContext ctx)
-        {
-            var config = new MapperConfiguration(cfg => cfg.AddProfile<AutoMapperProfile>());
-            var mapper = config.CreateMapper();
-            return new UserRepository(ctx, mapper);
-        }
-    }
-
-    public class DatabaseFixture : IDisposable
-    {
-        private readonly string _testDb = Path.Join(Directory.GetCurrentDirectory(), "unit-testing.db");
-        public DatabaseFixture()
-        {
-            if (File.Exists(_testDb))
-            {
-                File.Delete(_testDb);
-            }
-
-            var ctx = DataContextFactory.GetDataContext();
-            ctx.Database.Migrate();
-
-            var dataQuery = new DataQuery();
-            dataQuery.GenerateDataAsync().Wait();
-
-            Console.WriteLine("Seeding Data!!");
-
-            Seed.SeedSkills(ctx).Wait();
-            Seed.SeedUsers(ctx).Wait();
-            Seed.SeedLearningResources(ctx).Wait();
-            Seed.SeedUserProgressions(ctx).Wait();
-            Seed.SeedPosts(ctx).Wait();
-            Seed.SeedComments(ctx).Wait();
-            Console.WriteLine("Finished Seeding Data");
-        }
-
-        public void Dispose()
-        {
-            Console.WriteLine("Delete the db file!!!");
-            Console.WriteLine(Directory.GetCurrentDirectory());
-            var testDb = Path.Join(Directory.GetCurrentDirectory(), "unit-testing.db");
-            File.Delete(testDb);
-        }
-    }
-
-    [CollectionDefinition("Database collection")]
-    public class DatabaseCollection : ICollectionFixture<DatabaseFixture>
-    {
-        // This class has no code, and is never created. Its purpose is simply
-        // to be the place to apply [CollectionDefinition] and all the
-        // ICollectionFixture<> interfaces.
-    }
-
-    [Collection("Database collection")]
-    public class UserRepositoryTests
-    {
-        private DataContext _ctx
-        {
-            get
-            {
-                return DataContextFactory.GetDataContext();
-            }
-        }
-
         private UserDto ValidUserDto()
         {
             var g = Guid.NewGuid().ToString();
@@ -115,6 +32,29 @@ namespace BitBoard.Web.Tests.Data.Repositories
                 FirstName = "M" + g,
                 LastName = "W" + g
             };
+        }
+
+        [Fact]
+        public async Task GetUserModelAsync_ValidUser_Success()
+        {
+            using (var ctx = _ctx)
+            {
+                // Arrange
+                var repo = DataContextFactory.GetUserRepository(ctx);
+                var sampleUser = await ctx.Users.Where(u => u.UserId == 1).SingleAsync();
+
+                // Act
+                var userModel = await repo.GetUserModelAsync(sampleUser.UserName);
+
+                // Assert
+                // Assert.NotEmpty(userModel.CodeEditorConfigurations);
+                Assert.NotNull(userModel.Comments);
+                Assert.NotNull(userModel.LearningResources);
+                Assert.NotNull(userModel.Posts);
+
+                // Users should have user skills on registration
+                Assert.NotEmpty(userModel.UserSkills);
+            }
         }
 
         [Fact]
@@ -297,16 +237,16 @@ namespace BitBoard.Web.Tests.Data.Repositories
             using (var ctx = _ctx)
             {
                 var repo = DataContextFactory.GetUserRepository(ctx);
-                var user = new UserDto 
-                { 
-                    UserId = 1, 
-                    UserName = "NewUser", 
-                    FirstName = "New", 
-                    LastName = "User" 
+                var user = new UserDto
+                {
+                    UserId = 1,
+                    UserName = "NewUser",
+                    FirstName = "New",
+                    LastName = "User"
                 };
                 await repo.UpdateAsync(user);
             }
-            
+
             using (var ctx = _ctx)
             {
                 var repo = DataContextFactory.GetUserRepository(ctx);
@@ -338,35 +278,113 @@ namespace BitBoard.Web.Tests.Data.Repositories
         }
 
         [Fact]
-        public async Task GetProgressionAsync_UserWithProgressions_Success()
+        public async Task GetResourceStateAsync_UserWithResourceState_Success()
         {
-            // // Arrange
-            // var user = ValidUser();
+            using (var ctx = _ctx)
+            {
+                // Arrange
+                var repo = DataContextFactory.GetUserRepository(ctx);
+                var userState = await ctx.UserResourceStates.FirstAsync();
+                var realUser = await ctx.Users.Where(u => u.UserId == userState.UserId).SingleAsync();
+                var realResource = await ctx.LearningResources.Where(r => r.LearningResourceId == userState.LearningResourceId).SingleAsync();
 
+                // Act
+                var userResourceState = await repo.GetResourceStateAsync(userState.UserId, userState.LearningResourceId);
 
-            // var userSkill = new UserSkill();
-            // userSkill.Level = 5;
-            // userSkill.ProgressPercent = 40;
-            // userSkill.SkillId = 1;
-            // userSkill.UserId = 1;
+                // Assert
+                Assert.Equal(userState.ProgressPercent, userResourceState.ProgressPercent);
+                Assert.Equal(realUser.UserId, userResourceState.User.UserId);
+                Assert.Equal(realUser.UserName, userResourceState.User.UserName);
+                Assert.Equal(realResource.LearningResourceId, userResourceState.LearningResource.LearningResourceId);
+                Assert.Equal(realResource.Title, userResourceState.LearningResource.Title);
+            }
+        }
 
-            // var userResourceState = new UserResourceState();
-            // userResourceState.LearningResourceId = 1;
-            // userResourceState.ProgressPercent = 40;
-            // userResourceState.UserId = 1;
+        [Fact]
+        public async Task GetProgressionAsync_UserWithoutResourceProgression_ReturnNull()
+        {
+            using (var ctx = _ctx)
+            {
+                // Arrange
+                var repo = DataContextFactory.GetUserRepository(ctx);
+                var userState = await ctx.UserResourceStates.FirstAsync();
 
-            // user.UserSkills = new List<UserSkill>() { userSkill };
-            // user.UserResourceStates = new List<UserResourceState>() { userResourceState };
+                // Act
+                var nullState = await repo.GetResourceStateAsync(userState.UserId, -1);
 
-            // _dbContext.Users.Add(user);
-            // await _dbContext.SaveChangesAsync();
+                // Assert
+                Assert.Null(nullState);
+            }
+        }
 
-            // // Act
-            // var userProgression = await _repository.GetProgressionAsync(user.UserId, userResourceState.LearningResourceId);
+        [Fact]
+        public async Task GetProgressionAsync_ResourceProgressionWithoutUser_ReturnNull()
+        {
+            using (var ctx = _ctx)
+            {
+                // Arrange
+                var repo = DataContextFactory.GetUserRepository(ctx);
+                var userState = await ctx.UserResourceStates.FirstAsync();
 
-            // // Assert
-            // Assert.Equal(40, userProgression.ProgressPercent);
-            // Assert.Equal(user.UserName, userProgression.User.UserName);
+                // Act
+                var nullState = await repo.GetResourceStateAsync(-1, userState.LearningResourceId);
+
+                // Assert
+                Assert.Null(nullState);
+            }
+        }
+
+        [Fact]
+        public async Task GetAllResourceStatesAsync_UserWithResourceStates_Success()
+        {
+            using (var ctx = _ctx)
+            {
+                // Arrange
+                var repo = DataContextFactory.GetUserRepository(ctx);
+                var userState = await ctx.UserResourceStates.FirstAsync();
+                var userStates = await ctx.UserResourceStates
+                    .Where(u => u.UserId == userState.UserId)
+                    .OrderBy(u => u.LearningResourceId)
+                    .ToListAsync();
+
+                var realUser = await ctx.Users
+                    .Where(u => u.UserId == userState.UserId)
+                    .SingleAsync();
+
+                // Act
+                var userResourceStates = await repo.GetAllResourceStatesAsync(userState.UserId);
+                userResourceStates = userResourceStates.OrderBy(s => s.LearningResource.LearningResourceId).ToList();
+
+                var truthAndActual = userStates.Zip(userResourceStates, (t, a) => new { Truth = t, Actual = a });
+
+                // Assert
+                foreach (var state in truthAndActual)
+                {
+                    var realResource = await ctx.LearningResources.Where(r => r.LearningResourceId == state.Actual.LearningResource.LearningResourceId).SingleOrDefaultAsync();
+                    Assert.Equal(state.Truth.ProgressPercent, state.Actual.ProgressPercent);
+                    Assert.Equal(realUser.UserId, state.Actual.User.UserId);
+                    Assert.Equal(realUser.UserName, state.Actual.User.UserName);
+                    Assert.NotNull(realResource);
+                    Assert.Equal(realResource.LearningResourceId, state.Actual.LearningResource.LearningResourceId);
+                    Assert.Equal(realResource.Title, state.Actual.LearningResource.Title);
+                }
+            }
+        }
+
+        [Fact]
+        public async Task GetAllResourceStatesAsync_UserWithoutResourceStates_EmptyList()
+        {
+            using (var ctx = _ctx)
+            {
+                // Arrange
+                var repo = DataContextFactory.GetUserRepository(ctx);
+
+                // Act
+                var states = await repo.GetAllResourceStatesAsync(-1);
+
+                // Assert
+                Assert.Empty(states);
+            }
         }
     }
 }

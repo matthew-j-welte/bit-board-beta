@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,33 +24,6 @@ namespace API.Data.Repositories
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<LearningResourceDto>> GetAllAsync()
-        {
-            return await _context
-                .LearningResources
-                .ProjectTo<LearningResourceDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
-        }
-
-        public async Task<IEnumerable<LearningResourceDto>> GetTopViewedAsync(int amount)
-        {
-            return await _context
-                .LearningResources
-                .OrderByDescending(l => l.Viewers)
-                .Take(amount)
-                .ProjectTo<LearningResourceDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
-        }
-
-        public async Task<LearningResourceDto> GetAsync(int learningResourceId)
-        {
-            return await _context
-                .LearningResources
-                .Where(x => x.LearningResourceId == learningResourceId)
-                .ProjectTo<LearningResourceDto>(_mapper.ConfigurationProvider)
-                .SingleOrDefaultAsync();
-        }
-
         public async Task<LearningResourceModel> GetModelAsync(int learningResourceId, int userId)
         {
             var model = await _context
@@ -72,6 +46,7 @@ namespace API.Data.Repositories
                 .Where(x => x.UserId == userId && x.LearningResourceId == learningResourceId)
                 .ProjectTo<UserResourceStateDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
+
             model.UserResourceState = userResourceState;
             return model;
         }
@@ -81,6 +56,61 @@ namespace API.Data.Repositories
             return await _context
                 .LearningResources
                 .ProjectTo<LearningResourceModel>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+        }
+
+        public async Task<LearningResourceDto> GetAsync(int learningResourceId)
+        {
+            return await _context
+                .LearningResources
+                .Where(x => x.LearningResourceId == learningResourceId)
+                .ProjectTo<LearningResourceDto>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<LearningResourceDto>> GetAllAsync()
+        {
+            return await _context
+                .LearningResources
+                .ProjectTo<LearningResourceDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+        }
+
+        public async Task<LearningResourceDto> AddAsync(LearningResourceDto resource)
+        {
+            var resourceEntity = _mapper.Map<LearningResourceDto, LearningResource>(resource);
+            await _context.AddAsync(resourceEntity);
+            return _mapper.Map<LearningResource, LearningResourceDto>(resourceEntity);
+        }
+
+        public async Task RemoveAsync(LearningResourceDto resource)
+        {
+            if (await _context.LearningResources.AnyAsync(r => r.LearningResourceId == resource.LearningResourceId))
+            {
+                var resourceEntity = new LearningResource { LearningResourceId = resource.LearningResourceId };
+                _context.LearningResources.Remove(resourceEntity);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new InvalidOperationException("Cannot remove this record because it does not exist");
+            }
+        }
+
+        public async Task UpdateAsync(LearningResourceDto resource)
+        {
+            var resourceEntity = _mapper.Map<LearningResourceDto, LearningResource>(resource);
+            _context.LearningResources.Update(resourceEntity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<LearningResourceDto>> GetTopViewedAsync(int amount)
+        {
+            return await _context
+                .LearningResources
+                .OrderByDescending(l => l.Viewers)
+                .Take(amount)
+                .ProjectTo<LearningResourceDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
 
@@ -111,9 +141,22 @@ namespace API.Data.Repositories
             .Where(x => x.UserId == userId && x.LearningResourceId == post.LearningResourceId && x.PostId == post.PostId)
             .SingleOrDefaultAsync();
 
-            // TODO: Handle case where there is no userPostRelationship
-            userPostRelationship.UserPostAction = post.UserPostAction;
-
+            if (userPostRelationship == null)
+            {
+                var newRelationship = new UserPostRelationship
+                {
+                    LearningResourceId = post.LearningResourceId,
+                    PostId = post.PostId,
+                    UserId = userId,
+                    UserPostAction = post.UserPostAction
+                };
+                await _context.UserPostRelationships.AddAsync(newRelationship);
+            }
+            else
+            {
+                userPostRelationship.UserPostAction = post.UserPostAction;
+            }
+            
             var postEntity = await _context.Posts.Where(x => x.PostId == post.PostId).SingleOrDefaultAsync();
             postEntity.Likes += likeDiff;
             postEntity.Reports += reportDiff;
@@ -129,25 +172,6 @@ namespace API.Data.Repositories
             await _context.SaveChangesAsync();
 
             return _mapper.Map<Post, PostDto>(postEntity);
-        }
-
-        public async Task<LearningResourceDto> AddAsync(LearningResourceDto resource)
-        {
-            var resourceEntity = _mapper.Map<LearningResourceDto, LearningResource>(resource);
-            await _context.AddAsync(resourceEntity);
-            return _mapper.Map<LearningResource, LearningResourceDto>(resourceEntity);
-        }
-
-        public Task RemoveAsync(LearningResourceDto resource)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task UpdateAsync(LearningResourceDto resource)
-        {
-            var resourceEntity = _mapper.Map<LearningResourceDto, LearningResource>(resource);
-            _context.LearningResources.Update(resourceEntity);
-            await _context.SaveChangesAsync();
         }
     }
 }

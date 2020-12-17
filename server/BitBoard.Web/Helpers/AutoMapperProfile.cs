@@ -15,20 +15,36 @@ namespace API.Helpers
             CreateMap<User, UserModel>();
             CreateMap<User, LoginDto>();
             CreateMap<LearningResourceSkill, SkillDto>();
-            CreateMap<LearningResource, LearningResourceDto>().ForMember(
+            CreateMap<LearningResource, LearningResourceDto>()
+                .ForMember(
                     dest => dest.Skills,
-                    opt => opt.MapFrom(src => src.LearningResourceSkills.Select(y => y.Skill)));
+                    opt => opt.MapFrom(src => src.LearningResourceSkills.Select(y => y.Skill)))
+                .ForMember(
+                    dest => dest.Viewers,
+                    opt => opt.MapFrom(src => src.Viewers));
             CreateMap<LearningResource, LearningResourceModel>()
                 .ForMember(
                     dest => dest.Skills,
                     opt => opt.MapFrom(src => src.LearningResourceSkills.Select(y => y.Skill)));
+            CreateMap<LearningResourceDto, LearningResource>().ForMember(
+                    dest => dest.LearningResourceSkills,
+                    opt => opt.MapFrom(src => src.Skills.Select(y => new LearningResourceSkill
+                    {
+                        SkillId = y.SkillId
+                    }))
+            );
             CreateMap<LearningResourceSuggestion, LearningResourceSuggestionDto>().ForMember(
                     dest => dest.Skills,
                     opt => opt.MapFrom(src => src.LearningResourceSuggestionSkills.Select(y => y.Skill)));
             CreateMap<LearningResourceSuggestionDto, LearningResourceSuggestion>().ForMember(
                     dest => dest.LearningResourceSuggestionSkills,
-                    opt => opt.MapFrom(src => src.Skills.Select(y => new LearningResourceSuggestionSkill {SkillId=y.SkillId})));
+                    opt => opt.MapFrom(src => src.Skills.Select(y => new LearningResourceSuggestionSkill
+                    {
+                        SkillId = y.SkillId
+                    }))
+            );
             CreateMap<Skill, SkillDto>();
+            CreateMap<SkillDto, LearningResourceSkill>();
             CreateMap<UserSkill, UserSkillDto>();
             CreateMap<CodeEditorConfiguration, CodeEditorConfigurationDto>();
             CreateMap<Post, PostDto>();
