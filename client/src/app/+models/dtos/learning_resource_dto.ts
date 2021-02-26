@@ -9,4 +9,5 @@ export interface LearningResource {
   type: string;
   skills: Skill[];
   viewers: number;
+  userId: number;
 }

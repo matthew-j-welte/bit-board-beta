@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -16,10 +16,14 @@ import { AccountService } from 'src/app/+services/account.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  registerForm: FormGroup;
+  @ViewChild('failedModal', { read: TemplateRef })
+  failedModalTemplate: TemplateRef<any>;
+
+  loginForm: FormGroup;
   maxDate: Date;
   validationErrors: string[] = [];
   modalRef: BsModalRef;
+  failedModalRef: BsModalRef;
 
   constructor(
     private fb: FormBuilder,
@@ -33,7 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   intitializeForm(): void {
-    this.registerForm = this.fb.group({
+    this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: [
         '',
@@ -51,12 +55,13 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    this.accountService.login(this.registerForm.value).subscribe(
+    this.accountService.login(this.loginForm.value).subscribe(
       (_) => {
         this.router.navigate(['userDashboard']);
       },
       (error) => {
         this.validationErrors = error;
+        // pass something to a class or component that displays the error modal
       }
     );
   }
@@ -67,4 +72,15 @@ export class LoginComponent implements OnInit {
       Object.assign({}, { class: 'gray modal-lg' })
     );
   }
+
+  onModalSubmit = () => {
+    this.modalRef.hide();
+  };
+
+  onModalFailure = (errors: string[]) => {
+    this.failedModalRef = this.modalService.show(
+      this.failedModalTemplate,
+      Object.assign({}, { class: 'gray modal-md' })
+    );
+  };
 }

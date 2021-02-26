@@ -59,6 +59,9 @@ export class LearningResourceDetailPostsComponent implements OnInit {
   }
 
   addPost(post: Post): void {
-    this.learningResource.posts.push(post);
+    this.learningResource.posts.push({
+      ...post,
+      userPostAction: UserPostAction.Authored,
+    });
   }
 }

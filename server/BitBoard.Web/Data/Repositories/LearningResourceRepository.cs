@@ -168,6 +168,14 @@ namespace API.Data.Repositories
         public async Task<PostDto> AddPostAsync(PostDto post)
         {
             var postEntity = _mapper.Map<PostDto, Post>(post);
+            var newRelationship = new UserPostRelationship
+            {
+                LearningResourceId = post.LearningResourceId,
+                UserId = post.UserId,
+                UserPostAction = UserPostActionEnum.Authored
+            };
+            postEntity.UserPostRelationships = new List<UserPostRelationship>() { newRelationship };
+            
             await _context.Posts.AddAsync(postEntity);
             await _context.SaveChangesAsync();
 

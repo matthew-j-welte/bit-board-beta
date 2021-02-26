@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace API.Data.Migrations
+namespace BitBoard.Web.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -14,7 +14,7 @@ namespace API.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9");
+                .HasAnnotation("ProductVersion", "5.0.1");
 
             modelBuilder.Entity("API.Data.Entities.CodeEditorConfiguration", b =>
                 {
@@ -459,6 +459,8 @@ namespace API.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("API.Data.Entities.Comment", b =>
@@ -474,6 +476,10 @@ namespace API.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("API.Data.Entities.ErrorReport", b =>
@@ -481,6 +487,8 @@ namespace API.Data.Migrations
                     b.HasOne("API.Data.Entities.User", "UserSource")
                         .WithMany()
                         .HasForeignKey("UserSourceUserId");
+
+                    b.Navigation("UserSource");
                 });
 
             modelBuilder.Entity("API.Data.Entities.LearningResource", b =>
@@ -490,6 +498,8 @@ namespace API.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("API.Data.Entities.LearningResourceSkill", b =>
@@ -505,6 +515,10 @@ namespace API.Data.Migrations
                         .HasForeignKey("SkillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("LearningResource");
+
+                    b.Navigation("Skill");
                 });
 
             modelBuilder.Entity("API.Data.Entities.LearningResourceSuggestion", b =>
@@ -514,6 +528,8 @@ namespace API.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("API.Data.Entities.LearningResourceSuggestionSkill", b =>
@@ -529,6 +545,10 @@ namespace API.Data.Migrations
                         .HasForeignKey("SkillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("LearningResourceSuggestion");
+
+                    b.Navigation("Skill");
                 });
 
             modelBuilder.Entity("API.Data.Entities.Post", b =>
@@ -544,6 +564,10 @@ namespace API.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("LearningResource");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("API.Data.Entities.UserPostRelationship", b =>
@@ -565,6 +589,12 @@ namespace API.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("LearningResource");
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("API.Data.Entities.UserResourceState", b =>
@@ -580,6 +610,10 @@ namespace API.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("LearningResource");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("API.Data.Entities.UserSkill", b =>
@@ -595,6 +629,53 @@ namespace API.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Skill");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("API.Data.Entities.LearningResource", b =>
+                {
+                    b.Navigation("LearningResourceSkills");
+
+                    b.Navigation("Posts");
+
+                    b.Navigation("UserPostRelationships");
+                });
+
+            modelBuilder.Entity("API.Data.Entities.LearningResourceSuggestion", b =>
+                {
+                    b.Navigation("LearningResourceSuggestionSkills");
+                });
+
+            modelBuilder.Entity("API.Data.Entities.Post", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("UserPostRelationships");
+                });
+
+            modelBuilder.Entity("API.Data.Entities.Skill", b =>
+                {
+                    b.Navigation("LearningResourceSkills");
+                });
+
+            modelBuilder.Entity("API.Data.Entities.User", b =>
+                {
+                    b.Navigation("CodeEditorConfigurations");
+
+                    b.Navigation("Comments");
+
+                    b.Navigation("LearningResources");
+
+                    b.Navigation("Posts");
+
+                    b.Navigation("UserPostRelationships");
+
+                    b.Navigation("UserResourceStates");
+
+                    b.Navigation("UserSkills");
                 });
 #pragma warning restore 612, 618
         }

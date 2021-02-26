@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -52,11 +53,18 @@ namespace API.Data.Seeding
             
             if (userProgressions == null) throw new JsonException("Failed to deserialize");
 
+            var progressionSet = new HashSet<Tuple<int, int>>();
+
             foreach (var userProgress in userProgressions)
             {
+                var foreignKeys = new Tuple<int, int>(userProgress.UserId, userProgress.LearningResourceId);
+                if (progressionSet.Contains(foreignKeys))
+                {
+                    continue;
+                }
+                progressionSet.Add(foreignKeys);
                 await context.UserResourceStates.AddAsync(userProgress);
             }
-
             await context.SaveChangesAsync();
         }
 

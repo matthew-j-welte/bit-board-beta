@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -6,6 +6,7 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormConfig, FormFieldBuilder } from 'src/app/+helpers/form-helpers';
 import { Register } from 'src/app/+models/dtos/register_dto';
 import { AccountService } from 'src/app/+services/account.service';
@@ -17,6 +18,8 @@ import { registrationFormConfig } from './registration.config';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
+  @Input() onSubmitAction: () => void;
+  @Input() onSubmitFailedAction: (errors: string[]) => void;
   registerForm: FormGroup;
   validationErrors: string[] = [];
   formConfig: FormConfig;
@@ -53,10 +56,12 @@ export class RegistrationComponent implements OnInit {
 
     this.accountService.register(registration).subscribe(
       (_) => {
+        this.onSubmitAction();
         this.router.navigate(['userDashboard']);
       },
       (error) => {
-        this.validationErrors = error;
+        this.validationErrors = error.message;
+        this.onSubmitFailedAction(this.validationErrors);
       }
     );
   }

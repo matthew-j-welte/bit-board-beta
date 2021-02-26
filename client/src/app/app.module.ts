@@ -29,6 +29,7 @@ import { LearningResourceDetailPostsComponent } from './learning-resources/learn
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { TextSummaryPipe } from './+pipes/text-summary.pipe';
+import { GenericModalComponent } from './+modals/generic-modal/generic-modal.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { TextSummaryPipe } from './+pipes/text-summary.pipe';
     PageNotFoundComponent,
     AccessDeniedComponent,
     TextSummaryPipe,
+    GenericModalComponent,
   ],
   imports: [
     BrowserModule,

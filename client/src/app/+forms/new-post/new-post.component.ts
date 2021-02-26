@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { UserPostAction } from 'src/app/+enums/models';
 import { FormConfig, FormFieldBuilder } from 'src/app/+helpers/form-helpers';
 import { Post } from 'src/app/+models/dtos/post_dto';
 import { LearningResourcesService } from 'src/app/+services/learning-resources.service';
@@ -37,7 +38,7 @@ export class NewPostComponent implements OnInit {
   submitNewPost(): void {
     const newPost: Post = {
       content: this.newPostForm.value.content,
-      learningResourceId: this.learningResourceId,
+      learningResourceId: this.learningResourceId
     };
     this.learningResourceService.newResourcePost(newPost)?.subscribe((res) => {
       const addedPost: Post = res;

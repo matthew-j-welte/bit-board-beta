@@ -7,27 +7,32 @@
       developer while leveling up!
     </p>
   </div>
+  <hr class="jumbo-divider">
 </div>
-<div id="parent" class="container-fluid">
-  <div *ngIf="resources">
-    <h1 class="mt-4">Keep Working</h1>
-    <h6>
-      Pick up where you left off last time - the best way to level up from
-      learning resources is to finish each one in its entirety
-    </h6>
+<div id="body">
+  <div id="parent" class="container-fluid">
+    <div *ngIf="resources">
+      <h1 class="mt-4">Keep Working</h1>
+      <h6>
+        Pick up where you left off last time - the best way to level up from
+        learning resources is to finish each one in its entirety
+      </h6>
+      <hr />
+      <app-learning-resource-card-group [data]="resources">
+      </app-learning-resource-card-group>
+    </div>
+    <h1 class="mt-5">Popular</h1>
+    <h6>An assortment of resources that are trending recently</h6>
     <hr />
-    <app-learning-resource-card-group [data]="resources">
+    <app-learning-resource-card-group [data]="allResources">
     </app-learning-resource-card-group>
-  </div>
-  <h1 class="mt-5">Popular</h1>
-  <h6>An assortment of resources that are trending recently</h6>
-  <hr />
-  <app-learning-resource-card-group [data]="allResources">
-  </app-learning-resource-card-group>
 
-  <div *ngIf="resources">
-    <h1>Try Something New</h1>
-    <h6>Some suggestions to encourage spreading out your range of knowledge</h6>
-    <hr />
+    <div *ngIf="resources">
+      <h1>Try Something New</h1>
+      <h6>
+        Some suggestions to encourage spreading out your range of knowledge
+      </h6>
+      <hr />
+    </div>
   </div>
 </div>

@@ -1,0 +1,11 @@
+// Define the specific fonts and font styling to be used by each element type
+// fonts might not be the best name for that then? 
+
+// Actually I should just store the fonts in here so if I have to use a ttf it
+// can all be done from here and then all I have to do is import the font
+// what I said above should probably be done elsewhere in another files that
+// meshes this file and themes together to come up with a standardized stylng for
+// each element type, or at least class names that I expect to need
+
+// Can probably just do this component by component to avoid taking on too much at once
+// then finish off with a final cleanup

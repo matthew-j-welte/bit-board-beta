@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace API.Data.Migrations
+namespace BitBoard.Web.Data.Migrations
 {
     public partial class InitialCreate : Migration
     {
@@ -11,14 +11,14 @@ namespace API.Data.Migrations
                 name: "Skill",
                 columns: table => new
                 {
-                    SkillId = table.Column<int>(nullable: false)
+                    SkillId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    AvatarUrl = table.Column<string>(nullable: true),
-                    Category = table.Column<string>(nullable: true),
-                    BgColorHex = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    AvatarUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    Category = table.Column<string>(type: "TEXT", nullable: true),
+                    BgColorHex = table.Column<string>(type: "TEXT", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,21 +29,21 @@ namespace API.Data.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    UserName = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    ImageUrl = table.Column<string>(nullable: true),
-                    YearsExperience = table.Column<int>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    TechnicalSummary = table.Column<string>(nullable: true),
-                    CurrentEmployer = table.Column<string>(nullable: true),
-                    YearsAtEmployer = table.Column<int>(nullable: false),
-                    JobDescription = table.Column<string>(nullable: true)
+                    UserName = table.Column<string>(type: "TEXT", nullable: true),
+                    Password = table.Column<string>(type: "TEXT", nullable: true),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: true),
+                    LastName = table.Column<string>(type: "TEXT", nullable: true),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    YearsExperience = table.Column<int>(type: "INTEGER", nullable: false),
+                    Title = table.Column<string>(type: "TEXT", nullable: true),
+                    TechnicalSummary = table.Column<string>(type: "TEXT", nullable: true),
+                    CurrentEmployer = table.Column<string>(type: "TEXT", nullable: true),
+                    YearsAtEmployer = table.Column<int>(type: "INTEGER", nullable: false),
+                    JobDescription = table.Column<string>(type: "TEXT", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,20 +54,20 @@ namespace API.Data.Migrations
                 name: "CodeEditorConfiguration",
                 columns: table => new
                 {
-                    CodeEditorConfigurationId = table.Column<int>(nullable: false)
+                    CodeEditorConfigurationId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    FontSize = table.Column<int>(nullable: false),
-                    TabSize = table.Column<int>(nullable: false),
-                    ColorTheme = table.Column<string>(nullable: true),
-                    ColorThemeUrl = table.Column<string>(nullable: true),
-                    HasGutter = table.Column<bool>(nullable: false),
-                    HasLineNumbers = table.Column<bool>(nullable: false),
-                    HighlightLine = table.Column<bool>(nullable: false),
-                    EditorHeight = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    FontSize = table.Column<int>(type: "INTEGER", nullable: false),
+                    TabSize = table.Column<int>(type: "INTEGER", nullable: false),
+                    ColorTheme = table.Column<string>(type: "TEXT", nullable: true),
+                    ColorThemeUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    HasGutter = table.Column<bool>(type: "INTEGER", nullable: false),
+                    HasLineNumbers = table.Column<bool>(type: "INTEGER", nullable: false),
+                    HighlightLine = table.Column<bool>(type: "INTEGER", nullable: false),
+                    EditorHeight = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -84,14 +84,14 @@ namespace API.Data.Migrations
                 name: "ErrorReport",
                 columns: table => new
                 {
-                    ErrorReportId = table.Column<int>(nullable: false)
+                    ErrorReportId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    UserSourceUserId = table.Column<int>(nullable: true),
-                    Error = table.Column<string>(nullable: true),
-                    Type = table.Column<string>(nullable: true),
-                    Contents = table.Column<string>(nullable: true)
+                    UserSourceUserId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Error = table.Column<string>(type: "TEXT", nullable: true),
+                    Type = table.Column<string>(type: "TEXT", nullable: true),
+                    Contents = table.Column<string>(type: "TEXT", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -108,18 +108,18 @@ namespace API.Data.Migrations
                 name: "LearningResource",
                 columns: table => new
                 {
-                    LearningResourceId = table.Column<int>(nullable: false)
+                    LearningResourceId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Viewers = table.Column<int>(nullable: false),
-                    Placeholder = table.Column<string>(nullable: true),
-                    VideoId = table.Column<string>(nullable: true),
-                    ImageUrl = table.Column<string>(nullable: true),
-                    Type = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
+                    Title = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Viewers = table.Column<int>(type: "INTEGER", nullable: false),
+                    Placeholder = table.Column<string>(type: "TEXT", nullable: true),
+                    VideoId = table.Column<string>(type: "TEXT", nullable: true),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    Type = table.Column<string>(type: "TEXT", nullable: true),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -136,13 +136,13 @@ namespace API.Data.Migrations
                 name: "LearningResourceSuggestion",
                 columns: table => new
                 {
-                    LearningResourceSuggestionId = table.Column<int>(nullable: false)
+                    LearningResourceSuggestionId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    SourceUrl = table.Column<string>(nullable: true),
-                    Rationale = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false)
+                    SourceUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    Rationale = table.Column<string>(type: "TEXT", nullable: true),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -159,14 +159,14 @@ namespace API.Data.Migrations
                 name: "UserSkill",
                 columns: table => new
                 {
-                    UserSkillId = table.Column<int>(nullable: false)
+                    UserSkillId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    SkillId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    Level = table.Column<int>(nullable: false),
-                    ProgressPercent = table.Column<int>(nullable: false)
+                    SkillId = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Level = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProgressPercent = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -189,10 +189,10 @@ namespace API.Data.Migrations
                 name: "LearningResourceSkill",
                 columns: table => new
                 {
-                    LearningResourceSkillId = table.Column<int>(nullable: false)
+                    LearningResourceSkillId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    LearningResourceId = table.Column<int>(nullable: false),
-                    SkillId = table.Column<int>(nullable: false)
+                    LearningResourceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SkillId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -215,15 +215,15 @@ namespace API.Data.Migrations
                 name: "Post",
                 columns: table => new
                 {
-                    PostId = table.Column<int>(nullable: false)
+                    PostId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    Content = table.Column<string>(nullable: true),
-                    Likes = table.Column<int>(nullable: false),
-                    Reports = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    LearningResourceId = table.Column<int>(nullable: false)
+                    Content = table.Column<string>(type: "TEXT", nullable: true),
+                    Likes = table.Column<int>(type: "INTEGER", nullable: false),
+                    Reports = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    LearningResourceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -246,13 +246,13 @@ namespace API.Data.Migrations
                 name: "UserResourceState",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    ProgressPercent = table.Column<int>(nullable: false),
-                    LearningResourceId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
+                    ProgressPercent = table.Column<int>(type: "INTEGER", nullable: false),
+                    LearningResourceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -275,10 +275,10 @@ namespace API.Data.Migrations
                 name: "LearningResourceSuggestionSkill",
                 columns: table => new
                 {
-                    LearningResourceSuggestionSkillId = table.Column<int>(nullable: false)
+                    LearningResourceSuggestionSkillId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    LearningResourceSuggestionId = table.Column<int>(nullable: false),
-                    SkillId = table.Column<int>(nullable: false)
+                    LearningResourceSuggestionId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SkillId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -301,13 +301,13 @@ namespace API.Data.Migrations
                 name: "Comment",
                 columns: table => new
                 {
-                    CommentId = table.Column<int>(nullable: false)
+                    CommentId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    Content = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false),
-                    PostId = table.Column<int>(nullable: false)
+                    Content = table.Column<string>(type: "TEXT", nullable: true),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    PostId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -330,14 +330,14 @@ namespace API.Data.Migrations
                 name: "UserPostRelationship",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreatedDate = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    UserPostAction = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    PostId = table.Column<int>(nullable: false),
-                    LearningResourceId = table.Column<int>(nullable: false)
+                    UserPostAction = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    PostId = table.Column<int>(type: "INTEGER", nullable: false),
+                    LearningResourceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateModified = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,6 +1,6 @@
 nav {
-  background-color: rgb(241, 239, 250);
-  border-bottom: 2px solid #abb6c7;
+  background-color: rgb(20, 19, 21);
+  border-bottom: 2px solid #414141;
   z-index: 1;
 }
 
@@ -40,7 +40,7 @@ nav {
 
 @media (min-width: 1200px) {
   .logo-container {
-    border-bottom: 3px solid #abb6c7;
+    border-bottom: 3px solid #414141;
   }
 }
 
@@ -48,6 +48,6 @@ nav {
   border-radius: 0px 0px 50px 50px;
   padding-left: 20px;
   padding-right: 20px;
-  background-color: rgb(241, 239, 250);
+  background-color: rgb(41, 41, 41);
   z-index: 1;
 }
