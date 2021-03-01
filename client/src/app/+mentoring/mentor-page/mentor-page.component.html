@@ -1,0 +1,56 @@
+<router-outlet></router-outlet>
+<div class="container-fluid" id="parent">
+  <div class="card-deck">
+    <div class="card" (click)="openModalWithClass(template)">
+      <img
+        class="card-img-top"
+        src="./assets/textbook-logo.png"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <h5 class="card-title">Suggest Learning Resources</h5>
+        <p class="card-text text-muted">
+          Boost your mentor skills by submitting learning resource
+          reccomendations for approval. If approved you will earn points and
+          continue to earn more points as more users view the resource.
+        </p>
+      </div>
+    </div>
+    <div class="card">
+      <img
+        class="card-img-top"
+        src="./assets/code-reviewer-hands.png"
+        alt="Card image cap"
+      />
+      <div class="card-body">
+        <h5 class="card-title">Review Peer Code Submissions</h5>
+        <p class="card-text text-muted">
+          Boost your mentor skills by helping your peers improve their coding
+          skills through leaving friendly reviews of their code submissions.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Suggest Learning Resource</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-resource-suggestion></app-resource-suggestion>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="modalRef.hide()">
+      Close
+    </button>
+  </div>
+</ng-template>

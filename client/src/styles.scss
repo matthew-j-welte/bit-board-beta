@@ -1,0 +1,43 @@
+@import "./app/shared/scss/themes.scss";
+
+body {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 300;
+  background-color: $theme-offwhite;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
+
+.button {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+a {
+  color: $theme-blue;
+  font-weight: 500;
+}
+
+.jumbotron {
+  h1 {
+    color: $theme-navy;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $theme-blue;
+  }
+}

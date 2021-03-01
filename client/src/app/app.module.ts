@@ -5,54 +5,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { LearningResourcesComponent } from './learning-resources/learning-resources.component';
-import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
-import { NavbarComponent } from './navbar/navbar.component';
-import { LoginComponent } from './+forms/login/login.component';
-import { TextInputComponent } from './+forms/text-input/text-input.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { MentorPageComponent } from './mentor-page/mentor-page.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { LearningResourceDetailComponent } from './learning-resources/learning-resource-detail/learning-resource-detail.component';
-import { RegistrationComponent } from './+forms/registration/registration.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { LoadingInterceptor } from './+interceptors/loading.interceptor';
-import { ResourceSuggestionComponent } from './+forms/resource-suggestion/resource-suggestion.component';
-import { LearningResourceCardGroupComponent } from './learning-resources/learning-resource-card-group/learning-resource-card-group.component';
-import { NewPostComponent } from './+forms/new-post/new-post.component';
-import { LearningResourceCardComponent } from './learning-resources/learning-resource-card-group/learning-resource-card/learning-resource-card.component';
-import { LearningResourceDetailJumbotronComponent } from './learning-resources/learning-resource-detail/learning-resource-detail-jumbotron/learning-resource-detail-jumbotron.component';
-import { LearningResourceDetailPostsComponent } from './learning-resources/learning-resource-detail/learning-resource-detail-posts/learning-resource-detail-posts.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AccessDeniedComponent } from './access-denied/access-denied.component';
-import { TextSummaryPipe } from './+pipes/text-summary.pipe';
-import { GenericModalComponent } from './+modals/generic-modal/generic-modal.component';
+import { LoadingInterceptor } from './shared/interceptors/loading.interceptor';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    LearningResourcesComponent,
-    UserDashboardComponent,
-    NavbarComponent,
-    LoginComponent,
-    TextInputComponent,
-    MentorPageComponent,
-    LearningResourceDetailComponent,
-    RegistrationComponent,
-    ResourceSuggestionComponent,
-    LearningResourceCardGroupComponent,
-    NewPostComponent,
-    LearningResourceCardComponent,
-    LearningResourceDetailJumbotronComponent,
-    LearningResourceDetailPostsComponent,
-    PageNotFoundComponent,
-    AccessDeniedComponent,
-    TextSummaryPipe,
-    GenericModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,11 +27,12 @@ import { GenericModalComponent } from './+modals/generic-modal/generic-modal.com
     ReactiveFormsModule,
     TabsModule.forRoot(),
     ModalModule.forRoot(),
-    NgxSpinnerModule,
+    SharedModule,
+    NgxSpinnerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

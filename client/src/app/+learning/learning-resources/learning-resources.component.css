@@ -1,0 +1,36 @@
+#parent {
+  padding-top: 50px;
+  width: 70%;
+}
+
+#jumbo-header {
+  margin-top: 125px;
+}
+
+#jumbo-container {
+  width: 80%;
+}
+
+@media (max-width: 1400px) {
+  h6 {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1200px) {
+  h6 {
+    width: 90%;
+  }
+}
+
+@media (max-width: 800px) {
+  h6 {
+    width: 100%;
+  }
+}
+
+@media (max-width: 620px) {
+  .card-text {
+    width: auto;
+  }
+}

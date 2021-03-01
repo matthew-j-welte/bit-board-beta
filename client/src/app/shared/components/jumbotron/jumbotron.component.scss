@@ -1,0 +1,16 @@
+@import '../../scss/themes.scss';
+
+.jumbotron {
+  background-color: $theme-offwhite;
+  padding-bottom: 30px;
+  padding-top: 100px;
+  margin: 0px;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(
+      90deg,
+      $theme-offwhite,
+      $theme-blue,
+      $theme-offwhite
+    )
+    1;
+}
