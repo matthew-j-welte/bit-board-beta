@@ -1,8 +1,8 @@
-namespace API.Models.DTOs
+namespace API.Data.Entities
 {
-    public class SkillDto
+    public class Skill : BaseStaticEntity<Skill>
     {
-        public string SkillId { get; set; }
+        public string SkillId => this.Id;
         public string Name { get; set; }
         public string AvatarUrl { get; set; }
         public string Category { get; set; }

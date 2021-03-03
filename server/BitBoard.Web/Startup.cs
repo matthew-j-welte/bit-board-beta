@@ -1,7 +1,11 @@
 using API.Data;
+using API.Data.Entities;
 using API.Helpers;
-using API.Interfaces;
 using AutoMapper;
+using BitBoard.Web.Data.Repositories;
+using BitBoard.Web.Interfaces.Base;
+using BitBoard.Web.Interfaces.Services;
+using BitBoard.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,12 +27,19 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IBaseRepository<CodeEditorConfiguration>, BaseRepository<CodeEditorConfiguration>>();
+            services.AddScoped<IBaseRepository<Comment>, BaseRepository<Comment>>();
+            services.AddScoped<IBaseRepository<ErrorReport>, BaseRepository<ErrorReport>>();
+            services.AddScoped<IBaseRepository<LearningResource>, BaseRepository<LearningResource>>();
+            services.AddScoped<IBaseRepository<LearningResourceSuggestion>, BaseRepository<LearningResourceSuggestion>>();
+            services.AddScoped<IBaseRepository<Post>, BaseRepository<Post>>();
+            services.AddScoped<IBaseRepository<Skill>, BaseRepository<Skill>>();
+            services.AddScoped<IBaseRepository<User>, BaseRepository<User>>();
+
+            services.AddScoped<ILearningService, LearningService>();
+            services.AddScoped<IUserService, UserService>();
+
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
-            services.AddDbContext<DataContext>(options =>
-            {
-                options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
-            });
             services.AddControllers();
             services.AddCors();
         }

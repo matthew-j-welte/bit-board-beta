@@ -18,7 +18,7 @@ export class UserDashboardComponent implements OnInit {
   }
 
   async loadUserData(): Promise<void> {
-    this.usersService.getUser()?.subscribe((res) => {
+    this.usersService.getUserModel()?.subscribe((res) => {
       this.user = res;
     });
   }

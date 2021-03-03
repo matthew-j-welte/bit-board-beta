@@ -1,35 +1,22 @@
-using System.Collections.Generic;
-using API.Interfaces;
-using API.Interfaces.Repositories;
 using API.Models.DTOs;
+using BitBoard.Web.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     public class LearningResourceSuggestionsController : BaseApiController
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ILearningService learningService;
 
-        public LearningResourceSuggestionsController(IUnitOfWork unitOfWork)
+        public LearningResourceSuggestionsController(ILearningService learningService)
         {
-            _unitOfWork = unitOfWork;
+            this.learningService = learningService;
         }
 
         [HttpPost]
         public ActionResult NewLearningResourceSuggestion(LearningResourceSuggestionDto resourceSuggestion)
         {
-            _unitOfWork.LearningResourceSuggestionRepository.AddAsync(resourceSuggestion);
-            return Ok();
+            return Ok(learningService.UpsertResourceSuggestionAsync(resourceSuggestion));
         }
     }
 }
-
-/*
-From Go Server
-----------------
-
-POST:   /learn/resource/new                     --> /learningResourceSuggestions
-PUT:    /learn/resource/{id}/{field}/increment  --> /learningResourceSuggestions/{id}
-
-
-*/

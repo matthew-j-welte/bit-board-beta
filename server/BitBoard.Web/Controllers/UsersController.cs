@@ -1,47 +1,36 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using API.Models;
 using API.Models.DTOs;
-using API.Interfaces;
-using API.Interfaces.Repositories;
+using BitBoard.Web.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     public class UsersController : BaseApiController
     {
-        private readonly IUnitOfWork _unitOfWork;
+        IUserService userService;
 
-        public UsersController(IUnitOfWork unitOfWork)
+        public UsersController(IUserService userService)
         {
-            _unitOfWork = unitOfWork;
+            this.userService = userService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserDto>>> GetAllAsync()
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserDto>> GetAsync(string id)
         {
-            var users = await _unitOfWork.UserRepository.GetAllModelsAsync();
-            return Ok(users);
+            return Ok(await userService.GetUserAsync(id));
         }
 
-        [HttpGet("{username}")]
-        public async Task<ActionResult<IEnumerable<UserDto>>> GetAsync(string username)
+        [HttpGet("GetModel/{id}")]
+        public async Task<ActionResult<UserDto>> GetModelAsync(string id)
         {
-            var user = await _unitOfWork.UserRepository.GetUserModelAsync(username);
-            return Ok(user);
+            return Ok(await userService.GetUserModelAsync(id));
         }
 
-        [HttpGet("{id}/resourceProgress")]
-        public async Task<ActionResult<IEnumerable<UserResourceStateDto>>> GetResourceProgressionsByUserIdAsync(int id)
+        [HttpGet("GetByUsername/{username}")]
+        public async Task<ActionResult<UserDto>> GetByUsernameAsync(string username)
         {
-            var userProgressions = await _unitOfWork.UserRepository.GetAllResourceStatesAsync(id);
-            return Ok(userProgressions);
-        }
-
-        [HttpGet("{userId}/resourceProgress/{learningResourceId}")]
-        public async Task<ActionResult<IEnumerable<UserResourceStateDto>>> GetResourceProgressionAsync(int userId, int learningResourceId)
-        {
-            var userProgressions = await _unitOfWork.UserRepository.GetResourceStateAsync(userId, learningResourceId);
-            return Ok(userProgressions);
+            return Ok(await userService.GetUserByUsernameAsync(username));
         }
     }
 }

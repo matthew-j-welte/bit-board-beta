@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       username: ['', Validators.required],
       password: [
         '',
-        [Validators.required, Validators.minLength(4), Validators.maxLength(8)],
+        [Validators.required, Validators.minLength(4)],
       ],
     });
   }
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.accountService.login(this.loginForm.value).subscribe(
       (_) => {
-        this.router.navigate(['userDashboard']);
+        this.router.navigate(['home', 'dashboard']);
       },
       (error) => {
         this.validationErrors = error;

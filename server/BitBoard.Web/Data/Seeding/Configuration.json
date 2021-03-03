@@ -1,38 +1,18 @@
 [
   { 
-    "Id": "VkyJ5Mvwt", 
-    "PerRequest": 20, 
-    "Iterations": 1, 
-    "Model": "Users" 
-  },
-  {
-    "Id": "4y0z-NvwK",
-    "PerRequest": 10,
-    "Iterations": 1,
-    "Model": "Skills"
+    "Count": 5,
+    "Model": "User"
   },
   { 
-    "Id": "N1UFlVDvK", 
-    "PerRequest": 100, 
-    "Iterations": 1, 
-    "Model": "Posts" 
+    "Count": 50,
+    "Model": "Post"
   },
-  {
-    "Id": "EJwylNDDK",
-    "PerRequest": 100,
-    "Iterations": 3,
-    "Model": "Comments"
+  { 
+    "Count": 100,
+    "Model": "Comment"
   },
-  {
-    "Id": "E1I8NmPDK",
-    "PerRequest": 30,
-    "Iterations": 1,
-    "Model": "LearningResources"
-  },
-  {
-    "Id": "EyT9XHhcF",
-    "PerRequest": 100,
-    "Iterations": 1,
-    "Model": "UserResourceStates"
+  { 
+    "Count": 20,
+    "Model": "LearningResource"
   }
 ]

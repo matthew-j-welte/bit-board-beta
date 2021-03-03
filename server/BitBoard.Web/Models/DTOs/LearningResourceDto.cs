@@ -4,7 +4,7 @@ namespace API.Models.DTOs
 {
     public class LearningResourceDto
     {
-        public int LearningResourceId { get; set; }
+        public string LearningResourceId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
 
@@ -12,7 +12,7 @@ namespace API.Models.DTOs
         public string ImageUrl { get; set; }
         public string Type { get; set; }
         public int Viewers { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         public ICollection<SkillDto> Skills { get; set; }
     }

@@ -18,7 +18,14 @@ export class UsersService {
   getUser(): Observable<UserModel> {
     const user: User = JSON.parse(localStorage.getItem('user'));
     if (user) {
-      return this.http.get<UserModel>(`${this.baseUrl}/users/${user.userName}`);
+      return this.http.get<UserModel>(`${this.baseUrl}/users/GetByUsername/${user.userName}`);
+    }
+  }
+
+  getUserModel(): Observable<UserModel> {
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      return this.http.get<UserModel>(`${this.baseUrl}/users/GetModel/${user.userId}`);
     }
   }
 

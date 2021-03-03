@@ -1,11 +1,8 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace API.Data.Entities
 {
-    [Table("CodeEditorConfiguration")]
     public class CodeEditorConfiguration : BaseEntity
     {
-        public int CodeEditorConfigurationId { get; set; }
+        public string CodeEditorConfigurationId => this.Id;
         public string Name { get; set; }
         public int FontSize { get; set; }
         public int TabSize { get; set; }
@@ -16,7 +13,12 @@ namespace API.Data.Entities
         public bool HighlightLine { get; set; }
         public int EditorHeight { get; set; }
 
-        public User User { get; set; }
-        public int UserId { get; set; }
+        public CodeEditorUser Author { get; set; }
+    }
+
+    public class CodeEditorUser
+    {
+        public string UserId { get; set; }
+        public string Username { get; set; }
     }
 }

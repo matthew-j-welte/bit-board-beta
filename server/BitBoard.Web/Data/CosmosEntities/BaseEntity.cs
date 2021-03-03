@@ -4,13 +4,14 @@ namespace API.Data.Entities
 {
     public class BaseEntity
     {
+        public string Id { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime DateModified { get; set; }    
+        public DateTime DateModified = DateTime.UtcNow;
 
         public BaseEntity()
         {
+            Id = Guid.NewGuid().ToString();
             CreatedDate = DateTime.UtcNow;
-            DateModified = DateTime.UtcNow;
         }
     }
 }

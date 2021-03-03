@@ -1,25 +1,24 @@
 // using System.Threading.Tasks;
 using System.Threading.Tasks;
-using API.Interfaces.Repositories;
-using API.Interfaces;
 using API.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using BitBoard.Web.Interfaces.Services;
+using API.Models;
 
 namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public AccountController(IUnitOfWork unitOfWork)
+        private readonly IUserService userService;
+        public AccountController(IUserService userService)
         {
-            _unitOfWork = unitOfWork;
+            this.userService = userService;
         }
 
         [HttpPost("login")]
         public async Task<ActionResult> LoginAsync(LoginDto loginDto)
         {
-            var user = await _unitOfWork.UserRepository.GetAsync(loginDto.Username);
+            var user = await userService.GetUserByUsernameAsync(loginDto.Username);
             if (user.Password == loginDto.Password)
             {
                 return Ok(user);
@@ -28,22 +27,11 @@ namespace API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult> Register(UserDto userRegistration)
+        public async Task<ActionResult> Register(UserModel userRegistration)
         {
             System.Console.WriteLine(userRegistration.ToString());
-            var user = await _unitOfWork.UserRepository.AddAsync(userRegistration);
+            var user = await userService.UpsertUserAsync(userRegistration);
             return Ok(user);
         }
     }
 }
-
-
-
-/*
-From Go Server
-----------------
-
-POST: /user/login  -->  /account/login
-POST: /user/new    -->  /account/register
-
-*/

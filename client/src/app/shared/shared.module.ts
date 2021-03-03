@@ -8,7 +8,7 @@ import { LearningResourceCardGroupComponent } from './components/learning-resour
 import { LearningResourceCardComponent } from './components/learning-resource-card-group/learning-resource-card/learning-resource-card.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
-import { ResourceSuggestionComponent } from '../+mentoring/resource-suggestion/resource-suggestion.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,9 @@ import { ResourceSuggestionComponent } from '../+mentoring/resource-suggestion/r
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     TextInputComponent,
@@ -30,7 +32,8 @@ import { ResourceSuggestionComponent } from '../+mentoring/resource-suggestion/r
     JumbotronComponent,
     NavbarComponent,
     LearningResourceCardGroupComponent,
-    LearningResourceCardComponent
+    LearningResourceCardComponent,
+    GenericModalComponent
   ]
 })
 export class SharedModule { }

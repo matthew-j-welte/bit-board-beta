@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using API.Data.Entities;
 using API.Models;
 using API.Models.DTOs;
@@ -11,48 +9,32 @@ namespace API.Helpers
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserDto>();
-            CreateMap<User, UserModel>();
-            CreateMap<User, LoginDto>();
-            CreateMap<LearningResourceSkill, SkillDto>();
-            CreateMap<LearningResource, LearningResourceDto>()
-                .ForMember(
-                    dest => dest.Skills,
-                    opt => opt.MapFrom(src => src.LearningResourceSkills.Select(y => y.Skill)))
-                .ForMember(
-                    dest => dest.Viewers,
-                    opt => opt.MapFrom(src => src.Viewers));
-            CreateMap<LearningResource, LearningResourceModel>()
-                .ForMember(
-                    dest => dest.Skills,
-                    opt => opt.MapFrom(src => src.LearningResourceSkills.Select(y => y.Skill)));
-            CreateMap<LearningResourceDto, LearningResource>().ForMember(
-                    dest => dest.LearningResourceSkills,
-                    opt => opt.MapFrom(src => src.Skills.Select(y => new LearningResourceSkill
-                    {
-                        SkillId = y.SkillId
-                    }))
-            );
-            CreateMap<LearningResourceSuggestion, LearningResourceSuggestionDto>().ForMember(
-                    dest => dest.Skills,
-                    opt => opt.MapFrom(src => src.LearningResourceSuggestionSkills.Select(y => y.Skill)));
-            CreateMap<LearningResourceSuggestionDto, LearningResourceSuggestion>().ForMember(
-                    dest => dest.LearningResourceSuggestionSkills,
-                    opt => opt.MapFrom(src => src.Skills.Select(y => new LearningResourceSuggestionSkill
-                    {
-                        SkillId = y.SkillId
-                    }))
-            );
-            CreateMap<Skill, SkillDto>();
-            CreateMap<SkillDto, LearningResourceSkill>();
-            CreateMap<UserSkill, UserSkillDto>();
-            CreateMap<CodeEditorConfiguration, CodeEditorConfigurationDto>();
-            CreateMap<Post, PostDto>();
-            CreateMap<PostDto, Post>();
-            CreateMap<Comment, PostCommentDto>();
-            CreateMap<UserResourceState, UserResourceStateDto>();
-            CreateMap<User, UserResourceStateDto>();
-            CreateMap<UserDto, User>();
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<User, UserModel>().ReverseMap();
+            CreateMap<UserDto, UserModel>().ReverseMap();
+            CreateMap<User, LoginDto>().ReverseMap();
+            CreateMap<LearningResource, LearningResourceDto>().ReverseMap();
+            CreateMap<LearningResource, LearningResourceModel>().ReverseMap();
+            CreateMap<LearningResourceDto, LearningResourceModel>().ReverseMap();
+            CreateMap<LearningResourceSuggestion, LearningResourceSuggestionDto>().ReverseMap();
+            CreateMap<Post, PostDto>().ReverseMap();
+            CreateMap<Skill, SkillDto>().ReverseMap();
+            CreateMap<CodeEditorConfiguration, CodeEditorConfigurationDto>().ReverseMap();
+
+
+            CreateMap<UserSkill, UserSkillDto>().ReverseMap();
+            CreateMap<Comment, PostCommentDto>()
+                .ForMember(x => x.Post, options => options.MapFrom(x => new PostDto { PostId = x.ParentPost.PostId, Title = x.ParentPost.Title }))
+                .ReverseMap();
+            CreateMap<UserResourceState, UserResourceStateDto>().ReverseMap();
+            CreateMap<User, UserResourceStateDto>().ReverseMap();
+            CreateMap<UserEditorConfiguration, CodeEditorConfiguration>().ReverseMap();
+            CreateMap<UserPost, PostDto>().ReverseMap();
+            CreateMap<UserComment, PostCommentDto>().ReverseMap();
+            CreateMap<UserLearningResource, LearningResource>().ReverseMap();
+            CreateMap<PostLearningResource, LearningResourceDto>().ReverseMap();
+            CreateMap<PostLearningResource, PostLearningResourceDto>().ReverseMap();
+            CreateMap<LearningResource, PostLearningResourceDto>().ReverseMap();
         }
     }
 }

@@ -1,26 +1,24 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Models.DTOs;
-using API.Interfaces;
-using API.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using BitBoard.Web.Interfaces.Services;
 
 namespace API.Controllers
 {
     public class SkillsController : BaseApiController
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ILearningService learningService;
 
-        public SkillsController(IUnitOfWork unitOfWork)
+        public SkillsController(ILearningService learningService)
         {
-            _unitOfWork = unitOfWork;
+            this.learningService = learningService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SkillDto>>> GetAllAsync()
         {
-            var skills = await _unitOfWork.SkillsRepository.GetAllAsync();
-            return Ok(skills);
+            return Ok(await learningService.GetAllSkills());
         }
     }
 }
