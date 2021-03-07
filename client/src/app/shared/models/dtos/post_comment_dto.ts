@@ -1,8 +1,8 @@
 import { Post } from './post_dto';
 
 export interface PostComment {
-  commentId: number;
+  commentId: string;
   content: string;
-  postId: number;
+  postId: string;
   post: Post;
 }

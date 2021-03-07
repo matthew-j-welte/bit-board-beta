@@ -16,18 +16,12 @@ namespace API.Data.Entities
         public string Type { get; set; }
         public LearningResourceUser Author { get; set; }
         public IEnumerable<Post> Posts { get; set; }
-        public IEnumerable<LearningResourceSkill> AssociatedSkills { get; set; }
+        public IEnumerable<Skill> Skills { get; set; }
     }
 
     public class LearningResourceUser
     {
         public string UserId { get; set; }
         public string Username { get; set; }
-    }
-
-    public class LearningResourceSkill
-    {
-        public string SkillId { get; set; }
-        public string SkillName { get; set; }
     }
 }

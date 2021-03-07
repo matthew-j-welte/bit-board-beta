@@ -28,7 +28,7 @@ namespace BitBoard.Web.Data.Repositories
             }
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             return (await ReadContainer()).ToList();
         }
@@ -36,6 +36,11 @@ namespace BitBoard.Web.Data.Repositories
         public async Task<T> GetAsync(string id)
         {
             return (await ReadContainer()).Where(x => x.Id == id).FirstOrDefault();
+        }
+
+        public async Task<IEnumerable<T>> GetMultipleAsync(IEnumerable<string> ids)
+        {
+            return (await ReadContainer()).Where(x => ids.Contains(x.Id)).ToList();
         }
 
         public async Task RemoveAsync(T entity)

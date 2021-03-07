@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { LearningResource } from '../models/dtos/learning_resource_dto';
 import { Post } from '../models/dtos/post_dto';
 import { User } from '../models/dtos/user_dto';
+import { UserResourceProgression } from '../models/dtos/user_resource_progression_dto';
 import { LearningResourceModel } from '../models/learning_resource_model';
 import { getNgxSpinnerHeader } from './common';
 
@@ -20,6 +21,16 @@ export class LearningResourcesService {
     return this.http.get<LearningResource[]>(
       this.baseUrl + 'learningResources/standard',
       { headers: getNgxSpinnerHeader() }
+    );
+  }
+
+  getUserResourceProgressions(): Observable<UserResourceProgression[]> {
+    const user: User = JSON.parse(localStorage.getItem('user'));
+    return this.http.get<UserResourceProgression[]>(
+      this.baseUrl + `learningResources/progressions/${user.userId}`,
+      {
+        headers: getNgxSpinnerHeader(),
+      }
     );
   }
 

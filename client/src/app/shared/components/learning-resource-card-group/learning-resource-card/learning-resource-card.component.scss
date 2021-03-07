@@ -1,0 +1,83 @@
+@import '../../../scss/themes.scss';
+
+.card {
+  width: 300px;
+}
+
+.card-skills-container {
+  justify-content: center;
+  height: 45px;
+}
+
+.card-title {
+  font-size: 0.8rem;
+}
+
+.resource-description-container {
+  height: 100px;
+  overflow: hidden;
+}
+
+.card-subtitle {
+  font-size: 0.8rem;
+}
+
+.skill-points-number {
+  font-size: 0.8rem;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 125px;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.logo-pill {
+  height: 40px;
+  width: 40px;
+}
+
+.card-divider {
+  margin-left: -20px;
+  margin-right: -20px;
+  border-bottom: 1px solid;
+  border-image: linear-gradient(
+      90deg,
+      white,
+      $theme-baby-blue,
+      white
+    )
+    1;
+  opacity: 0.5;
+}
+
+.progress {
+  background-color: rgb(247, 247, 247);
+  border-radius: 20px;
+}
+
+.progress-bar {
+  background-color: $theme-baby-blue;
+  color: black;
+}
+
+.skill-point-name {
+  font-size: 0.8rem;
+}
+
+.card:hover {
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
+}
+
+.item-card {
+  transition: 0.2s;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+  margin: 0.5em;
+  background-color: rgb(253, 253, 248);
+}
+
+.percentage-complete {
+  font-size: 0.8rem;
+}

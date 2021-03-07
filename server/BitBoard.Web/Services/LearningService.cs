@@ -12,13 +12,15 @@ namespace BitBoard.Web.Services
 {
     public class LearningService : ILearningService
     {
+        IBaseRepository<User> userRepository;
         IBaseRepository<LearningResource> resourceRepository;
         IBaseRepository<LearningResourceSuggestion> resourceSuggestionRepository;
         IBaseRepository<Skill> skillRepository;
         IMapper mapper;
 
-        public LearningService(IBaseRepository<LearningResource> resourceRepository, IBaseRepository<LearningResourceSuggestion> resourceSuggestionRepository, IBaseRepository<Skill> skillRepository, IMapper mapper)
+        public LearningService(IBaseRepository<User> userRepository, IBaseRepository<LearningResource> resourceRepository, IBaseRepository<LearningResourceSuggestion> resourceSuggestionRepository, IBaseRepository<Skill> skillRepository, IMapper mapper)
         {
+            this.userRepository = userRepository;
             this.resourceRepository = resourceRepository;
             this.resourceSuggestionRepository = resourceSuggestionRepository;
             this.skillRepository = skillRepository;
@@ -41,6 +43,19 @@ namespace BitBoard.Web.Services
             // Populate the rest of the models data
             // Maybe this should go in user ? or should user be renamed to dashboard or something
             return model;
+        }
+
+        public async Task<IEnumerable<UserResourceStateDto>> GetUserResourceProgressions(string userId)
+        {
+            var user = await userRepository.GetAsync(userId);
+            var resourceIds = user.UserResourceProgressions.Select(x => x.LearningResourceId);
+            var resources = mapper.Map<IEnumerable<LearningResourceDto>>(await resourceRepository.GetMultipleAsync(resourceIds));
+            return resources.Select(x => new UserResourceStateDto
+            {
+                LearningResource = x,
+                User = mapper.Map<UserDto>(user),
+                ProgressPercent = user.UserResourceProgressions.Where(y => y.LearningResourceId == x.LearningResourceId).Select(y => y.ProgressPercent).Single()
+            });
         }
 
         public async Task<IEnumerable<LearningResourceDto>> GetTopViewedResourcesAsync(int amount)

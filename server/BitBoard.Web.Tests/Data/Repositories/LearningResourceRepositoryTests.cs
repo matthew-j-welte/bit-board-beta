@@ -94,7 +94,7 @@ namespace BitBoard.Web.Tests.Data.Repositories
                 Assert.NotNull(resourceModel.ImageUrl);
                 Assert.NotNull(resourceModel.Title);
                 Assert.NotNull(resourceModel.Type);
-                Assert.NotNull(resourceModel.UserResourceState);
+                Assert.NotNull(resourceModel.UserResourceProgression);
                 Assert.NotEqual(0, resourceModel.Viewers);
             }
         }

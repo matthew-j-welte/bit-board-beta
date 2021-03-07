@@ -12,7 +12,7 @@ interface LearningResourceCard extends LearningResource {
 @Component({
   selector: 'app-learning-resources',
   templateUrl: './learning-resources.component.html',
-  styleUrls: ['./learning-resources.component.css'],
+  styleUrls: ['./learning-resources.component.scss'],
 })
 export class LearningResourcesComponent implements OnInit {
   resources: LearningResourceCard[];
@@ -20,16 +20,15 @@ export class LearningResourcesComponent implements OnInit {
 
   constructor(
     private learningResourcesService: LearningResourcesService,
-    private userService: UsersService
   ) {}
 
   ngOnInit(): void {
-    this.getLearningResources();
+    this.getInProgressResources();
     this.getAllResources();
   }
 
-  getLearningResources(): void {
-    const resources$ = this.userService.getResourceProgressions()?.pipe(
+  getInProgressResources(): void {
+    const resources$ = this.learningResourcesService.getUserResourceProgressions()?.pipe(
       map((response) =>
         response.map((resource) => ({
           ...resource.learningResource,

@@ -12,7 +12,7 @@ import { newPostForm } from './new-post.config';
   styleUrls: ['./new-post.component.css'],
 })
 export class NewPostComponent implements OnInit {
-  @Input() learningResourceId: number;
+  @Input() learningResourceId: string;
   @Output() addPost = new EventEmitter<Post>();
 
   newPostForm: FormGroup;

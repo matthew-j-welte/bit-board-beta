@@ -9,7 +9,8 @@ namespace BitBoard.Web.Interfaces.Base
         Task<T> UpsertAsync(T entity);
         Task RemoveAsync(T entity);
         Task<T> GetAsync(string id);
-        Task<List<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetMultipleAsync(IEnumerable<string> ids);
+        Task<IEnumerable<T>> GetAllAsync();
         Task Clear();
     }
 }

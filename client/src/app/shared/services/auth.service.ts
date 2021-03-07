@@ -12,7 +12,7 @@ export class AuthService {
     return localStorage.getItem('user') !== null;
   }
 
-  validUser(id: number): boolean {
+  validUser(id: string): boolean {
     const user: User = JSON.parse(localStorage.getItem('user'));
     return id === user.userId;
   }

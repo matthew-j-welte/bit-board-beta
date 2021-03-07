@@ -26,7 +26,7 @@ namespace API.Helpers
             CreateMap<Comment, PostCommentDto>()
                 .ForMember(x => x.Post, options => options.MapFrom(x => new PostDto { PostId = x.ParentPost.PostId, Title = x.ParentPost.Title }))
                 .ReverseMap();
-            CreateMap<UserResourceState, UserResourceStateDto>().ReverseMap();
+            CreateMap<UserResourceProgression, UserResourceStateDto>().ReverseMap();
             CreateMap<User, UserResourceStateDto>().ReverseMap();
             CreateMap<UserEditorConfiguration, CodeEditorConfiguration>().ReverseMap();
             CreateMap<UserPost, PostDto>().ReverseMap();

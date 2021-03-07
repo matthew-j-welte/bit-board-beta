@@ -9,6 +9,7 @@ namespace BitBoard.Web.Interfaces.Services
     {
         Task<LearningResourceDto> GetResourceAsync(string id);
         Task<IEnumerable<LearningResourceDto>> GetAllResources();
+        Task<IEnumerable<UserResourceStateDto>> GetUserResourceProgressions(string userId);
         Task<LearningResourceModel> GetResourceModelAsync(string learningResourceId, string userId);
         Task<IEnumerable<LearningResourceDto>> GetTopViewedResourcesAsync(int amount);
         Task<LearningResourceModel> UpsertResourceAsync(LearningResourceModel learningResource);

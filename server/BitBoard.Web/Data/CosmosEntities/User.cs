@@ -18,7 +18,7 @@ namespace API.Data.Entities
         public int YearsAtEmployer { get; set; }
         public string JobDescription { get; set; }
         public IEnumerable<UserSkill> UserSkills { get; set; }
-        public IEnumerable<UserResourceState> UserResourceStates { get; set; }
+        public IEnumerable<UserResourceProgression> UserResourceProgressions { get; set; }
         public IEnumerable<UserPostRelationship> UserPostRelationships { get; set; }
         public IEnumerable<UserLearningResource> AuthoredResources { get; set; }
         public IEnumerable<UserEditorConfiguration> CodeEditorConfigurations { get; set; }
@@ -30,12 +30,12 @@ namespace API.Data.Entities
     {
 
         public string SkillId { get; set; }
-        public string SkillName { get; set; }
+        public string Name { get; set; }
         public int Level { get; set; }
         public int ProgressPercent { get; set; }
     }
 
-    public class UserResourceState
+    public class UserResourceProgression
     {
         public string LearningResourceId { get; set; }
         public string LearningResourceName { get; set; }

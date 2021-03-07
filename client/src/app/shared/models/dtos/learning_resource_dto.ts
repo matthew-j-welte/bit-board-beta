@@ -1,7 +1,7 @@
 import { Skill } from './skill_dto';
 
 export interface LearningResource {
-  learningResourceId: number;
+  learningResourceId: string;
   title: string;
   description: string;
   videoId: string;
@@ -9,5 +9,5 @@ export interface LearningResource {
   type: string;
   skills: Skill[];
   viewers: number;
-  userId: number;
+  userId: string;
 }

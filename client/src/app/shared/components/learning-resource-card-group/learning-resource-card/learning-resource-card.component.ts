@@ -4,7 +4,7 @@ import { LearningResourceCard } from '../../../models/component-interfaces/inter
 @Component({
   selector: 'app-learning-resource-card',
   templateUrl: './learning-resource-card.component.html',
-  styleUrls: ['./learning-resource-card.component.css'],
+  styleUrls: ['./learning-resource-card.component.scss'],
 })
 export class LearningResourceCardComponent implements OnInit {
   @Input() learningResource: LearningResourceCard;

@@ -289,14 +289,14 @@ namespace BitBoard.Web.Tests.Data.Repositories
                 var realResource = await ctx.LearningResources.Where(r => r.LearningResourceId == userState.LearningResourceId).SingleAsync();
 
                 // Act
-                var userResourceState = await repo.GetResourceStateAsync(userState.UserId, userState.LearningResourceId);
+                var userResourceProgression = await repo.GetResourceStateAsync(userState.UserId, userState.LearningResourceId);
 
                 // Assert
-                Assert.Equal(userState.ProgressPercent, userResourceState.ProgressPercent);
-                Assert.Equal(realUser.UserId, userResourceState.User.UserId);
-                Assert.Equal(realUser.UserName, userResourceState.User.UserName);
-                Assert.Equal(realResource.LearningResourceId, userResourceState.LearningResource.LearningResourceId);
-                Assert.Equal(realResource.Title, userResourceState.LearningResource.Title);
+                Assert.Equal(userState.ProgressPercent, userResourceProgression.ProgressPercent);
+                Assert.Equal(realUser.UserId, userResourceProgression.User.UserId);
+                Assert.Equal(realUser.UserName, userResourceProgression.User.UserName);
+                Assert.Equal(realResource.LearningResourceId, userResourceProgression.LearningResource.LearningResourceId);
+                Assert.Equal(realResource.Title, userResourceProgression.LearningResource.Title);
             }
         }
 
@@ -352,10 +352,10 @@ namespace BitBoard.Web.Tests.Data.Repositories
                     .SingleAsync();
 
                 // Act
-                var userResourceStates = await repo.GetAllResourceStatesAsync(userState.UserId);
-                userResourceStates = userResourceStates.OrderBy(s => s.LearningResource.LearningResourceId).ToList();
+                var userResourceProgressions = await repo.GetAllResourceStatesAsync(userState.UserId);
+                userResourceProgressions = userResourceProgressions.OrderBy(s => s.LearningResource.LearningResourceId).ToList();
 
-                var truthAndActual = userStates.Zip(userResourceStates, (t, a) => new { Truth = t, Actual = a });
+                var truthAndActual = userStates.Zip(userResourceProgressions, (t, a) => new { Truth = t, Actual = a });
 
                 // Assert
                 foreach (var state in truthAndActual)

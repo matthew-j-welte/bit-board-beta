@@ -161,12 +161,12 @@ namespace API.Data.Seeding
                     Level = RandomInt(1, 100),
                     ProgressPercent = RandomInt(1, 100),
                     SkillId = skill.SkillId,
-                    SkillName = skill.Name
+                    Name = skill.Name
                 });
             }
             user.UserSkills = userSkills;
 
-            var resourceStates = new List<UserResourceState>();
+            var resourceStates = new List<UserResourceProgression>();
             var resourceStateCount = RandomInt(2, 15);
             for (int i = 0; i < resourceStateCount; i++)
             {
@@ -175,14 +175,14 @@ namespace API.Data.Seeding
                 {
                     resource = RandomElement<LearningResource>(resources);
                 }
-                resourceStates.Add(new UserResourceState
+                resourceStates.Add(new UserResourceProgression
                 {
                     LearningResourceId = resource.LearningResourceId,
                     LearningResourceName = resource.Title,
                     ProgressPercent = RandomInt(1, 100)
                 });
             }
-            user.UserResourceStates = resourceStates;
+            user.UserResourceProgressions = resourceStates;
 
             var postRelationships = new List<UserPostRelationship>();
             var postRelationshipCount = RandomInt(5, 40);
@@ -274,7 +274,7 @@ namespace API.Data.Seeding
             }
             resource.Posts = resourcePosts;
 
-            var resourceSkills = new List<LearningResourceSkill>();
+            var resourceSkills = new List<Skill>();
             var skillCount = RandomInt(1, 4);
             for (int i = 0; i < skillCount; i++)
             {
@@ -283,12 +283,9 @@ namespace API.Data.Seeding
                 {
                     skill = RandomElement<Skill>(skills);
                 }
-                resourceSkills.Add(new LearningResourceSkill{
-                    SkillId = skill.SkillId,
-                    SkillName = skill.Name
-                });
+                resourceSkills.Add(skill);
             }
-            resource.AssociatedSkills = resourceSkills;
+            resource.Skills = resourceSkills;
             return resource;
         }
 

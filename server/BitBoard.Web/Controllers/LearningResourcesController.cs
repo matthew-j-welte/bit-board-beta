@@ -19,13 +19,21 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<LearningResourceDto>>> GetAllAsync([FromQuery] string sortBy, [FromQuery] int count)
         {
             IEnumerable<LearningResourceDto> resources;
-            if (sortBy != null && sortBy.Equals("viewers")) {
+            if (sortBy != null && sortBy.Equals("viewers"))
+            {
                 resources = await learningService.GetTopViewedResourcesAsync(count);
             }
-            else {
+            else
+            {
                 resources = await learningService.GetAllResources();
             }
             return Ok(resources);
+        }
+
+        [HttpGet("progressions/{userId}")]
+        public async Task<ActionResult<IEnumerable<UserResourceStateDto>>> GetUserResourceProgressions(string userId)
+        {
+            return Ok(await learningService.GetUserResourceProgressions(userId));
         }
 
         [HttpGet("standard/{id}")]
