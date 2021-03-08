@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { APP_ROUTES } from '../../configuration/routes/app-routes';
-import { HOME_ROUTES } from '../../configuration/routes/home-routes';
-import { LEARNING_ROUTES } from '../../configuration/routes/learning-routes';
-import { MENTORING_ROUTES } from '../../configuration/routes/mentoring-routes';
+import { APP_ROUTES } from '../../constants/routes/app-routes';
+import { HOME_ROUTES } from '../../constants/routes/home-routes';
+import { LEARNING_ROUTES } from '../../constants/routes/learning-routes';
+import { MENTORING_ROUTES } from '../../constants/routes/mentoring-routes';
 import { AccountService } from '../../services/account.service';
 
 @Component({

@@ -1,16 +1,15 @@
+@import '../../shared/scss/themes.scss';
+
 #parent {
   padding-top: 50px;
-  width: 70%;
+  // width: 70%;
 }
 
-#jumbo-header {
-  margin-top: 125px;
+.section-header {
+  color: $theme-blue;
 }
 
-#jumbo-container {
-  width: 80%;
-}
-
+// Standardize this or use bootstrap
 @media (max-width: 1400px) {
   h6 {
     width: 80%;

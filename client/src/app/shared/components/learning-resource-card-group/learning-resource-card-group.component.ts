@@ -1,75 +1,63 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { LearningResourceCard } from '../../models/component-interfaces/interfaces';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { BOOTSTRAP_BREAKPOINTS } from '../../constants/breakpoints';
+
+const breakpointCardAmountMap = new Map<string, number>([
+  [BOOTSTRAP_BREAKPOINTS.xs, 1],
+  [BOOTSTRAP_BREAKPOINTS.sm, 1],
+  [BOOTSTRAP_BREAKPOINTS.md, 2],
+  [BOOTSTRAP_BREAKPOINTS.lg, 3],
+  [BOOTSTRAP_BREAKPOINTS.xl, 4],
+  [BOOTSTRAP_BREAKPOINTS.xxl, 4],
+]);
 
 @Component({
   selector: 'app-learning-resource-card-group',
   templateUrl: './learning-resource-card-group.component.html',
-  styleUrls: ['./learning-resource-card-group.component.css'],
+  styleUrls: ['./learning-resource-card-group.component.scss'],
 })
-export class LearningResourceCardGroupComponent implements OnInit {
-  private inputData = new BehaviorSubject<LearningResourceCard[]>([]);
-  resources: LearningResourceCard[];
+export class LearningResourceCardGroupComponent implements OnInit, OnDestroy {
+  @Input() resources: LearningResourceCard[] = [];
+  resourceGroupings: LearningResourceCard[][] = [];
 
-  @Input() set data(value) {
-    this.inputData.next(value);
-  }
-
-  get data(): LearningResourceCard[] {
-    return this.inputData.getValue();
-  }
-
-  activeResources: LearningResourceCard[];
-  resourceIndex = 0;
-  resourcePageCount = 3;
-  pages: number[] = [];
-
-  constructor() {}
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
-    this.inputData.subscribe((x) => {
-      this.resources = this.data;
-      this.setActiveResources();
-      for (
-        let index = 0;
-        index < this.resources?.length / this.resourcePageCount;
-        index++
-      ) {
-        this.pages.push(index + 1);
+    this.groupCards(3);
+    this.initBreakpointObserver();
+  }
+
+  initBreakpointObserver(): void {
+    this.breakpointObserver
+      .observe(Object.values(BOOTSTRAP_BREAKPOINTS))
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.handleBreakpointChange(state);
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.breakpointObserver.ngOnDestroy();
+  }
+
+  handleBreakpointChange(state: BreakpointState): void {
+    for (const breakpoint of Object.keys(state.breakpoints)) {
+      if (state.breakpoints[breakpoint] === true) {
+        return this.groupCards(breakpointCardAmountMap.get(breakpoint));
       }
-    });
-  }
-
-  setActiveResources(): void {
-    this.activeResources = this.resources?.slice(
-      this.resourceIndex * this.resourcePageCount,
-      this.resourceIndex * this.resourcePageCount + 3
-    );
-  }
-
-  nextKeepWorkingPage(): void {
-    if (
-      this.resourceIndex <
-      this.resources.length / this.resourcePageCount - 1
-    ) {
-      this.resourceIndex += 1;
-    } else {
-      this.resourceIndex = 0;
     }
-    this.setActiveResources();
   }
 
-  previousKeepWorkingPage(): void {
-    if (this.resourceIndex > 0) {
-      this.resourceIndex -= 1;
-    } else {
-      this.resourceIndex = this.resources.length / this.resourcePageCount - 1;
+  groupCards(cardPerGroup: number): void {
+    const chunk = (arr, size) =>
+      Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
+        arr.slice(i * size, i * size + size)
+      );
+    if (this.resources != null) {
+      this.resourceGroupings = chunk(this.resources, cardPerGroup);
+      console.log(this.resourceGroupings);
     }
-    this.setActiveResources();
-  }
-
-  setKeepWorkingPage(page: number): void {
-    this.resourceIndex = page - 1;
-    this.setActiveResources();
   }
 }

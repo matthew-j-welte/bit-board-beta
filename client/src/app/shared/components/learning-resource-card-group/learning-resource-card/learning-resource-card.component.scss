@@ -1,16 +1,33 @@
-@import '../../../scss/themes.scss';
+@import "../../../scss/themes.scss";
 
 .card {
-  width: 300px;
+  width: 250px;
+  transition: 0.2s;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+  margin: 0.5em;
+  background-color: whitesmoke;
+}
+
+.card-body {
+  padding: 15px;
 }
 
 .card-skills-container {
   justify-content: center;
-  height: 45px;
+  height: 30px;
 }
 
 .card-title {
   font-size: 0.8rem;
+  text-overflow: ellipsis;
+}
+
+.card-title-container {
+  height: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .resource-description-container {
@@ -18,12 +35,18 @@
   overflow: hidden;
 }
 
-.card-subtitle {
-  font-size: 0.8rem;
+.skill-points-number {
+  font-size: 0.6rem;
 }
 
-.skill-points-number {
-  font-size: 0.8rem;
+.resource-card-details {
+  font-size: 0.7rem;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.rating-stars {
+  color: $theme-red;
 }
 
 .card-img-top {
@@ -32,33 +55,28 @@
   border-radius: 20px 20px 0px 0px;
 }
 
-.logo-pill {
-  height: 40px;
-  width: 40px;
+.skill-logo {
+  height: 30px;
+  width: 30px;
 }
 
 .card-divider {
-  margin-left: -20px;
-  margin-right: -20px;
+  margin-left: -15px;
+  margin-right: -15px;
   border-bottom: 1px solid;
-  border-image: linear-gradient(
-      90deg,
-      white,
-      $theme-baby-blue,
-      white
-    )
-    1;
-  opacity: 0.5;
+  border-image: linear-gradient(90deg, rgb(215, 215, 215), $theme-baby-blue, rgb(215, 215, 215)) 1;
+  opacity: 0.3;
 }
 
 .progress {
-  background-color: rgb(247, 247, 247);
+  background-color: whitesmoke;
   border-radius: 20px;
+  border: 1px solid rgb(230, 230, 230);
 }
 
 .progress-bar {
-  background-color: $theme-baby-blue;
-  color: black;
+  background-color: $theme-red;
+  color: white;
 }
 
 .skill-point-name {
@@ -69,15 +87,7 @@
   box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.3);
 }
 
-.item-card {
-  transition: 0.2s;
-  cursor: pointer;
-  border-radius: 20px;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-  margin: 0.5em;
-  background-color: rgb(253, 253, 248);
-}
-
 .percentage-complete {
   font-size: 0.8rem;
+  font-weight: bold;
 }

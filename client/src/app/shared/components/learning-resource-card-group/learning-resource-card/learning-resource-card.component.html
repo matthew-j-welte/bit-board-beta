@@ -1,63 +1,89 @@
-<div
-  class="card d-inline-block item-card px-0"
-  (mouseenter)="textualSkillsView()"
-  (mouseleave)="graphicalSkillsView()"
-  routerLink="{{ learningResource?.learningResourceId }}"
->
-  <img
-    class="card-img-top"
-    src="{{ learningResource?.imageUrl }}"
-    alt="Card image cap"
-  />
-  <div class="card-body pb-2">
-    <h6 class="card-title">
-      <strong>{{ learningResource?.type }} | </strong>
-      {{ learningResource.title | titlecase }}
-    </h6>
-    <p class="card-subtitle  mr-0">
-      <em>Viewers: </em>{{ learningResource.viewers }}
-    </p>
-    <hr class="my-2 card-divider" />
-  </div>
-  <div class="row mx-2 card-skills-container">
-    <div
-      *ngIf="learningResource?.showLogos; then graphical; else textual"
-      class="p-0"
-    ></div>
-    <ng-template #graphical>
-      <img
-        *ngFor="let skill of learningResource?.skills"
-        src="./assets/{{ skill.avatarUrl }}"
-        class="logo-pill ml-2 mr-2 p-0 col-auto rounded-circle"
-      />
-    </ng-template>
-    <ng-template #textual>
-      <div
-        *ngFor="let skill of learningResource?.skills"
-        class="col-auto mx-0 px-2 py-0 text-center"
-      >
-        <span
-          class="px-2 py-1 skill-point-name"
-          [style.color]="skill.bgColorHex"
-        >
-          <strong>{{ skill.name }}</strong>
-        </span>
-        <p class="mb-0 skill-points-number"><strong>+25</strong></p>
+<div class="resource-container">
+  <div
+    class="card row d-inline-block px-0 mb-0"
+    (mouseenter)="textualSkillsView()"
+    (mouseleave)="graphicalSkillsView()"
+    routerLink="{{ learningResource?.learningResourceId }}"
+  >
+    <img
+      class="card-img-top"
+      src="{{ learningResource?.imageUrl }}"
+      alt="Card image cap"
+    />
+    <div class="card-body pb-1">
+      <div class="card-title-container m-0">
+        <h6 class="card-title mb-0">
+          <strong>{{ learningResource?.type }} | </strong>
+          {{ learningResource.title | titlecase }}
+        </h6>
       </div>
-    </ng-template>
+      <p class="resource-card-details">
+        <span class="rating-stars"
+          ><i *ngFor="let _ of [1, 2, 3, 4]" class="fas fa-star"></i
+          ><i class="fas fa-star-half-alt"></i
+        ></span>
+      </p>
+      <hr class="my-2 card-divider" />
+      <div class="container row px-0 mx-0">
+        <div class="col-6">
+          <p class="resource-card-details">
+            <strong>Viewers: </strong>{{ learningResource.viewers }}
+          </p>
+        </div>
+        <div class="col-6">
+          <p class="resource-card-details"><strong>Length: </strong>3:17</p>
+        </div>
+      </div>
+    </div>
+    <div class="mb-1">
+      <div class="row mx-2 card-skills-container">
+        <div
+          *ngIf="learningResource?.showLogos; then graphical; else textual"
+          class="p-0"
+        ></div>
+        <ng-template #graphical>
+          <div>
+            <img
+              *ngFor="let skill of learningResource?.skills"
+              src="./assets/{{ skill.avatarUrl }}"
+              class="skill-logo ml-2 mr-2 p-0 col-auto rounded-circle"
+            />
+          </div>
+        </ng-template>
+        <ng-template #textual>
+          <div
+            *ngFor="let skill of learningResource?.skills"
+            class="col-auto mx-0 p-0 text-center"
+          >
+            <span
+              class="px-2 mb-0 skill-point-name"
+              [style.color]="skill.bgColorHex"
+            >
+              <strong>{{ skill.name }}</strong>
+            </span>
+          </div>
+        </ng-template>
+      </div>
+    </div>
   </div>
+
+  <!-- Possibly for this if there is overflow just do something like "+3 more..."-->
   <div
     *ngIf="learningResource?.progressPercent"
-    class="progress mt-2 mb-3 mx-3"
+    class="progress mt-3 mb-1 mx-2"
   >
     <div
       class="progress-bar"
       role="progressbar"
-      [style.width.%]="learningResource.progressPercent"
+      [style.width.%]="
+        learningResource.progressPercent < 10
+          ? 10
+          : learningResource.progressPercent
+      "
       aria-valuemin="0"
       aria-valuemax="100"
     >
-      <i id="percent" class="percentage-complete" style="font-size: 0.7rem;"
+      <i id="percent" class="percentage-complete" style="font-size: 0.7rem"
         ><strong>{{ learningResource?.progressPercent }}%</strong></i
       >
     </div>

@@ -1,0 +1,32 @@
+@import "../../scss/themes.scss";
+
+.card-container {
+  justify-content: center;
+}
+
+::ng-deep {
+  .carousel-control-prev, .carousel-control-next {
+    width: 20px;
+    z-index: 5;
+  }
+
+  .carousel-control-prev:hover, .carousel-control-next:hover {
+    cursor: pointer;
+  }
+
+  .carousel-control-prev-icon {
+    background-image: url("https://apufpel.com.br/assets/img/seta_prim.png");
+  }
+  .carousel-control-next-icon {
+    background-image: url("https://apufpel.com.br/assets/img/seta_ult.png");
+  }
+
+  .carousel {
+    outline: unset !important;
+    padding-bottom: 15px;
+  }
+
+  .carousel-inner {
+    padding-bottom: 5px;
+  }
+}

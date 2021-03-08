@@ -1,29 +1,15 @@
-<div class="row card-container">
-  <div *ngFor="let learningResource of activeResources">
-    <app-learning-resource-card [learningResource]="learningResource">
-    </app-learning-resource-card>
-  </div>
-</div>
-
-<div class="text-center">
-  <div
-    class="mx-2 my-3 rounded-circle card-navigation-dot"
-    [style.background-color]="
-      resourceIndex + 1 === pageNum ? 'rgb(12, 160, 160)' : 'rgb(238, 238, 238)'
-    "
-    *ngFor="let pageNum of pages"
-    type="button"
-    (click)="setKeepWorkingPage(pageNum)"
-  ></div>
-  <br />
-  <i
-    class="fas fa-angle-left fa-3x mr-3"
-    type="button"
-    (click)="previousKeepWorkingPage()"
-  ></i>
-  <i
-    class="fas fa-angle-right fa-3x ml-3"
-    type="button"
-    (click)="nextKeepWorkingPage()"
-  ></i>
-</div>
+<ngb-carousel
+  *ngIf="resources"
+  [interval]="false"
+  [showNavigationIndicators]="false"
+  role="none"
+>
+  <ng-template ngbSlide *ngFor="let cardGroup of resourceGroupings">
+    <div class="row card-container">
+      <div *ngFor="let learningResource of cardGroup">
+        <app-learning-resource-card [learningResource]="learningResource">
+        </app-learning-resource-card>
+      </div>
+    </div>
+  </ng-template>
+</ngb-carousel>
