@@ -1,15 +1,28 @@
-<ngb-carousel
-  *ngIf="resources"
-  [interval]="false"
-  [showNavigationIndicators]="false"
-  role="none"
->
-  <ng-template ngbSlide *ngFor="let cardGroup of resourceGroupings">
-    <div class="row card-container">
+<div id="parent" *ngIf="resources">
+  <span class="navigation-block navigation-block-prev float-left">
+    <button
+      [disabled]="activePageIndex === 0"
+      (click)="updateIndex(-1)"
+      class="nav-btn btn text-decoration-none p-0 m-0"
+    >
+      <i class="fas fa-chevron-left fa-lg"></i>
+    </button>
+  </span>
+  <span class="navigation-block navigation-block-next float-right">
+    <button
+      [disabled]="activePageIndex === resourceGroupings.length - 1"
+      (click)="updateIndex(1)"
+      class="nav-btn btn text-decoration-none p-0 m-0"
+    >
+      <i class="fas fa-chevron-right fa-lg"></i>
+    </button>
+  </span>
+  <div *ngFor="let cardGroup of resourceGroupings; index as index">
+    <div *ngIf="index === activePageIndex" class="row card-container">
       <div *ngFor="let learningResource of cardGroup">
         <app-learning-resource-card [learningResource]="learningResource">
         </app-learning-resource-card>
       </div>
     </div>
-  </ng-template>
-</ngb-carousel>
+  </div>
+</div>

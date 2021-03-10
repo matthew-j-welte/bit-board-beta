@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { LearningResourceCard } from '../../models/component-interfaces/interfaces';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { BOOTSTRAP_BREAKPOINTS } from '../../constants/breakpoints';
@@ -20,11 +20,12 @@ const breakpointCardAmountMap = new Map<string, number>([
 export class LearningResourceCardGroupComponent implements OnInit, OnDestroy {
   @Input() resources: LearningResourceCard[] = [];
   resourceGroupings: LearningResourceCard[][] = [];
+  activePageIndex = 0;
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 
   ngOnInit(): void {
-    this.groupCards(3);
+    this.groupCards(4);
     this.initBreakpointObserver();
   }
 
@@ -42,6 +43,10 @@ export class LearningResourceCardGroupComponent implements OnInit, OnDestroy {
     this.breakpointObserver.ngOnDestroy();
   }
 
+  updateIndex(increment: 1 | -1): void {
+    this.activePageIndex += increment;
+  }
+
   handleBreakpointChange(state: BreakpointState): void {
     for (const breakpoint of Object.keys(state.breakpoints)) {
       if (state.breakpoints[breakpoint] === true) {
@@ -57,7 +62,6 @@ export class LearningResourceCardGroupComponent implements OnInit, OnDestroy {
       );
     if (this.resources != null) {
       this.resourceGroupings = chunk(this.resources, cardPerGroup);
-      console.log(this.resourceGroupings);
     }
   }
 }

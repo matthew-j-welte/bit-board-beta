@@ -44,3 +44,8 @@ a {
     color: $theme-blue;
   }
 }
+
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
