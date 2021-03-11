@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BitBoard.Business.Views\BitBoard.Business.Views.csproj" />
+    <ProjectReference Include="..\..\1_Domain\BitBoard.Domain.Learning\BitBoard.Domain.Learning.csproj" />
+    <ProjectReference Include="..\..\1_Domain\BitBoard.Domain.Shared\BitBoard.Domain.Shared.csproj" />
+    <ProjectReference Include="..\..\1_Domain\BitBoard.Domain.Account\BitBoard.Domain.Account.csproj" />
+  </ItemGroup>
+
+</Project>

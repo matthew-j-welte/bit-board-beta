@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\1_Domain\BitBoard.Domain.Shared\BitBoard.Domain.Shared.csproj" />
+    <ProjectReference Include="..\..\1_Domain\BitBoard.Domain.Account\BitBoard.Domain.Account.csproj" />
+    <ProjectReference Include="..\..\1_Domain\BitBoard.Domain.Learning\BitBoard.Domain.Learning.csproj" />
+    <ProjectReference Include="..\..\2_Business\BitBoard.Business.Learning\BitBoard.Business.Learning.csproj" />
+    <ProjectReference Include="..\..\1_Domain\BitBoard.Domain.Admin\BitBoard.Domain.Admin.csproj" />
+    <ProjectReference Include="..\..\2_Business\BitBoard.Business.Views\BitBoard.Business.Views.csproj" />
+    <ProjectReference Include="..\BitBoard.API.Shared\BitBoard.API.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
