@@ -26,7 +26,7 @@ namespace BitBoard.API.Shared
             posts = new List<Post>();
             comments = new List<Comment>();
             var currentDir = Directory.GetCurrentDirectory();
-            var skillFile = Path.Combine(currentDir, "Data", "Seeding", "Static", "Skill.json");
+            var skillFile = Path.Combine(currentDir, "Static", "Skill.json");
             var json = System.IO.File.ReadAllText(skillFile);
             skills = System.Text.Json.JsonSerializer.Deserialize<List<Skill>>(json);
         }
